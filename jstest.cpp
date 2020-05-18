@@ -47,9 +47,9 @@ extern "C"
       return x * x;
    }
 
-   const char* myteststr(char* s_input)
+   const char* myteststr(char* s_input, size_t s_input_len)
    {
-      std::string sinput{ s_input };
+      std::string sinput(s_input, s_input_len);
       sinput += 'X';
       std::string soutput{ sinput };
       unsigned r = (unsigned)soutput.c_str(); // CAREFUL!
