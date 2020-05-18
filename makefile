@@ -8,11 +8,19 @@ run:
 	./build/app_main
 
 
-vendor:
+vendor: update_submodules get_libcrypton get_csbiginteger
+
+update_submodules:
 	git submodule update --init --recursive
 	git submodule update --recursive
+
+get_libcrypton:
 	(cd libs/libcrypton && git submodule update --init --recursive && git submodule update --recursive)
 	(cd libs/libcrypton && make vendor)
+
+get_csbiginteger:
+	(cd libs/csBigInteger_cpp && git submodule update --init --recursive && git submodule update --recursive)
+	(cd libs/csBigInteger_cpp && make vendor)
 	
 
 
