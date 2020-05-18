@@ -37,9 +37,11 @@ extern "C"
 {
   int mytest(int x)
   {
+     std::cout << "mytest x=" << x << std::endl;
+     int old_x = x;
     x += mycrypto(x);
-    std::cout << "OI: " << x << std::endl;
-    std::cout << "opt: " << X::myopt() << std::endl;
+    std::cout << "after mycrypto x=" << x << " old_x=" << old_x << std::endl;
+    std::cout << "myopt returns 10 or 20 (should be 10):" << X::myopt() << std::endl;
     return x * x;
   }
 };
