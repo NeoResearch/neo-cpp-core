@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "src/Core.hpp"
+#include "neo3-cpp-core/Core.hpp"
 
 using namespace std;
 
