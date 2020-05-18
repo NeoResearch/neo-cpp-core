@@ -8,7 +8,10 @@ run:
 	./build/app_main
 
 
-vendor: update_submodules get_libcrypton get_csbiginteger
+vendor: update_submodules get_libcrypton get_csbiginteger  #get_bn-js already provided
+
+get_bn-js:
+	npm install bn.js --prefix libs/ -g
 
 update_submodules:
 	git submodule update --init --recursive
