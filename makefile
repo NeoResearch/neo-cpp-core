@@ -25,8 +25,8 @@ get_csbiginteger:
 	
 
 
-GCC_FLAGS = -g -O0 -Wall --std=c++17 -fno-exceptions
-EMCC_FLAGS = -g -O0 -Wall -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 --std=c++17
+GCC_FLAGS = -g -O3 -Wall --std=c++17 -fno-exceptions
+EMCC_FLAGS = -g -O3 -Wall -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 --std=c++17
 OPENMP_FLAGS = #-fopenmp -lpthread
 
 #-s DISABLE_EXCEPTION_CATCHING=0
@@ -39,6 +39,10 @@ RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 jstest: ./jstest.cpp
 	mkdir -p build/
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
+	echo "We need Emscripten to proceed (tested with 1.39.16)"
+	echo 
+	em++ --version
+	echo 
 	em++ $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
 	#nodejs testnode.js
 	echo "testing build!!"
@@ -46,3 +50,7 @@ jstest: ./jstest.cpp
 
 run:
 	nodejs build/test.js
+
+
+clean: 
+	rm -f build/*
