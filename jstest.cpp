@@ -40,7 +40,7 @@ extern "C"
       std::cout << "mytest x=" << x << std::endl;
       int old_x = x;
       x += mycrypto(x);
-      std::cout << "after mycrypto x=" << x << " old_x=" << old_x << std::endl;
+      std::cout << "after mycrypto x=" << x << " expects '2*old_x+1'=" << (2 * old_x + 1) << " old_x=" << old_x << std::endl;
       std::cout << "myopt returns 10 or 20 (should be 10):" << X::myopt() << std::endl;
 
       std::cout << "final value squared: " << (x * x) << std::endl;
