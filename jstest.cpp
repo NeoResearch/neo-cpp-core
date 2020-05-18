@@ -46,6 +46,15 @@ extern "C"
       std::cout << "final value squared: " << (x * x) << std::endl;
       return x * x;
    }
+
+   const char* myteststr(char* s_input)
+   {
+      std::string sinput{ s_input };
+      sinput += 'X';
+      std::string soutput{ sinput };
+      const char* r = soutput.c_str(); // CAREFUL!
+      return r;
+   }
 };
 
 int
