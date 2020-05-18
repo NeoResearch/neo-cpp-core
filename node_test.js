@@ -1,11 +1,5 @@
-const lt = require('./build/librarytest');
-
-function mainTest()
-{
-    lt._mytest()
-}
-
+let lt = require('./build/librarytest');
 setTimeout(function() {
-    mainTest()
-    , 500
-})
+    lt._mytest(5);
+}, 3000);
+
