@@ -1,4 +1,5 @@
 all:
+	mkdir -p build/
 	g++ main-test.cpp -Isrc/ -o build/app_main
 
 
@@ -26,9 +27,10 @@ EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest']" -s EXTRA_EXPORTED_
 ####PATH_EMCC = "em++"
 RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 
-libtest: ./src/main.cpp
+jstest: ./jstest.cpp
+	mkdir -p build/
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
-	em++ $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./src/main.cpp --js-library src/mycrypto.js -o ./build/librarytest.js
+	em++ $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
 	#nodejs testnode.js
 #
 
