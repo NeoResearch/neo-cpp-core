@@ -8,6 +8,8 @@ run:
 
 
 vendor:
+	git submodule update --init --recursive
+	git submodule update --recursive
 	(cd libs/libcrypton && git submodule update --init --recursive && git submodule update --recursive)
 	(cd libs/libcrypton && make vendor)
 	
