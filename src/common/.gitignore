@@ -1,0 +1,7 @@
+*~
+neopt-core-test
+tmp_build
+openssl_src
+libneocrypto_openssl.a
+*.o
+*.a

@@ -1,0 +1,6 @@
+[submodule "libs/libcrypton"]
+	path = libs/libcrypton
+	url = https://github.com/NeoResearch/libcrypton.git
+[submodule "libs/csBigInteger_cpp"]
+	path = libs/csBigInteger_cpp
+	url = https://github.com/NeoResearch/csBigInteger.cpp.git
