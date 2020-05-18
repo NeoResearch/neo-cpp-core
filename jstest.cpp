@@ -52,8 +52,8 @@ extern "C"
       std::string sinput{ s_input };
       sinput += 'X';
       std::string soutput{ sinput };
-      const char* r = soutput.c_str(); // CAREFUL!
-      return r;
+      unsigned r = (unsigned)soutput.c_str(); // CAREFUL!
+      return (const char*)r;
    }
 };
 
