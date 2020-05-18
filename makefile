@@ -41,7 +41,8 @@ jstest: ./jstest.cpp
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
 	em++ $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
 	#nodejs testnode.js
-#
+	echo "testing build!!"
+	nodejs node_test.js
 
 run:
 	nodejs build/test.js
