@@ -7,6 +7,7 @@
 // ===========================================================================
 // these are C++ methods provided to emscripten and connected to C++ Neo3 Core
 //
+#include <neo3-cpp-core/Core.hpp>
 #include <neo3-cpp-core/core_imports.h>
 // ---------------------------------------------------------------------------
 
@@ -108,10 +109,25 @@ cpp_bignum_add(std::string a, std::string b)
    return str;
 }
 
+// ================================
+//
+
+vbyte
+cppContract_CreateSignatureRedeemScript(vbyte pubkey)
+{
+   // call method from Core! (see class Neo SmartContract Contract, method CreateSignatureRedeemScript)
+   vbyte v(10, 1); // 10 elements with value 1
+   return v; 
+}
+
+// ================================
+
 // these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
    function("my_cpp_teststr", &my_cpp_teststr);
 
    function("cpp_bignum_add", &cpp_bignum_add);
+
+   function("cppContract_CreateSignatureRedeemScript", &cppContract_CreateSignatureRedeemScript);
 }

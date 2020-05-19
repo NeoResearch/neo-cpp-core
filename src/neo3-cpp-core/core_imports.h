@@ -26,5 +26,5 @@ extern "C"
    //    "serious" methods
    // ------------------------
 
-   extern int create_signature_redeem_script(const char* pubkey, const char* out_script_hexstr);
+   //
 }
