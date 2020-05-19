@@ -1,5 +1,7 @@
 #pragma once
 
+// these are the 'imports', these come from outside world
+
 extern "C"
 {
    // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).

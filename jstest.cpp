@@ -3,8 +3,7 @@
 #include <memory>
 #include <optional>
 
-#include <neo3-cpp-core/libcore.h>
-
+#include <neo3-cpp-core/imports.h>
 
 using namespace emscripten;
 
@@ -71,7 +70,8 @@ extern "C"
       std::cout << "output pointer 1 = " << (void*)pstr << std::endl;
       int rsize = bignum_add(bn1.c_str(), bn2.c_str(), pstr);
       std::cout << "output pointer 2 = " << (void*)pstr << std::endl;
-      std::cout << "ptr return on bignum_add = '" << rsize << "' -> str NOT DONE '" << "'" << std::endl;
+      std::cout << "ptr return on bignum_add = '" << rsize << "' -> str NOT DONE '"
+                << "'" << std::endl;
       std::string bn3{ pstr };
 
       std::cout << "BIG3 = " << bn3 << std::endl;
