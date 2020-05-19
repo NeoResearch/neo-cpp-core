@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 //using System;
 //using System.IO;
 //using System.Numerics;
@@ -9,6 +11,8 @@
 
 using neopt::BinaryWriter;
 using neopt::MemoryStream;
+
+#include "OpCode.hpp"
 
 namespace Neo {
 //
@@ -45,26 +49,27 @@ public:
       //ms.Dispose();
    }
 
-   /*
-   ScriptBuilder Emit(OpCode op, byte[] arg = null)
+   // TODO: not sure that zero is the same as null...
+   ScriptBuilder& Emit(OpCode op, std::optional<vbyte> arg = std::nullopt)
    {
-      writer.Write((byte)op);
-      if (arg != null)
-         writer.Write(arg);
-      return this;
+      writer.Write((neopt::byte)op);
+      if (arg)
+         writer.Write(*arg);
+      return *this;
    }
 
+   /*
    ScriptBuilder EmitCall(int offset)
    {
       if (offset < sbyte.MinValue || offset > sbyte.MaxValue)
-         return Emit(OpCode.CALL_L, BitConverter.GetBytes(offset));
+         return Emit(OpCode::CALL_L, BitConverter.GetBytes(offset));
       else
-         return Emit(OpCode.CALL, new[]{ (byte)offset });
+         return Emit(OpCode::CALL, new[]{ (byte)offset });
    }
 
    ScriptBuilder EmitJump(OpCode op, int offset)
    {
-      if (op < OpCode.JMP || op > OpCode.JMPLE_L)
+      if (op < OpCode::JMP || op > OpCode::JMPLE_L)
          throw new ArgumentOutOfRangeException(nameof(op));
       if ((int)op % 2 == 0 && (offset < sbyte.MinValue || offset > sbyte.MaxValue))
          op += 1;
@@ -77,28 +82,28 @@ public:
    ScriptBuilder EmitPush(BigInteger number)
    {
       if (number >= -1 && number <= 16)
-         return Emit(OpCode.PUSH0 + (byte)(int)number);
+         return Emit(OpCode::PUSH0 + (byte)(int)number);
       byte[] data = number.ToByteArray(isUnsigned
                                        : false, isBigEndian
                                        : false);
       if (data.Length == 1)
-         return Emit(OpCode.PUSHINT8, data);
+         return Emit(OpCode::PUSHINT8, data);
       if (data.Length == 2)
-         return Emit(OpCode.PUSHINT16, data);
+         return Emit(OpCode::PUSHINT16, data);
       if (data.Length <= 4)
-         return Emit(OpCode.PUSHINT32, PadRight(data, 4));
+         return Emit(OpCode::PUSHINT32, PadRight(data, 4));
       if (data.Length <= 8)
-         return Emit(OpCode.PUSHINT64, PadRight(data, 8));
+         return Emit(OpCode::PUSHINT64, PadRight(data, 8));
       if (data.Length <= 16)
-         return Emit(OpCode.PUSHINT128, PadRight(data, 16));
+         return Emit(OpCode::PUSHINT128, PadRight(data, 16));
       if (data.Length <= 32)
-         return Emit(OpCode.PUSHINT256, PadRight(data, 32));
+         return Emit(OpCode::PUSHINT256, PadRight(data, 32));
       throw new ArgumentOutOfRangeException(nameof(number));
    }
 
    ScriptBuilder EmitPush(bool data)
    {
-      return Emit(data ? OpCode.PUSH1 : OpCode.PUSH0);
+      return Emit(data ? OpCode::PUSH1 : OpCode::PUSH0);
    }
 */
 
@@ -109,23 +114,23 @@ public:
       // impossible null here
 
       if (data.size() < 0x100) {
-         Emit(OpCode.PUSHDATA1);
+         Emit(OpCode::PUSHDATA1);
          writer.Write((neopt::byte)data.size());
          writer.Write(data);
       } else if (data.size() < 0x10000) {
-         Emit(OpCode.PUSHDATA2);
+         Emit(OpCode::PUSHDATA2);
          writer.Write((ushort)data.size());
          writer.Write(data);
       } else // if (data.Length < 0x100000000L)
       {
-         Emit(OpCode.PUSHDATA4);
+         Emit(OpCode::PUSHDATA4);
          writer.Write(data.size());
          writer.Write(data);
       }
       return *this;
    }
 
-/*
+   /*
    ScriptBuilder EmitPush(string data)
    {
       return EmitPush(Encoding.UTF8.GetBytes(data));
@@ -137,12 +142,13 @@ public:
          writer.Write(arg);
       return this;
    }
+*/
 
    ScriptBuilder EmitSysCall(uint api)
    {
-      return Emit(OpCode.SYSCALL, BitConverter.GetBytes(api));
+      return Emit(OpCode::SYSCALL, BitConverter.GetBytes(api));
    }
-*/
+
 
    vbyte ToArray()
    {

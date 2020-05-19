@@ -95,7 +95,7 @@ public:
             sb.EmitPush(publicKey.EncodePoint(true));
          }
          sb.EmitPush(publicKeys.Length);
-         sb.Emit(OpCode.PUSHNULL);
+         sb.Emit(OpCode::PUSHNULL);
          sb.EmitSysCall(InteropService.Crypto.CheckMultisigWithECDsaSecp256r1);
          return sb.ToArray();
       }
@@ -118,7 +118,7 @@ public:
       //using(ScriptBuilder sb = new ScriptBuilder())
       if (ScriptBuilder sb; true) {
          sb.EmitPush(publicKey.EncodePoint(true));
-         sb.Emit(OpCode.PUSHNULL);
+         sb.Emit(OpCode::PUSHNULL);
          sb.EmitSysCall(InteropService.Crypto.VerifyWithECDsaSecp256r1);
          return sb.ToArray();
       }

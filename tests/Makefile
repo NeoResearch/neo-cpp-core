@@ -5,16 +5,14 @@ LIBS_PATH=../libs
 
 all: test
 	@echo "Executing tests"
-	./build/OptFrame_test
+	./build/neopt-extra_test
 
-test: clean OptFrame_test 
+test: clean neopt-extra_test
 	
 
-OptFrame_test : OptFrame.Test.cpp
+neopt-extra_test : neopt-extra.Test.cpp
 	g++ --coverage -g -O0 -fconcepts -fmax-errors=5 -std=c++17 -I$(SRC_PATH) -I$(LIBS_PATH) -DCATCH_CONFIG_MAIN $< -o ./build/$@   
 
-FCore_test : FCore.Test.cpp
-	g++-10.1 --coverage -g -O0 -fmax-errors=5 -std=c++20 -fcoroutines -I$(SRC_PATH) -I$(LIBS_PATH) -DCATCH_CONFIG_MAIN $< -o ./build/$@   
 
 test-install:
 	g++ -g --std=c++17 -fconcepts test-install-OptFrame.cpp -o ./build/optframe_test_install
