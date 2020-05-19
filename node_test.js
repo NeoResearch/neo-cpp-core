@@ -16,9 +16,16 @@ function testMain() {
     console.log(str_cpp);
 
     var pubKey = lNeo3.cppUtil_GenerateVectorByte(8, 2);
+    console.log(typeof(pubKey)); // console.log(
+    //
+    var vx = new lNeo3.vector$unsigned$char$();
+    console.log(vx);
+    vx.push_back(4);
+    vx.push_back(5);
+    
     pubKey.set(0, 50);
 
-    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript(pubKey);
+    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript(vx);
     console.log(retVector);
     for (var i = 0; i < retVector.size(); i++) {
         console.log("Vector Value: ", retVector.get(i));
