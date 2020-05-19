@@ -42,6 +42,8 @@ RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 
 BN_JS=./libs/lib/node_modules/bn.js/lib/bn.js
 
+NEO3_SRC=./src/
+
 jstest: ./jstest.cpp
 	mkdir -p build/
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
@@ -49,7 +51,7 @@ jstest: ./jstest.cpp
 	echo 
 	em++ --version
 	echo 
-	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"' -s ASSERTIONS=1
+	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library src/js-crypto/mycrypto.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"' -s ASSERTIONS=1
 	#### -s EXPORT_ES6=1 -s MODULARIZE=1 -s USE_ES6_IMPORT_META=0
 	#
 	#nodejs testnode.js

@@ -3,6 +3,9 @@
 #include <memory>
 #include <optional>
 
+#include <neo3-cpp-core/libcore.h>
+
+
 using namespace emscripten;
 
 template<class X>
@@ -10,19 +13,6 @@ using op = std::optional<X>;
 
 template<class X>
 using uptr = std::unique_ptr<X>;
-
-extern "C"
-{
-   // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).
-   extern int mycrypto(int x);
-}
-
-extern "C"
-{
-   // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).
-   extern int bignum_add(const char* bn1, const char* bn2, const char* bn_out);
-   // returns the allocated size...
-}
 
 class X
 {
