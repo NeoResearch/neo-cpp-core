@@ -1,4 +1,5 @@
 // https://github.com/indutny/bn.js/
+let lt = require('./build/librarytest');
 let lt_bn = require('./libs/lib/node_modules/bn.js/lib/bn.js');
 let BN = lt_bn.BN;
 //

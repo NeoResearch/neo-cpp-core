@@ -16,6 +16,16 @@ extern "C"
    extern int mycrypto(int x);
 }
 
+//std::string bignum_add(std::string bn1, std::string bn2);
+
+
+
+extern "C"
+{
+   extern const char* bignum_add(const char* bn1, const char* bn2);
+}
+
+
 class X
 {
 public:
@@ -56,6 +66,20 @@ extern "C"
       sinput += 'X';
       std::string soutput{ sinput };
       unsigned r = (unsigned)soutput.c_str(); // CAREFUL!
+
+      std::string bn1 = "10";
+      std::string bn2 = "20";
+      std::cout << "calling 'bignum_add' " << bn1 << " " << bn2 << std::endl;
+
+      
+        //EM_ASM_ARGS({
+         //   console.log(Pointer_stringify($0));
+         //}, bn1.c_str());
+      std::cout << "end" << std::endl;
+
+      std::string bn3 = bignum_add(bn1.c_str(), bn2.c_str());
+      
+      std::cout << "BIG3 = " << bn3 << std::endl;
       return (const char*)r;
    }
 };
@@ -66,10 +90,25 @@ my_cpp_teststr(std::string a)
    return a.append("x");
 }
 
+
+std::string
+cpp_bignum_add(std::string a, std::string b)
+{
+   // calling 'js' implementation (or pure cpp)
+   std::string str{bignum_add(a.c_str(), b.c_str())};
+   return str;
+}
+
+
 EMSCRIPTEN_BINDINGS(my_module)
 {
    function("my_cpp_teststr", &my_cpp_teststr);
+   function("cpp_bignum_add", &cpp_bignum_add);
 }
+
+
+
+
 
 int
 main()

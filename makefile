@@ -12,6 +12,7 @@ vendor: update_submodules get_libcrypton get_csbiginteger  #get_bn-js already pr
 
 get_bn-js:
 	npm install bn.js --prefix libs/ -g
+	#npm install csbiginteger.js --prefix libs/ -g   ## TODO:
 
 update_submodules:
 	git submodule update --init --recursive
@@ -35,11 +36,11 @@ OPENMP_FLAGS = #-fopenmp -lpthread
 #-s DISABLE_EXCEPTION_CATCHING=0
 # -s ALLOW_MEMORY_GROWTH=1
 #EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_main']"
-EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']"
+EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString']"
 ####PATH_EMCC = "em++"
 RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 
-BN_JS=./libs/lib/node_modules/bn.js/lib
+BN_JS=./libs/lib/node_modules/bn.js/lib/bn.js
 
 jstest: ./jstest.cpp
 	mkdir -p build/
@@ -48,8 +49,9 @@ jstest: ./jstest.cpp
 	echo 
 	em++ --version
 	echo 
-	#em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js --js-library $(BN_JS) -o ./build/librarytest.js
-	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
+	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"'
+	#### -s EXPORT_ES6=1 -s MODULARIZE=1 -s USE_ES6_IMPORT_META=0
+	#
 	#nodejs testnode.js
 	echo
 	echo "testing build!!"
