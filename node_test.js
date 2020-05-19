@@ -15,8 +15,10 @@ function testMain() {
     var str_cpp = lNeo3.my_cpp_teststr("Hello World!");
     console.log(str_cpp);
 
-    var list = [];
-    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript();
+    var pubKey = lNeo3.cppUtil_GenerateVectorByte(8, 2);
+    pubKey.set(0, 50);
+
+    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript(pubKey);
     console.log(retVector);
     for (var i = 0; i < retVector.size(); i++) {
         console.log("Vector Value: ", retVector.get(i));
