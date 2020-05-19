@@ -113,10 +113,12 @@ cpp_bignum_add(std::string a, std::string b)
 //
 
 vbyte
-cppContract_CreateSignatureRedeemScript(vbyte pubkey)
+cppContract_CreateSignatureRedeemScript()//vbyte pubkey)
 {
    // call method from Core! (see class Neo SmartContract Contract, method CreateSignatureRedeemScript)
-   vbyte v(10, 1); // 10 elements with value 1
+   vbyte v(5); // 5 elements
+   for(unsigned i=0; i<v.size(); i++)
+      v[i] = i;
    return v; 
 }
 
@@ -125,6 +127,8 @@ cppContract_CreateSignatureRedeemScript(vbyte pubkey)
 // these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
+   register_vector<unsigned char>("vector<unsigned char>");
+
    function("my_cpp_teststr", &my_cpp_teststr);
 
    function("cpp_bignum_add", &cpp_bignum_add);

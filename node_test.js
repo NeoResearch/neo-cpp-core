@@ -1,19 +1,26 @@
-let lt = require('./build/librarytest');
+let lNeo3 = require('./build/librarytest');
 // c function needs wrapping... cpp don't!
-var myteststr = lt.cwrap('myteststr', 'string', ['string', 'number']);
+var myteststr = lNeo3.cwrap('myteststr', 'string', ['string', 'number']);
 
 // loading BigNum module
 let lt_bn = require('./libs/lib/node_modules/bn.js/lib/bn.js');
 
-lt['BN'] = lt_bn.BN; // "injecting" module
+lNeo3['BN'] = lt_bn.BN; // "injecting" module
 
 function testMain() {
-    lt._mytest(5);
+    lNeo3._mytest(5);
     var shello = 'hello';
     var str = myteststr(shello, shello.length);
     console.log(str);
-    var str_cpp = lt.my_cpp_teststr("Hello World!");
+    var str_cpp = lNeo3.my_cpp_teststr("Hello World!");
     console.log(str_cpp);
+
+    var list = [];
+    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript();
+    console.log(retVector);
+    for (var i = 0; i < retVector.size(); i++) {
+        console.log("Vector Value: ", retVector.get(i));
+    }
 }
 
 // ----------- wait until loading ----------
