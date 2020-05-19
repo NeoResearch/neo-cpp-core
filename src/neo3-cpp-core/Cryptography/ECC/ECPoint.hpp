@@ -23,16 +23,22 @@ class ECPoint : IComparable<ECPoint>
    /*
    internal ECFieldElement X, Y;
    internal readonly ECCurve Curve;
-
-public
-   bool IsInfinity
+*/
+   vbyte X;       // do NOT use ECField
+   vbyte Y;       // do NOT use ECField
+   bool Y_IsEven; // from ECField
+   //
+public:
+   bool IsInfinity()
    {
-      get { return X == null && Y == null; }
+      //get { return X == null && Y == null; }
+      return (X.size() == 0) && (Y.size() == 0);
    }
 
-public
-   int Size = > IsInfinity ? 1 : 33;
+public:
+   int Size(){ return IsInfinity() ? 1 : 33; };
 
+   /*
 public
    ECPoint()
      : this(null, null, ECCurve.Secp256r1)
@@ -151,30 +157,31 @@ public
             throw new FormatException("Invalid point encoding " + buffer[0]);
       }
    }
+*/
 
-public
-   byte[] EncodePoint(bool commpressed)
+public:
+   vbyte EncodePoint(bool commpressed)
    {
-      if (IsInfinity)
-         return new byte[1];
-      byte[] data;
+      if (IsInfinity())
+         return vbyte(1, 0); // [0]
+      vbyte data;
       if (commpressed) {
-         data = new byte[33];
+         data = vbyte(33, 0);
       } else {
-         data = new byte[65];
-         byte[] yBytes = Y.Value.ToByteArray(isUnsigned
-                                             : true, isBigEndian
-                                             : true);
-         Buffer.BlockCopy(yBytes, 0, data, 65 - yBytes.Length, yBytes.Length);
+         data = vbyte(65, 0);
+         //byte[] yBytes = Y.Value.ToByteArray(isUnsigned : true, isBigEndian : true);
+         vbyte yBytes = Y; // ENSURE IT'S BIG ENDIAN!
+         neopt::Buffer::BlockCopy(yBytes, 0, data, 65 - yBytes.size(), yBytes.size());
       }
-      byte[] xBytes = X.Value.ToByteArray(isUnsigned
-                                          : true, isBigEndian
-                                          : true);
-      Buffer.BlockCopy(xBytes, 0, data, 33 - xBytes.Length, xBytes.Length);
-      data[0] = commpressed ? Y.Value.IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
+      //byte[] xBytes = X.Value.ToByteArray(isUnsigned : true, isBigEndian : true);
+      vbyte xBytes = X; // ENSURE IT'S BIG ENDIAN!
+      neopt::Buffer::BlockCopy(xBytes, 0, data, 33 - xBytes.size(), xBytes.size());
+      //data[0] = commpressed ? Y.Value.IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
+      data[0] = commpressed ? Y_IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
       return data;
    }
 
+   /*
 public
    bool Equals(ECPoint other)
    {
