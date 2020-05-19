@@ -15,7 +15,7 @@ function testMain() {
     var str_cpp = lNeo3.my_cpp_teststr("Hello World!");
     console.log(str_cpp);
 
-    var pubKey = lNeo3.cppUtil_GenerateVectorByte(8, 2);
+    var pubKey = lNeo3.cpp_Util_GenerateVectorByte(8, 2);
     console.log(typeof(pubKey)); // console.log(
     //
     var vx = new lNeo3.vector$unsigned$char$();
@@ -25,7 +25,7 @@ function testMain() {
     
     pubKey.set(0, 50);
 
-    var retVector = lNeo3.cppContract_CreateSignatureRedeemScript(vx);
+    var retVector = lNeo3.cpp_Contract_CreateSignatureRedeemScript(vx);
     console.log(retVector);
     for (var i = 0; i < retVector.size(); i++) {
         console.log("Vector Value: ", retVector.get(i));

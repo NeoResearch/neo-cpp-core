@@ -113,27 +113,26 @@ cpp_bignum_add(std::string a, std::string b)
 //
 
 vbyte
-cppUtil_GenerateVectorByte(int vsize, unsigned char initValue)
+cpp_Util_GenerateVectorByte(int vsize, unsigned char initValue)
 {
    vbyte v(vsize, initValue);
-   return v; 
+   return v;
 }
 
 // ------------
 
-
 vbyte
-cppContract_CreateSignatureRedeemScript(vbyte pubkey)
+cpp_Contract_CreateSignatureRedeemScript(vbyte pubkey)
 {
    std::cout << pubkey.size() << std::endl;
-   for(unsigned i=0; i<pubkey.size(); i++)
+   for (unsigned i = 0; i < pubkey.size(); i++)
       std::cout << (unsigned)pubkey[i] << std::endl;
    //
    // call method from Core! (see class Neo SmartContract Contract, method CreateSignatureRedeemScript)
    vbyte v(5); // 5 elements
-   for(unsigned i=0; i<v.size(); i++)
+   for (unsigned i = 0; i < v.size(); i++)
       v[i] = i;
-   return v; 
+   return v;
 }
 
 // ================================
@@ -147,7 +146,7 @@ EMSCRIPTEN_BINDINGS(my_module)
 
    function("cpp_bignum_add", &cpp_bignum_add);
 
-   function("cppUtil_GenerateVectorByte", &cppUtil_GenerateVectorByte);
+   function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
 
-   function("cppContract_CreateSignatureRedeemScript", &cppContract_CreateSignatureRedeemScript);
+   function("cpp_Contract_CreateSignatureRedeemScript", &cpp_Contract_CreateSignatureRedeemScript);
 }
