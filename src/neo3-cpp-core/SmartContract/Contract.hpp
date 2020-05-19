@@ -114,7 +114,7 @@ public:
 
 public:
    //static byte[] CreateSignatureRedeemScript(ECPoint publicKey)
-   static vbyte CreateSignatureRedeemScript(ECPoint publicKey)
+   static vbyte CreateSignatureRedeemScript(ECPoint& publicKey)
    {
       //using(ScriptBuilder sb = new ScriptBuilder())
       if (ScriptBuilder sb; true) {
