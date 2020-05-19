@@ -20,7 +20,8 @@ extern "C"
 extern "C"
 {
    // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).
-   extern void bignum_add(const char* bn1, const char* bn2, const char* bn_out);
+   extern int bignum_add(const char* bn1, const char* bn2, const char* bn_out);
+   // returns the allocated size...
 }
 
 class X
@@ -77,8 +78,8 @@ extern "C"
       const char* pstr = out.c_str();
 
       //std::string bn3 = bignum_add(bn1.c_str(), bn2.c_str());
-      bignum_add(bn1.c_str(), bn2.c_str(), pstr);
-      std::cout << "ptr return on bignum_add = '" << (size_t)pstr << "'" << std::endl;
+      int rsize = bignum_add(bn1.c_str(), bn2.c_str(), pstr);
+      std::cout << "ptr return on bignum_add = '" << rsize << "' -> str NOT DONE '" << "'" << std::endl;
       std::string bn3{ pstr };
 
       std::cout << "BIG3 = " << bn3 << std::endl;

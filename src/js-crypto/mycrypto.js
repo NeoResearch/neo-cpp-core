@@ -29,10 +29,16 @@ mergeInto(
       var rstr = b3.toString(10);
       console.log("b3="+rstr);
       
-      console.log("ptr_str_out has some bytes: "+ lengthBytesUTF8(ptr_str_out));
-      stringToUTF8(rstr, ptr_str_out);
+      console.log("requires some bytes: "+ lengthBytesUTF8(rstr));
+      console.log("out space is '"+Module.UTF8ToString(ptr_str_out)+"'");
+      //ptr_str_out = rstr;
+      //stringToUTF8(rstr, ptr_str_out);
+      Module.writeStringToMemory(rstr, ptr_str_out);
+      console.log("out space is '"+Module.UTF8ToString(ptr_str_out)+"'");
+      //stringToUTF8(rstr, ptr_str_out);
       //////return ptr; // string
       // NO RETURN... pass by parameter 'ptr_str_out'
+      return lengthBytesUTF8(rstr);
     }
   }
 );
