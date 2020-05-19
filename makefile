@@ -39,6 +39,8 @@ EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr']" -s E
 ####PATH_EMCC = "em++"
 RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 
+BN_JS=./libs/lib/node_modules/bn.js/lib
+
 jstest: ./jstest.cpp
 	mkdir -p build/
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
@@ -46,10 +48,17 @@ jstest: ./jstest.cpp
 	echo 
 	em++ --version
 	echo 
-	em++ $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
+	#em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js --js-library $(BN_JS) -o ./build/librarytest.js
+	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp --js-library src/js-crypto/mycrypto.js -o ./build/librarytest.js
 	#nodejs testnode.js
+	echo
 	echo "testing build!!"
+	echo
 	nodejs node_test.js
+	echo
+	echo "testing BN.js locally"
+	echo
+	nodejs node_bn_test.js
 
 run:
 	nodejs build/test.js

@@ -1,6 +1,9 @@
+#include <emscripten/bind.h>
 #include <iostream>
 #include <memory>
 #include <optional>
+
+using namespace emscripten;
 
 template<class X>
 using op = std::optional<X>;
@@ -56,6 +59,17 @@ extern "C"
       return (const char*)r;
    }
 };
+
+std::string
+my_cpp_teststr(std::string a)
+{
+   return a.append("x");
+}
+
+EMSCRIPTEN_BINDINGS(my_module)
+{
+   function("my_cpp_teststr", &my_cpp_teststr);
+}
 
 int
 main()
