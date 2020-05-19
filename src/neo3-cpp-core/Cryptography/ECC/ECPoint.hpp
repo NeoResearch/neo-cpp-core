@@ -177,7 +177,7 @@ public:
       vbyte xBytes = X; // ENSURE IT'S BIG ENDIAN!
       neopt::Buffer::BlockCopy(xBytes, 0, data, 33 - xBytes.size(), xBytes.size());
       //data[0] = commpressed ? Y.Value.IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
-      data[0] = commpressed ? Y_IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
+      data[0] = commpressed ? Y_IsEven ? (neopt::byte)0x02 : (neopt::byte)0x03 : (neopt::byte)0x04;
       return data;
    }
 

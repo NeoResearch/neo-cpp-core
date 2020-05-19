@@ -100,28 +100,32 @@ public:
    {
       return Emit(data ? OpCode.PUSH1 : OpCode.PUSH0);
    }
+*/
 
-   ScriptBuilder EmitPush(byte[] data)
+   ScriptBuilder& EmitPush(vbyte data)
    {
-      if (data == null)
-         throw new ArgumentNullException(nameof(data));
-      if (data.Length < 0x100) {
+      //if (data == null)
+      //   throw new ArgumentNullException(nameof(data));
+      // impossible null here
+
+      if (data.size() < 0x100) {
          Emit(OpCode.PUSHDATA1);
-         writer.Write((byte)data.Length);
+         writer.Write((neopt::byte)data.size());
          writer.Write(data);
-      } else if (data.Length < 0x10000) {
+      } else if (data.size() < 0x10000) {
          Emit(OpCode.PUSHDATA2);
-         writer.Write((ushort)data.Length);
+         writer.Write((ushort)data.size());
          writer.Write(data);
       } else // if (data.Length < 0x100000000L)
       {
          Emit(OpCode.PUSHDATA4);
-         writer.Write(data.Length);
+         writer.Write(data.size());
          writer.Write(data);
       }
-      return this;
+      return *this;
    }
 
+/*
    ScriptBuilder EmitPush(string data)
    {
       return EmitPush(Encoding.UTF8.GetBytes(data));

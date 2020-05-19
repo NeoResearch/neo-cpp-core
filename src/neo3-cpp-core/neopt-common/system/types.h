@@ -13,7 +13,8 @@ namespace neopt {
 
 // the simplest chunk of information
 // TODO: migrate to C++17 byte type
-typedef unsigned char byte;
+typedef unsigned char byte; // EVILLLLL
+//using byte = std::byte;
 
 // half byte: nibble
 //typedef byte nibble;
