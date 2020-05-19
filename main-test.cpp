@@ -1,22 +1,24 @@
 #include <iostream>
 
-#include <neo3-cpp-core/Core.hpp>
-#include <neo3-cpp-vm/ScriptBuilder.hpp>
+//#include <neo3-cpp-core/Core.hpp>
+//#include <neo3-cpp-vm/ScriptBuilder.hpp>
+#include <neo3-cpp-vm/OpCode.hpp>
 
 using namespace std;
 
 using namespace Neo::VM;
-
-using namespace Neo::SmartContract;
+//using namespace Neo::SmartContract;
 
 int
 main()
 {
-   ScriptBuilder sb;
+   OpCode op = OpCode::CLEARITEMS;
 
-   ECPoint ecp;
+   std::cout << op << std::endl;
 
-   vbyte script = Contract::CreateSignatureRedeemScript(ecp);
+   //ScriptBuilder sb;
+   //ECPoint ecp;
+   //vbyte script = Contract::CreateSignatureRedeemScript(ecp);
 
    return 0;
 }
