@@ -3,7 +3,7 @@
 #include <memory>
 #include <optional>
 
-#include <neo3-cpp-core/imports.h>
+#include <neo3-cpp-core/core_imports.h>
 
 using namespace emscripten;
 
