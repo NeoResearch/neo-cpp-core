@@ -5,31 +5,46 @@
 //using System.Numerics;
 //using System.Text;
 
+#include <neo3-cpp-core/neopt-common/System.hpp>
+
+using neopt::BinaryWriter;
+
 namespace Neo {
 //
 namespace VM {
 //
 class ScriptBuilder //: IDisposable
 {
-   /*
+
 private:
-   readonly MemoryStream ms = new MemoryStream();
-   readonly BinaryWriter writer;
+   //readonly MemoryStream ms = new MemoryStream();
+   //const MemoryStream ms = new MemoryStream();
+   //
+   //readonly BinaryWriter writer;
+   BinaryWriter writer;
 
 public:
-   int Offset = > (int)ms.Position;
+   //int Offset = > (int)ms.Position;
+   int Offset()
+   {
+      //return (int)ms.Position;
+      assert(false);
+      return -1;
+   }
 
    ScriptBuilder()
    {
-      writer = new BinaryWriter(ms);
+      //writer = new BinaryWriter(ms);
    }
 
-   void Dispose()
+   //void Dispose()
+   ~ScriptBuilder()
    {
-      writer.Dispose();
-      ms.Dispose();
+      //writer.Dispose();
+      //ms.Dispose();
    }
 
+   /*
    ScriptBuilder Emit(OpCode op, byte[] arg = null)
    {
       writer.Write((byte)op);

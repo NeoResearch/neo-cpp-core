@@ -7,8 +7,8 @@
 #include <vector>
 
 // neopt core part
-#include <system/IBinaryWriter.h>
-#include <system/types.h>
+#include "../system/IBinaryWriter.h"
+#include "../system/types.h"
 //#include<numbers/nhelper.h>
 
 using namespace std; // TODO: do not use that in the future... prefer std::vector instead
@@ -84,10 +84,11 @@ public:
       return -1; // unknown
    }
 
-   //   virtual void Flush()
-   //   {
-   //output->flush(); // don't know if actually needed
-   //   }
+   virtual void Flush()
+   {
+      //output->flush(); // don't know if actually needed
+      assert(false);
+   }
 
    /*
    // Gets new independent reader from stream (must delete stream later)
@@ -165,7 +166,7 @@ public:
    }
    */
 };
-
-}
+//
+} // namespace neopt
 
 #endif
