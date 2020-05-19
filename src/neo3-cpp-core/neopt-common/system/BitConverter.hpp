@@ -10,7 +10,7 @@
 #include "../system/types.h"
 //#include<numbers/nhelper.h>
 
-using namespace std; // TODO: do not use that in the future... prefer std::vector instead
+//using namespace std; // TODO: do not use that in the future... prefer std::vector instead
 
 namespace neopt {
 

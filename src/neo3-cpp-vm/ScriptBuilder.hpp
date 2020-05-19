@@ -10,6 +10,7 @@
 #include <neo3-cpp-core/neopt-common/System.hpp>
 
 using neopt::BinaryWriter;
+using neopt::BitConverter;
 using neopt::MemoryStream;
 
 #include "OpCode.hpp"
@@ -146,9 +147,8 @@ public:
 
    ScriptBuilder EmitSysCall(uint api)
    {
-      return Emit(OpCode::SYSCALL, BitConverter.GetBytes(api));
+      return Emit(OpCode::SYSCALL, BitConverter::GetBytes(api));
    }
-
 
    vbyte ToArray()
    {
