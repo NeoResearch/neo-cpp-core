@@ -33,7 +33,7 @@ mergeInto(
       console.log("out space is '"+Module.UTF8ToString(ptr_str_out)+"'");
       //ptr_str_out = rstr;
       //stringToUTF8(rstr, ptr_str_out);
-      Module.writeStringToMemory(rstr, ptr_str_out);
+      Module.writeStringToMemory(rstr, ptr_str_out); // DEPRECATED!! But stringToUTF8 is not working...
       console.log("out space is '"+Module.UTF8ToString(ptr_str_out)+"'");
       //stringToUTF8(rstr, ptr_str_out);
       //////return ptr; // string
