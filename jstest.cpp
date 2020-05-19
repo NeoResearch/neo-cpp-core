@@ -13,18 +13,15 @@ using uptr = std::unique_ptr<X>;
 
 extern "C"
 {
+   // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).
    extern int mycrypto(int x);
 }
 
-//std::string bignum_add(std::string bn1, std::string bn2);
-
-
-
 extern "C"
 {
-   extern const char* bignum_add(const char* bn1, const char* bn2);
+   // this method is coming from the outside world... it could be 'js' (mergeInto), or 'cpp' (linking).
+   extern void bignum_add(const char* bn1, const char* bn2, const char* bn_out);
 }
-
 
 class X
 {
@@ -71,14 +68,19 @@ extern "C"
       std::string bn2 = "20";
       std::cout << "calling 'bignum_add' " << bn1 << " " << bn2 << std::endl;
 
-      
-        //EM_ASM_ARGS({
-         //   console.log(Pointer_stringify($0));
-         //}, bn1.c_str());
+      //EM_ASM_ARGS({
+      //   console.log(Pointer_stringify($0));
+      //}, bn1.c_str());
       std::cout << "end" << std::endl;
 
-      std::string bn3 = bignum_add(bn1.c_str(), bn2.c_str());
-      
+      std::string out = "abcdefabcdef"; // some space
+      const char* pstr = out.c_str();
+
+      //std::string bn3 = bignum_add(bn1.c_str(), bn2.c_str());
+      bignum_add(bn1.c_str(), bn2.c_str(), pstr);
+      std::cout << "ptr return on bignum_add = '" << (size_t)pstr << "'" << std::endl;
+      std::string bn3{ pstr };
+
       std::cout << "BIG3 = " << bn3 << std::endl;
       return (const char*)r;
    }
@@ -90,25 +92,24 @@ my_cpp_teststr(std::string a)
    return a.append("x");
 }
 
-
 std::string
 cpp_bignum_add(std::string a, std::string b)
 {
    // calling 'js' implementation (or pure cpp)
-   std::string str{bignum_add(a.c_str(), b.c_str())};
+   std::string st = "somespacereserved";
+   const char* pstr = st.c_str();
+   bignum_add(a.c_str(), b.c_str(), pstr); // output on pstr
+   std::cout << "ptr return on cpp_bignum_add = " << pstr << std::endl;
+   std::string str{ pstr };
    return str;
 }
 
-
+// these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
    function("my_cpp_teststr", &my_cpp_teststr);
    function("cpp_bignum_add", &cpp_bignum_add);
 }
-
-
-
-
 
 int
 main()
