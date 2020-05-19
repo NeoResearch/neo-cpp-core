@@ -5,9 +5,9 @@
 #include <neo3-cpp-core/neopt-common/System.hpp>
 
 namespace Neo {
-
+//
 namespace VM {
-
+//
 enum class OpCode : neopt::byte
 {
    //#region Constants
@@ -814,12 +814,13 @@ enum class OpCode : neopt::byte
    //#endregion
 };
 
-ostream& operator<<(ostream& os, const OpCode& op)
+ostream&
+operator<<(ostream& os, const OpCode& op)
 {
    os << "OpCode(" << (int)op << "; 0x" << std::hex << (int)op << ")";
    return os;
 }
 
 } // namespace VM
-
+//
 } // namespace Neo

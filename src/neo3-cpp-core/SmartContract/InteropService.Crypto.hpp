@@ -1,11 +1,13 @@
-using Neo.Cryptography;
-using Neo.Network.P2P;
-using Neo.Network.P2P.Payloads;
-using Neo.VM;
-using Neo.VM.Types;
-using System;
-using System.Linq;
-using Array = Neo.VM.Types.Array;
+#pragma once
+
+//using Neo.Cryptography;
+//using Neo.Network.P2P;
+//using Neo.Network.P2P.Payloads;
+//using Neo.VM;
+//using Neo.VM.Types;
+//using System;
+//using System.Linq;
+//using Array = Neo.VM.Types.Array;
 
 namespace Neo {
 
@@ -14,19 +16,24 @@ namespace SmartContract {
 class InteropService
 {
    ////public static class Crypto
-   namespace Crypto {
-   ////public
-   static readonly InteropDescriptor SHA256 = Register("Neo.Crypto.SHA256", Crypto_SHA256, 0_01000000, TriggerType.All, CallFlags.None);
-   //public
-   static readonly InteropDescriptor VerifyWithECDsaSecp256r1 = Register("Neo.Crypto.ECDsa.Secp256r1.Verify", Crypto_ECDsaSecp256r1Verify, 0_01000000, TriggerType.All, CallFlags.None);
-   //public
-   static readonly InteropDescriptor VerifyWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.Verify", Crypto_ECDsaSecp256k1Verify, 0_01000000, TriggerType.All, CallFlags.None);
-   //public
-   static readonly InteropDescriptor CheckMultisigWithECDsaSecp256r1 = Register("Neo.Crypto.ECDsa.Secp256r1.CheckMultiSig", Crypto_ECDsaSecp256r1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
-   //public
-   static readonly InteropDescriptor CheckMultisigWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.CheckMultiSig", Crypto_ECDsaSecp256k1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
+   class Crypto
+   {
+   public:
+      ////public
+      //static readonly InteropDescriptor SHA256 = Register("Neo.Crypto.SHA256", Crypto_SHA256, 0_01000000, TriggerType.All, CallFlags.None);
+      //public
+      static const InteropDescriptor VerifyWithECDsaSecp256r1()
+      {
+         return Register("Neo.Crypto.ECDsa.Secp256r1.Verify", Crypto_ECDsaSecp256r1Verify, 0_01000000, TriggerType.All, CallFlags.None);
+      }
+      //public
+      //static readonly InteropDescriptor VerifyWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.Verify", Crypto_ECDsaSecp256k1Verify, 0_01000000, TriggerType.All, CallFlags.None);
+      //public
+      //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256r1 = Register("Neo.Crypto.ECDsa.Secp256r1.CheckMultiSig", Crypto_ECDsaSecp256r1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
+      //public
+      //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.CheckMultiSig", Crypto_ECDsaSecp256k1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
 
-/*
+      /*
    //private
    static bool Crypto_SHA256(ApplicationEngine engine)
    {
@@ -144,7 +151,7 @@ class InteropService
    }
    }
 */
-} // class Crypto / namespace Crypto
-}; // partial class InteropService   / class
+   }; // class Crypto Crypto
+};    // partial class InteropService   / class
 } // namespace SmartContract
 } // namespace Neo
