@@ -1,6 +1,6 @@
 all:
 	mkdir -p build/
-	g++ -std=c++11 main-test.cpp -Isrc/ -o build/app_main
+	g++ -std=c++17 main-test.cpp -Isrc/ -o build/app_main
 
 
 

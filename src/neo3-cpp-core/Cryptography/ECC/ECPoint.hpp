@@ -1,12 +1,14 @@
 #pragma once
 
+#include <neo3-cpp-core/neopt-common/System.hpp>
 //using Neo.IO;
 //using System;
 //using System.IO;
 //using System.Numerics;
 //using static Neo.Helper;
-
-#include <neo3-cpp-core/neopt-common/System.hpp>
+using neopt::IComparable;
+using neopt::IEquatable;
+using neopt::ISerializable;
 
 namespace Neo {
 //

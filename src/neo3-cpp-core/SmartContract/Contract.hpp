@@ -1,18 +1,17 @@
 #pragma once
 
-//using Neo.Cryptography.ECC;
-using Neo::Cryptography::ECC;
-//using Neo.VM;
-using Neo::VM;
+#include <neo3-cpp-core/Cryptography/ECC/ECPoint.hpp>
+using namespace Neo::Cryptography::ECC;
+#include <neo3-cpp-vm/ScriptBuilder.hpp>
+using namespace Neo::VM;
 //using Neo.Wallets;
 //using System;
 //using System.Linq;
 
-namespace Neo //Neo.SmartContract
-{
+namespace Neo {
 //
 namespace SmartContract {
-
+//
 class Contract
 {
    /*
@@ -127,4 +126,5 @@ public:
 };
 //
 } // namespace SmartContract
+//
 } // namespace Neo
