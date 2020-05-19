@@ -8,6 +8,7 @@
 #include <neo3-cpp-core/neopt-common/System.hpp>
 
 using neopt::BinaryWriter;
+using neopt::MemoryStream;
 
 namespace Neo {
 //
@@ -18,7 +19,7 @@ class ScriptBuilder //: IDisposable
 
 private:
    //readonly MemoryStream ms = new MemoryStream();
-   //const MemoryStream ms = new MemoryStream();
+   MemoryStream ms;
    //
    //readonly BinaryWriter writer;
    BinaryWriter writer;
@@ -34,7 +35,7 @@ public:
 
    ScriptBuilder()
    {
-      //writer = new BinaryWriter(ms);
+      writer = BinaryWriter{ &ms };
    }
 
    //void Dispose()

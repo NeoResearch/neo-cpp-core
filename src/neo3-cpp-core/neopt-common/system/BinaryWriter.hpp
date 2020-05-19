@@ -10,6 +10,7 @@
 #include "../system/IBinaryWriter.h"
 #include "../system/types.h"
 //#include<numbers/nhelper.h>
+#include "../system/MemoryStream.hpp"
 
 using namespace std; // TODO: do not use that in the future... prefer std::vector instead
 
@@ -25,7 +26,16 @@ private:
    vbyte* data_bytes; // if available, write here
    bool delete_array;
 
+   MemoryStream* mstream{ nullptr };
+
 public:
+   BinaryWriter(MemoryStream* _mstream)
+     : mstream(_mstream)
+     , delete_array(false)
+     , data_bytes(nullptr)
+   {
+   }
+
    // writing data on output stream
    // may not be fully portable
    // if necessary, in the future, create abstract Stream class with better cross-compatibility
