@@ -11,7 +11,7 @@ using vbyte = neopt::vbyte;
 
 // more specific
 
-#include "SmartContract/Contract.hpp"
+/////#include "SmartContract/Contract.hpp"
 
 //
 //#include<vector>

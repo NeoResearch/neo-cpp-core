@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <neo3-cpp-core/Core.hpp>
+#include <neo3-cpp-core/SmartContract/Contract.hpp>
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 #include <neo3-cpp-vm/OpCode.hpp>
 #include <neo3-cpp-vm/ScriptBuilder.hpp>
