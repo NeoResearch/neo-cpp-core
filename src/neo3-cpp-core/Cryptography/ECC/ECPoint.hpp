@@ -29,9 +29,9 @@ class ECPoint // TODO: inheritances........
 */
    const ECCurve Curve;
    //
-   vbyte X;       // do NOT use ECField
-   vbyte Y;       // do NOT use ECField
-   bool Y_IsEven; // from ECField
+   const vbyte X;               // do NOT use ECField
+   const vbyte Y;               // do NOT use ECField
+   const bool Y_IsEven{ true }; // from ECField
    //
 public:
    bool IsInfinity()
@@ -54,6 +54,8 @@ public:
    //ECPoint(ECFieldElement x, ECFieldElement y, ECCurve curve)
    ECPoint(vbyte x, vbyte y, ECCurve curve)
      : Curve(curve)
+     , X(x)
+     , Y(y)
    {
       //if ((x is null ^ y is null) || (curve is null))
       //   throw new ArgumentException("Exactly one of the field elements is null");
@@ -61,8 +63,9 @@ public:
          std::cerr << "Exactly one of the field elements is null" << std::endl;
          assert(false);
       }
-      this->X = x;
-      this->Y = y;
+      //this->X = x;
+      //this->Y = y;
+      std::cout << "WARNING: ECPoint EVEN is ALWAYS set to 'true'" << std::endl;
    }
    /*
 public

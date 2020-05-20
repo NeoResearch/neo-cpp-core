@@ -147,6 +147,7 @@ public:
 
    ScriptBuilder EmitSysCall(uint api)
    {
+      std::cout << "WARNING: EmitSysCall api = " << api << std::endl;
       return Emit(OpCode::SYSCALL, BitConverter::GetBytes(api));
    }
 

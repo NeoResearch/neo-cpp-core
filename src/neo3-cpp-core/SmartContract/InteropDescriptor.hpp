@@ -68,6 +68,7 @@ public:
      , AllowedTriggers(allowedTriggers)
      , RequiredCallFlags(requiredCallFlags)
    {
+      std::cout << "WARNING: missing Hash on InteropDescriptor" << std::endl;
       //this.Method = method;
       // TODO --------> ///////this.Hash = BitConverter.ToUInt32(Encoding.ASCII.GetBytes(method).Sha256(), 0);
       //this.Handler = handler;
@@ -76,6 +77,7 @@ public:
       //this.RequiredCallFlags = requiredCallFlags;
    }
 
+   /*
    InteropDescriptor(const InteropDescriptor& other)
      : Method{ other.Method }
      , Handler{ other.Handler }
@@ -90,6 +92,7 @@ public:
       //this.AllowedTriggers = allowedTriggers;
       //this.RequiredCallFlags = requiredCallFlags;
    }
+   */
 
 public:
    //static implicit operator uint(InteropDescriptor descriptor)

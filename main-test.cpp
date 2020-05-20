@@ -22,8 +22,8 @@ main()
 
    ScriptBuilder sb;
 
-   vbyte vx_32(32, 0);
-   vbyte vy_32(32, 0);
+   vbyte vx_32(32, 8);
+   vbyte vy_32(32, 9);
 
    ECPoint ecp{ vx_32, vy_32, ECCurve::Secp256r1 };
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
