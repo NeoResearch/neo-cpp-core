@@ -83,6 +83,8 @@ public:
    {
       if (data_bytes)
          data_bytes->push_back(v);
+      else if(mstream)
+         mstream->internal_buffer.push_back(v);
       else
          NEOPT_EXCEPTION("NOT IMPLEMENTED WITH OTHER BUFFER TYPE!");
    }

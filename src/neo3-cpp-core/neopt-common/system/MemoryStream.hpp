@@ -7,15 +7,17 @@
 #include "types.h" // vbyte
 
 namespace neopt {
-
+//
 class MemoryStream
 {
 public:
+   vbyte internal_buffer;
+
    vbyte ToArray()
    {
-      assert(false);
-      return vbyte(0);
+      return internal_buffer;
    }
 };
-
+//
 } // namespace neopt
+//
