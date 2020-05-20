@@ -10,13 +10,15 @@ using neopt::IComparable;
 using neopt::IEquatable;
 using neopt::ISerializable;
 
+#include "ECCurve.hpp"
+
 namespace Neo {
 //
 namespace Cryptography {
 //
 namespace ECC {
 //
-class ECPoint  // TODO: inheritances........
+class ECPoint // TODO: inheritances........
 //: IComparable<ECPoint>
 //  , IEquatable<ECPoint>
 //  , ISerializable
@@ -25,6 +27,8 @@ class ECPoint  // TODO: inheritances........
    internal ECFieldElement X, Y;
    internal readonly ECCurve Curve;
 */
+   const ECCurve Curve;
+   //
    vbyte X;       // do NOT use ECField
    vbyte Y;       // do NOT use ECField
    bool Y_IsEven; // from ECField
@@ -37,23 +41,30 @@ public:
    }
 
 public:
-   int Size(){ return IsInfinity() ? 1 : 33; };
+   int Size() { return IsInfinity() ? 1 : 33; };
 
+public:
    /*
-public
    ECPoint()
      : this(null, null, ECCurve.Secp256r1)
    {}
+   */
 
-   internal ECPoint(ECFieldElement x, ECFieldElement y, ECCurve curve)
+   //internal
+   //ECPoint(ECFieldElement x, ECFieldElement y, ECCurve curve)
+   ECPoint(vbyte x, vbyte y, ECCurve curve)
+     : Curve(curve)
    {
-      if ((x is null ^ y is null) || (curve is null))
-         throw new ArgumentException("Exactly one of the field elements is null");
-      this.X = x;
-      this.Y = y;
-      this.Curve = curve;
+      //if ((x is null ^ y is null) || (curve is null))
+      //   throw new ArgumentException("Exactly one of the field elements is null");
+      if ((x.size() == 0) && (y.size() == 0)) {
+         std::cerr << "Exactly one of the field elements is null" << std::endl;
+         assert(false);
+      }
+      this->X = x;
+      this->Y = y;
    }
-
+   /*
 public
    int CompareTo(ECPoint other)
    {

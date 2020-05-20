@@ -10,6 +10,7 @@
 
 using namespace Neo::VM;
 using namespace Neo::SmartContract;
+using namespace Neo::Cryptography::ECC;
 
 int
 main()
@@ -18,7 +19,11 @@ main()
    std::cout << op << std::endl;
 
    ScriptBuilder sb;
-   ECPoint ecp;
+
+   vbyte vx_32(32, 0);
+   vbyte vy_32(32, 0);
+
+   ECPoint ecp{ vx_32, vy_32, ECCurve::Secp256r1 };
    vbyte script = Contract::CreateSignatureRedeemScript(ecp);
 
    std::cout << "Finished successfully" << std::endl;
