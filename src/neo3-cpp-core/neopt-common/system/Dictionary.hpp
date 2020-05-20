@@ -10,7 +10,7 @@
 #include "../system/types.h"
 //#include<numbers/nhelper.h>
 
-using namespace std;
+//using namespace std;
 
 namespace neopt {
 
@@ -18,7 +18,7 @@ template<class Key, class Value>
 class Dictionary
 {
 private:
-   map<Key, Value> dictionary;
+   std::map<Key, Value> dictionary;
 
 public:
    Value& operator[](const Key& key)
@@ -33,9 +33,9 @@ public:
 
    void Add(Key& key, Value& value)
    {
-      std::cerr << "MUST IMPLEMENT Dictionary.Add FOR const std::function... see InteropDescriptor!" << std::endl;
-      assert(false);
-      //dictionary[key] = value;
+      //std::cerr << "MUST IMPLEMENT Dictionary.Add FOR const std::function... see InteropDescriptor!" << std::endl;
+      //assert(false);
+      dictionary[key] = value;
    }
 
    // TODO: avoid memory leaks

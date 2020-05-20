@@ -26,7 +26,7 @@ public:
    ////public
    //static readonly InteropDescriptor SHA256 = Register("Neo.Crypto.SHA256", Crypto_SHA256, 0_01000000, TriggerType.All, CallFlags.None);
    //public
-   static const InteropDescriptor VerifyWithECDsaSecp256r1()
+   static const InteropDescriptor& VerifyWithECDsaSecp256r1()
    {
       return Register("Neo.Crypto.ECDsa.Secp256r1.Verify", Crypto_ECDsaSecp256r1Verify, 01000000, TriggerType::All, CallFlags::None);
    }

@@ -23,7 +23,8 @@ namespace InteropService {
 
 //private
 //static readonly Dictionary<uint, InteropDescriptor> methods = new Dictionary<uint, InteropDescriptor>();
-Dictionary<uint, InteropDescriptor> methods;
+//Dictionary<uint, InteropDescriptor> methods; // should be like this!! orrrrr, 'constexpr' (TODO)
+Dictionary<uint, InteropDescriptor*> methods; // TODO: remove pointer!!
 
 /*
 static InteropService()
@@ -57,14 +58,15 @@ Invoke(ApplicationEngine engine, uint method)
 
 //private
 //static
-InteropDescriptor
+InteropDescriptor&
 //Register(std::string method, Func<ApplicationEngine, bool> handler, long price, TriggerType allowedTriggers, CallFlags requiredCallFlags)
-Register(std::string method, const std::function<bool(ApplicationEngine&)>& handler, long price, TriggerType allowedTriggers, CallFlags requiredCallFlags)
+//Register(std::string method, const std::function<bool(ApplicationEngine&)>& handler, long price, TriggerType allowedTriggers, CallFlags requiredCallFlags)
+Register(std::string method, bool(*handler)(ApplicationEngine&), long price, TriggerType allowedTriggers, CallFlags requiredCallFlags)
 {
-   //InteropDescriptor descriptor = new InteropDescriptor(method, handler, price, allowedTriggers, requiredCallFlags);
-   InteropDescriptor descriptor{ method, handler, price, allowedTriggers, requiredCallFlags };
-   methods.Add(descriptor.Hash, descriptor);
-   return descriptor;
+   InteropDescriptor* descriptor = new InteropDescriptor(method, handler, price, allowedTriggers, requiredCallFlags);
+   //InteropDescriptor descriptor{ method, handler, price, allowedTriggers, requiredCallFlags };
+   methods.Add(descriptor->Hash, descriptor);
+   return *descriptor;
 }
 //
 } // public static partial class / namespace InteropService
