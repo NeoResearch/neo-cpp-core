@@ -33,6 +33,8 @@ public:
 
    void Add(Key& key, Value& value)
    {
+      std::cerr << "MUST IMPLEMENT Dictionary.Add FOR const std::function... see InteropDescriptor!" << std::endl;
+      assert(false);
       //dictionary[key] = value;
    }
 
