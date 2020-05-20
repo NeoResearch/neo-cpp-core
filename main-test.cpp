@@ -21,5 +21,6 @@ main()
    ECPoint ecp;
    vbyte script = Contract::CreateSignatureRedeemScript(ecp);
 
+   std::cout << "Finished successfully" << std::endl;
    return 0;
 }

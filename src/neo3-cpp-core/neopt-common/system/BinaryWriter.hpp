@@ -99,7 +99,8 @@ public:
    virtual void Flush()
    {
       //output->flush(); // don't know if actually needed
-      assert(false);
+      //assert(false);
+      std::cout << "WARNING: BinaryWriter don't know how (and if) to flush!" << std::endl;
    }
 
    /*
