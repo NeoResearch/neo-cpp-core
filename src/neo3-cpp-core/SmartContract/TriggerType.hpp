@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <sstream>
 
 #include <neo3-cpp-core/neopt-common/System.hpp>
 
@@ -34,7 +35,9 @@ enum class TriggerType : neopt::byte
 ostream&
 operator<<(ostream& os, const TriggerType& tt)
 {
-   os << "TriggerType(" << (int)tt << "; 0x" << std::hex << (int)tt << ")";
+   std::stringstream ss;
+   ss << "TriggerType(" << (int)tt << "; 0x" << std::hex << (int)tt << ")";
+   os << ss.str();
    return os;
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <sstream>
 
 #include <neo3-cpp-core/neopt-common/System.hpp>
 
@@ -817,7 +818,9 @@ enum class OpCode : neopt::byte
 ostream&
 operator<<(ostream& os, const OpCode& op)
 {
-   os << "OpCode(" << (int)op << "; 0x" << std::hex << (int)op << ")";
+   std::stringstream ss;
+   ss << "OpCode(" << (int)op << "; 0x" << std::hex << (int)op << ")"; 
+   os << ss.str();
    return os;
 }
 

@@ -120,6 +120,17 @@ class MyStaticSingletonClass final
 };
 */
 
+/*
+ostream&
+operator<<(ostream& os, const vbyte& v)
+{
+   os << "vbyte(" << vbyte.size() << "): ";
+   for (auto i : v)
+      os << i << " ";
+   return os;
+}
+*/
+
 } // namespace neopt
 
 #endif
