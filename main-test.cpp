@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <neo3-cpp-core/Core.hpp>
+#include <neo3-cpp-core/Cryptography/ECC/ECFieldElement.hpp>
 #include <neo3-cpp-core/SmartContract/Contract.hpp>
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 #include <neo3-cpp-vm/OpCode.hpp>
@@ -21,6 +22,8 @@ main()
    std::cout << op << std::endl;
 
    ScriptBuilder sb;
+
+   ECFieldElement ecf_x;
 
    vbyte vx_32(32, 8);
    vbyte vy_32(32, 9);
