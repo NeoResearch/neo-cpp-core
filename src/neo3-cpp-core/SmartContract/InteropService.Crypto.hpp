@@ -1,6 +1,7 @@
 #pragma once
 
 //using Neo.Cryptography;
+#include <neo3-cpp-core/Cryptography/ECC/ECCurve.hpp>
 //using Neo.Network.P2P;
 //using Neo.Network.P2P.Payloads;
 //using Neo.VM;
@@ -9,31 +10,34 @@
 //using System.Linq;
 //using Array = Neo.VM.Types.Array;
 
+#include "InteropDescriptor.hpp"
+
+#include "InteropService.hpp"
+
 namespace Neo {
 
 namespace SmartContract {
-//partial class InteropService
-class InteropService
+//partial static class InteropService
+namespace InteropService {
+////public static class Crypto
+class Crypto
 {
-   ////public static class Crypto
-   class Crypto
+public:
+   ////public
+   //static readonly InteropDescriptor SHA256 = Register("Neo.Crypto.SHA256", Crypto_SHA256, 0_01000000, TriggerType.All, CallFlags.None);
+   //public
+   static const InteropDescriptor VerifyWithECDsaSecp256r1()
    {
-   public:
-      ////public
-      //static readonly InteropDescriptor SHA256 = Register("Neo.Crypto.SHA256", Crypto_SHA256, 0_01000000, TriggerType.All, CallFlags.None);
-      //public
-      static const InteropDescriptor VerifyWithECDsaSecp256r1()
-      {
-         return Register("Neo.Crypto.ECDsa.Secp256r1.Verify", Crypto_ECDsaSecp256r1Verify, 0_01000000, TriggerType.All, CallFlags.None);
-      }
-      //public
-      //static readonly InteropDescriptor VerifyWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.Verify", Crypto_ECDsaSecp256k1Verify, 0_01000000, TriggerType.All, CallFlags.None);
-      //public
-      //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256r1 = Register("Neo.Crypto.ECDsa.Secp256r1.CheckMultiSig", Crypto_ECDsaSecp256r1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
-      //public
-      //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.CheckMultiSig", Crypto_ECDsaSecp256k1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
+      return Register("Neo.Crypto.ECDsa.Secp256r1.Verify", Crypto_ECDsaSecp256r1Verify, 01000000, TriggerType::All, CallFlags::None);
+   }
+   //public
+   //static readonly InteropDescriptor VerifyWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.Verify", Crypto_ECDsaSecp256k1Verify, 0_01000000, TriggerType.All, CallFlags.None);
+   //public
+   //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256r1 = Register("Neo.Crypto.ECDsa.Secp256r1.CheckMultiSig", Crypto_ECDsaSecp256r1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
+   //public
+   //static readonly InteropDescriptor CheckMultisigWithECDsaSecp256k1 = Register("Neo.Crypto.ECDsa.Secp256k1.CheckMultiSig", Crypto_ECDsaSecp256k1CheckMultiSig, 0, TriggerType.All, CallFlags.None);
 
-      /*
+   /*
    //private
    static bool Crypto_SHA256(ApplicationEngine engine)
    {
@@ -47,22 +51,23 @@ class InteropService
       engine.CurrentContext.EvaluationStack.Push(value.ToArray().Sha256());
       return true;
    }
-
-   //private
-   static bool Crypto_ECDsaSecp256r1Verify(ApplicationEngine engine)
+*/
+private:
+   static bool Crypto_ECDsaSecp256r1Verify(ApplicationEngine& engine)
    {
-      return Crypto_ECDsaVerify(engine, Cryptography.ECC.ECCurve.Secp256r1);
+      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurve::Secp256r1);
    }
 
-   //private
-   static bool Crypto_ECDsaSecp256k1Verify(ApplicationEngine engine)
+private:
+   static bool Crypto_ECDsaSecp256k1Verify(ApplicationEngine& engine)
    {
-      return Crypto_ECDsaVerify(engine, Cryptography.ECC.ECCurve.Secp256k1);
+      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurve::Secp256k1);
    }
 
-   //private
-   static bool Crypto_ECDsaVerify(ApplicationEngine engine, Cryptography.ECC.ECCurve curve)
+private:
+   static bool Crypto_ECDsaVerify(ApplicationEngine& engine, Cryptography::ECC::ECCurve curve)
    {
+      /*
       StackItem item0 = engine.CurrentContext.EvaluationStack.Pop();
       ReadOnlySpan<byte> message = item0 switch {
          InteropInterface _interface = > _interface.GetInterface<IVerifiable>().GetHashData(),
@@ -76,9 +81,10 @@ class InteropService
       } catch (ArgumentException) {
          engine.CurrentContext.EvaluationStack.Push(false);
       }
+      */
       return true;
    }
-
+   /*
    //private
    static bool Crypto_ECDsaSecp256r1CheckMultiSig(ApplicationEngine engine)
    {
@@ -151,7 +157,7 @@ class InteropService
    }
    }
 */
-   }; // class Crypto Crypto
-};    // partial class InteropService   / class
+}; // class Crypto Crypto
+}; // partial class InteropService   / class
 } // namespace SmartContract
 } // namespace Neo

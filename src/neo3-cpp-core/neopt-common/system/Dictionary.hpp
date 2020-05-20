@@ -7,7 +7,7 @@
 #include <vector>
 
 // neopt core part
-#include <system/types.h>
+#include "../system/types.h"
 //#include<numbers/nhelper.h>
 
 using namespace std;
@@ -33,7 +33,7 @@ public:
 
    void Add(Key& key, Value& value)
    {
-      dictionary[key] = value;
+      //dictionary[key] = value;
    }
 
    // TODO: avoid memory leaks

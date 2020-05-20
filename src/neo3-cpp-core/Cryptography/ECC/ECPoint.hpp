@@ -16,9 +16,10 @@ namespace Cryptography {
 //
 namespace ECC {
 //
-class ECPoint : IComparable<ECPoint>
-  , IEquatable<ECPoint>
-  , ISerializable
+class ECPoint  // TODO: inheritances........
+//: IComparable<ECPoint>
+//  , IEquatable<ECPoint>
+//  , ISerializable
 {
    /*
    internal ECFieldElement X, Y;

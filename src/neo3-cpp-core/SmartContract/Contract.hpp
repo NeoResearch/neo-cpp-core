@@ -121,7 +121,7 @@ public:
       if (ScriptBuilder sb; true) {
          sb.EmitPush(publicKey.EncodePoint(true));
          sb.Emit(OpCode::PUSHNULL);
-         sb.EmitSysCall(Neo::SmartContract::InteropService::Crypto.VerifyWithECDsaSecp256r1);
+         sb.EmitSysCall(Neo::SmartContract::InteropService::Crypto::VerifyWithECDsaSecp256r1());
          return sb.ToArray();
       }
    }

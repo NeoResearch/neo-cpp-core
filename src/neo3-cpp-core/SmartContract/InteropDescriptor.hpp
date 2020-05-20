@@ -1,31 +1,88 @@
-using Neo.Cryptography;
-using System;
-using System.Text;
 
-namespace Neo.SmartContract
+#pragma once
+
+//using Neo.Cryptography;
+//using System;
+//using System.Text;
+
+#include <functional>
+
+#include "ApplicationEngine.hpp"
+#include "CallFlags.hpp"
+#include "TriggerType.hpp"
+
+namespace Neo {
+
+namespace SmartContract {
+class InteropDescriptor
 {
-    public class InteropDescriptor
-    {
-        public string Method { get; }
-        public uint Hash { get; }
-        internal Func<ApplicationEngine, bool> Handler { get; }
-        public long FixedPrice { get; }
-        public TriggerType AllowedTriggers { get; }
-        public CallFlags RequiredCallFlags { get; }
+public:
+   std::string Method;
+   std::string getMethod()
+   {
+      return Method;
+   }
 
-        internal InteropDescriptor(string method, Func<ApplicationEngine, bool> handler, long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
-        {
-            this.Method = method;
-            this.Hash = BitConverter.ToUInt32(Encoding.ASCII.GetBytes(method).Sha256(), 0);
-            this.Handler = handler;
-            this.FixedPrice = fixedPrice;
-            this.AllowedTriggers = allowedTriggers;
-            this.RequiredCallFlags = requiredCallFlags;
-        }
+public:
+   uint Hash;
+   uint getHash()
+   {
+      return Hash;
+   }
 
-        public static implicit operator uint(InteropDescriptor descriptor)
-        {
-            return descriptor.Hash;
-        }
-    }
-}
+   //internal
+   const std::function<bool(ApplicationEngine&)>& Handler;
+   const std::function<bool(ApplicationEngine&)>& getHandler()
+   {
+      return Handler;
+   }
+
+public:
+   long FixedPrice;
+   long getFixedPrice()
+   {
+      return FixedPrice;
+   }
+
+public:
+   TriggerType AllowedTriggers;
+   TriggerType getAllowedTriggers()
+   {
+      return AllowedTriggers;
+   }
+
+public:
+   CallFlags RequiredCallFlags;
+   CallFlags getRequiredCallFlags()
+   {
+      return RequiredCallFlags;
+   }
+
+   //internal
+   InteropDescriptor(std::string method, const std::function<bool(ApplicationEngine&)>& handler, long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
+     : Method{ method }
+     , Handler{ handler }
+     , FixedPrice{ fixedPrice }
+     , AllowedTriggers(allowedTriggers)
+     , RequiredCallFlags(requiredCallFlags)
+   {
+      //this.Method = method;
+      // TODO --------> ///////this.Hash = BitConverter.ToUInt32(Encoding.ASCII.GetBytes(method).Sha256(), 0);
+      //this.Handler = handler;
+      //this.FixedPrice = fixedPrice;
+      //this.AllowedTriggers = allowedTriggers;
+      //this.RequiredCallFlags = requiredCallFlags;
+   }
+
+public:
+   //static implicit operator uint(InteropDescriptor descriptor)
+   operator uint() const
+   {
+      return this->Hash;
+   }
+
+}; // class InteropDescriptor
+//
+} // namespace SmartContract
+//
+} // namespace Neo
