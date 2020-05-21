@@ -17,11 +17,16 @@ using namespace Neo::Cryptography::ECC;
 
 using namespace neopt;
 
+using namespace csbiginteger;
+
 int
 main()
 {
    OpCode op = OpCode::CLEARITEMS;
    std::cout << op << std::endl;
+
+   BigInteger big(-1);
+   std::cout << big.ToString(16) << std::endl;
 
    ScriptBuilder sb;
 
