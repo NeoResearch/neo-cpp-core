@@ -20,12 +20,12 @@ update_submodules:
 
 get_libcrypton:
 	(cd libs/libcrypton && git submodule update --init --recursive && git submodule update --recursive)
-	(cd libs/libcrypton && make vendor)
+	(cd libs/libcrypton && make vendor && make test)
 
 get_csbiginteger:
 	(cd libs/csBigInteger_cpp && git submodule update --init --recursive && git submodule update --recursive)
 	(cd libs/csBigInteger_cpp && rm -rf tests/libgtest/build)
-	(cd libs/csBigInteger_cpp && make vendor)
+	(cd libs/csBigInteger_cpp && make vendor && make test)
 	
 
 
