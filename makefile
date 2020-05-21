@@ -1,6 +1,6 @@
 all:
 	mkdir -p build/
-	g++ -std=c++17 main-test.cpp -Isrc/ -Ilibs/ -L./libs/csbiginteger-cpp/lib -o build/app_main -lcsbiginteger
+	g++ -std=c++17 main-test.cpp -Isrc/ -Ilibs/ -L./libs/csbiginteger-cpp/lib -o build/app_main -lcsbiginteger -lgmp -lgmpxx
 
 
 

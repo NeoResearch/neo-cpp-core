@@ -6,6 +6,8 @@
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 #include <neo3-cpp-vm/OpCode.hpp>
 #include <neo3-cpp-vm/ScriptBuilder.hpp>
+//
+#include <csbiginteger-cpp/src/csBigIntegerLibClass.hpp>
 
 //using namespace std;
 
