@@ -2,13 +2,15 @@
 #pragma once
 
 //using Neo.Cryptography;
+#include <neo3-cpp-core/Cryptography/cHelper.hpp>
+//
 //using System;
 //using System.Text;
 #include <neo3-cpp-core/neopt-common/system/BitConverter.hpp>
 #include <neo3-cpp-core/neopt-common/system/Encoding.hpp>
-
+//
 #include <functional>
-
+//
 #include "ApplicationEngine.hpp"
 #include "CallFlags.hpp"
 #include "TriggerType.hpp"
@@ -65,14 +67,14 @@ public:
    //InteropDescriptor(std::string method, const std::function<bool(ApplicationEngine&)>& handler, long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
    InteropDescriptor(std::string method, bool (*handler)(ApplicationEngine&), long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
      : Method{ method }
+     , Hash{ BitConverter::ToUInt32(cHelper::Sha256(neopt::Encoding::ASCII::GetBytes(method)), 0) }
      , Handler{ handler }
      , FixedPrice{ fixedPrice }
      , AllowedTriggers(allowedTriggers)
      , RequiredCallFlags(requiredCallFlags)
    {
-      std::cout << "WARNING: missing Hash on InteropDescriptor" << std::endl;
+      //std::cout << "WARNING: missing Hash on InteropDescriptor" << std::endl;
       //this.Method = method;
-      uint hash = BitConverter::ToUInt32((neopt::Encoding::ASCII::GetBytes(method)), 0); // Sha256()
       // TODO --------> ///////this.Hash = BitConverter.ToUInt32(Encoding.ASCII.GetBytes(method).Sha256(), 0);
       //this.Handler = handler;
       //this.FixedPrice = fixedPrice;
