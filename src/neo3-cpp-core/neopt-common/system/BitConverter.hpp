@@ -19,7 +19,7 @@ class BitConverter
 public:
    static vbyte GetBytes(unsigned int x)
    {
-      std::cout << "GetBytes(" << x << ")" << std::endl;
+      //std::cout << "GetBytes(" << x << ")" << std::endl;
       // given int is considered to be in bigendian (must return little-endian)
       // 16385 -> 0x00004001 (big endian) ->  [1, 64, 0, 0] (little endian)
       vbyte vb(4, 9);
@@ -47,7 +47,17 @@ public:
 
    static unsigned ToUInt32(vbyte data, int from)
    {
-      NEOPT_EXCEPTION("NOT IMPLEMENTED BitConverter::ToUInt32");
+      vbyte data2(data.begin()+from, data.begin()+from+4);
+      uint u = 0;
+      u += data2[0];
+      u += data2[1] * 256;
+      u += data2[2] * 256 * 256;
+      u += data2[3] * 256 * 256 * 256;
+      return u;
+
+
+
+      //NEOPT_EXCEPTION("NOT IMPLEMENTED BitConverter::ToUInt32");
    }
 };
 

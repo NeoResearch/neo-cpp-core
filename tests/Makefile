@@ -5,7 +5,7 @@ LIBS_PATH=../libs
 
 all: test
 	@echo "Executing tests"
-	./build/neopt-extra_test
+	./build/neopt-extra_test -d yes
 
 test: clean neopt-extra_test
 	

@@ -73,7 +73,6 @@ public:
       }
       //this->X = x;
       //this->Y = y;
-      std::cout << "WARNING: ECPoint EVEN is ALWAYS set to 'true'" << std::endl;
    }
    /*
 public

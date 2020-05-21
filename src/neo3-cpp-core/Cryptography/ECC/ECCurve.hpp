@@ -29,7 +29,7 @@ public:
    //const ECPoint<>& Infinity;
 
 public:
-   const vbyte G; //ECPoint<> G;
+   const vbyte G; //ECPoint G; // TODO: make ECPoint and put Decode Point on ECCurveList
 
 public:
    //const int ExpectedECPointLength;

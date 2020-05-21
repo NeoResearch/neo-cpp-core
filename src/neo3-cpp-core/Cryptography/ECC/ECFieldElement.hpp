@@ -36,7 +36,9 @@ public:
    {
       //if (curve is null)
       //    throw new ArgumentNullException(nameof(curve));
-      //if (value >= curve.Q)
+      if (value >= curve.Q) {
+         std::cerr << "ECFieldElement: 'x value too large in field element'" << std::endl;
+      }
       //    throw new ArgumentException("x value too large in field element");
       //this.Value = value;
       //this.curve = curve;
@@ -201,7 +203,7 @@ public:
         }
         */
 }; // class ECFieldElement
-   //
+  //
 } // namespace ECC
   //
 } // namespace Cryptography
