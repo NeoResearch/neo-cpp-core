@@ -9,8 +9,8 @@
 #include <neo3-cpp-core/Cryptography/ECC/ECCurveList.hpp>
 //
 #include <neo3-cpp-core/Cryptography/ECC/ECCurve.hpp>
-#include <neo3-cpp-core/Cryptography/ECC/ECPoint.hpp>
 #include <neo3-cpp-core/Cryptography/ECC/ECFieldElement.hpp>
+#include <neo3-cpp-core/Cryptography/ECC/ECPoint.hpp>
 //
 #include <neo3-cpp-core/SmartContract/Contract.hpp>
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
@@ -39,6 +39,8 @@ main()
    BigInteger big(-1);
    std::cout << big.ToString(16) << std::endl;
 
+   //const ECCurve& c = ECCurveList::Secp256r1();
+
    ScriptBuilder sb;
 
    vbyte vx_32(32, 8); // little-endian value
@@ -56,6 +58,7 @@ main()
       std::cout << std::hex << ((unsigned int)i) << " ";
    std::cout << std::endl;
 
-   std::cout << "Finished successfully" << std::endl;
+   std::cout
+     << "Finished successfully" << std::endl;
    return 0;
 }
