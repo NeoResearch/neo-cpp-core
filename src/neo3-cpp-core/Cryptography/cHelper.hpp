@@ -10,18 +10,23 @@ using namespace Neo::VM;
 //
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 
+// UGLY!!
+#include <libcrypton/src/Crypto.h>
+
 namespace Neo {
 //
 namespace SmartContract {
 //
 namespace cHelper {
 
-   static vbyte Sha256(vbyte value)
-   {
-      std::cout << "TODO: NOT IMPLEMENTED SHA256!" << std::endl;
-      return value;
-   }
-   //vbyte Sha256(vbyte value, int offset, int count);
+static vbyte
+Sha256(vbyte value)
+{
+   const libcrypton::ICrypto& ic = libcrypton::Crypto::Default();
+   std::cout << "Running libcrypton" << std::endl;
+   vbyte val = ic.Sha256(value);
+   return val;
+}
 
 } // namespace cHelper
 //
