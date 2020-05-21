@@ -9,6 +9,7 @@ run:
 
 
 vendor: update_submodules get_libcrypton get_csbiginteger  #get_bn-js already provided
+	@echo "Finished 'make vendor' successfully"
 
 get_bn-js:
 	npm install bn.js --prefix libs/ -g
