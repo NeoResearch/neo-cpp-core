@@ -4,6 +4,8 @@
 //using Neo.Cryptography;
 //using System;
 //using System.Text;
+#include <neo3-cpp-core/neopt-common/system/BitConverter.hpp>
+#include <neo3-cpp-core/neopt-common/system/Encoding.hpp>
 
 #include <functional>
 
@@ -70,6 +72,7 @@ public:
    {
       std::cout << "WARNING: missing Hash on InteropDescriptor" << std::endl;
       //this.Method = method;
+      uint hash = BitConverter::ToUInt32((neopt::Encoding::ASCII::GetBytes(method)), 0); // Sha256()
       // TODO --------> ///////this.Hash = BitConverter.ToUInt32(Encoding.ASCII.GetBytes(method).Sha256(), 0);
       //this.Handler = handler;
       //this.FixedPrice = fixedPrice;
