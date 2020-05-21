@@ -14,6 +14,8 @@ namespace neopt {
 // the simplest chunk of information
 // TODO: migrate to C++17 byte type
 typedef unsigned char byte; // EVILLLLL
+//using byte = std::byte; // DON't know if it's usable inside vector!! avoid it...
+
 //using byte = std::byte;
 
 // half byte: nibble

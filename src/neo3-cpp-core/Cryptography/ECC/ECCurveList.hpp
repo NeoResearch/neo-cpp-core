@@ -24,7 +24,7 @@ public:
 
       for (uint i = 0; i < hex.length(); i += 2) {
          std::string byteString = hex.substr(i, 2);
-         byte b = (byte)strtol(byteString.c_str(), NULL, 16);
+         neopt::byte b = (neopt::byte)strtol(byteString.c_str(), NULL, 16);
          bytes[i / 2] = b;
       }
       return bytes;
