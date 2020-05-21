@@ -23,9 +23,9 @@ get_libcrypton:
 	(cd libs/libcrypton && make vendor && make test)
 
 get_csbiginteger:
-	(cd libs/csBigInteger_cpp && git submodule update --init --recursive && git submodule update --recursive)
-	(cd libs/csBigInteger_cpp && rm -rf tests/libgtest/build)
-	(cd libs/csBigInteger_cpp && make vendor && make test)
+	(cd libs/csbiginteger-cpp && git submodule update --init --recursive && git submodule update --recursive)
+	(cd libs/csbiginteger-cpp && rm -rf tests/libgtest/build)
+	(cd libs/csbiginteger-cpp && make vendor && make test)
 	
 
 
