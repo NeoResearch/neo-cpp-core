@@ -65,7 +65,7 @@ private:
    }
 
 private:
-   static bool Crypto_ECDsaVerify(ApplicationEngine& engine, Cryptography::ECC::ECCurve curve)
+   static bool Crypto_ECDsaVerify(ApplicationEngine& engine, const Cryptography::ECC::ECCurve<>& curve)
    {
       /*
       StackItem item0 = engine.CurrentContext.EvaluationStack.Pop();

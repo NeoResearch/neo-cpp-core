@@ -10,7 +10,9 @@ using neopt::IComparable;
 using neopt::IEquatable;
 using neopt::ISerializable;
 
-#include "ECCurve.hpp"
+//#include "ECCurve.hpp"
+//
+#include "ECFieldElement.hpp" // hard dependency!!
 
 namespace Neo {
 //
@@ -18,26 +20,33 @@ namespace Cryptography {
 //
 namespace ECC {
 //
+//template<class unused>
+//class ECCurve; // forward declaration
+//
+//template<class unused = nullptr_t>
+//class ECFieldElement; // forward declaration
+//
+template<class unused>
 class ECPoint // TODO: inheritances........
 //: IComparable<ECPoint>
 //  , IEquatable<ECPoint>
 //  , ISerializable
 {
-   /*
-   internal ECFieldElement X, Y;
-   internal readonly ECCurve Curve;
-*/
-   const ECCurve Curve;
+
+   const ECFieldElement<> X, Y;
+   //internal readonly ECCurve Curve;
+
+   const ECCurve<>& Curve;
    //
-   const vbyte X;               // do NOT use ECField
-   const vbyte Y;               // do NOT use ECField
-   const bool Y_IsEven{ true }; // from ECField
+   //const vbyte X;               // do NOT use ECField
+   //const vbyte Y;               // do NOT use ECField
+   //const bool Y_IsEven{ true }; // from ECField
    //
 public:
    bool IsInfinity()
    {
       //get { return X == null && Y == null; }
-      return (X.size() == 0) && (Y.size() == 0);
+      return (X.Value.Length() == 0) && (Y.Value.Length() == 0);
    }
 
 public:
@@ -51,15 +60,15 @@ public:
    */
 
    //internal
-   //ECPoint(ECFieldElement x, ECFieldElement y, ECCurve curve)
-   ECPoint(vbyte x, vbyte y, ECCurve curve)
+   ECPoint(const ECFieldElement<>& x, const ECFieldElement<>& y, const ECCurve<>& curve)
+     //ECPoint(vbyte x, vbyte y, ECCurve curve)
      : Curve(curve)
      , X(x)
      , Y(y)
    {
       //if ((x is null ^ y is null) || (curve is null))
       //   throw new ArgumentException("Exactly one of the field elements is null");
-      if ((x.size() == 0) && (y.size() == 0)) {
+      if ((x.Value.Length() == 0) && (y.Value.Length() == 0)) {
          std::cerr << "Exactly one of the field elements is null" << std::endl;
          assert(false);
       }
@@ -185,14 +194,14 @@ public:
       } else {
          data = vbyte(65, 0);
          //byte[] yBytes = Y.Value.ToByteArray(isUnsigned : true, isBigEndian : true);
-         vbyte yBytes = Y; // ENSURE IT'S BIG ENDIAN!
+         vbyte yBytes = Y.Value.ToByteArray(true, true);
          neopt::Buffer::BlockCopy(yBytes, 0, data, 65 - yBytes.size(), yBytes.size());
       }
       //byte[] xBytes = X.Value.ToByteArray(isUnsigned : true, isBigEndian : true);
-      vbyte xBytes = X; // ENSURE IT'S BIG ENDIAN!
+      vbyte xBytes = X.Value.ToByteArray(true, true);
       neopt::Buffer::BlockCopy(xBytes, 0, data, 33 - xBytes.size(), xBytes.size());
       //data[0] = commpressed ? Y.Value.IsEven ? (byte)0x02 : (byte)0x03 : (byte)0x04;
-      data[0] = commpressed ? Y_IsEven ? (neopt::byte)0x02 : (neopt::byte)0x03 : (neopt::byte)0x04;
+      data[0] = commpressed ? Y.Value.IsEven() ? (neopt::byte)0x02 : (neopt::byte)0x03 : (neopt::byte)0x04;
       return data;
    }
 

@@ -3,10 +3,10 @@
 //using System;
 //using System.Numerics;
 
-#include <csbiginteger-cpp/src/BigInteger.h>
-using BigInteger = csbiginteger::BigInteger;
+#include <csbiginteger-cpp/src/csBigIntegerLibClass.hpp>
+using BigInteger = csbigintegerlib::BigInteger;
 
-#include "ECCurve.hpp"
+//#include "ECCurve.hpp"
 
 namespace Neo {
 //
@@ -14,27 +14,35 @@ namespace Cryptography {
 //
 namespace ECC {
 //
+//template<class unused>
+//class ECPoint; // forward declaration
+//
+//template<class unused>
+//class ECCurve; // forward declaration
+//
+template<class unused>
 class ECFieldElement //: IComparable<ECFieldElement>, IEquatable<ECFieldElement>
 {
 public:
-   //const BigInteger Value;
+   const BigInteger Value;
 
 private:
-   //const ECCurve curve;
+   const ECCurve<>& curve;
+
+public:
+   ECFieldElement(const BigInteger& value, const ECCurve<>& curve)
+     : Value{ value }
+     , curve{ curve }
+   {
+      //if (curve is null)
+      //    throw new ArgumentNullException(nameof(curve));
+      //if (value >= curve.Q)
+      //    throw new ArgumentException("x value too large in field element");
+      //this.Value = value;
+      //this.curve = curve;
+   }
 
    /*
-        public:
-         ECFieldElement(BigInteger value, ECCurve curve)
-        {
-            if (curve is null)
-                throw new ArgumentNullException(nameof(curve));
-            if (value >= curve.Q)
-                throw new ArgumentException("x value too large in field element");
-            this.Value = value;
-            this.curve = curve;
-        }
-        
-
         public int CompareTo(ECFieldElement other)
         {
             if (ReferenceEquals(this, other)) return 0;
@@ -193,7 +201,7 @@ private:
         }
         */
 }; // class ECFieldElement
-  //
+   //
 } // namespace ECC
   //
 } // namespace Cryptography

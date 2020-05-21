@@ -73,6 +73,8 @@
         "compare": "cpp",
         "concepts": "cpp",
         "ranges": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp"
     }
 }
