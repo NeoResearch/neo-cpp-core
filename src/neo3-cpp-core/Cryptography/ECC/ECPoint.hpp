@@ -10,7 +10,7 @@ using neopt::IComparable;
 using neopt::IEquatable;
 using neopt::ISerializable;
 
-//#include "ECCurve.hpp"
+#include "ECCurve.hpp"
 //
 #include "ECFieldElement.hpp" // hard dependency!!
 
@@ -26,17 +26,16 @@ namespace ECC {
 //template<class unused = nullptr_t>
 //class ECFieldElement; // forward declaration
 //
-template<class unused>
 class ECPoint // TODO: inheritances........
 //: IComparable<ECPoint>
 //  , IEquatable<ECPoint>
 //  , ISerializable
 {
 
-   const ECFieldElement<> X, Y;
+   const ECFieldElement X, Y;
    //internal readonly ECCurve Curve;
 
-   const ECCurve<>& Curve;
+   const ECCurve& Curve;
    //
    //const vbyte X;               // do NOT use ECField
    //const vbyte Y;               // do NOT use ECField
@@ -60,7 +59,7 @@ public:
    */
 
    //internal
-   ECPoint(const ECFieldElement<>& x, const ECFieldElement<>& y, const ECCurve<>& curve)
+   ECPoint(const ECFieldElement& x, const ECFieldElement& y, const ECCurve& curve)
      //ECPoint(vbyte x, vbyte y, ECCurve curve)
      : Curve(curve)
      , X(x)

@@ -44,10 +44,10 @@ main()
    vbyte vx_32(32, 8); // little-endian value
    vbyte vy_32(32, 9); // little-endian value
 
-   ECFieldElement<> X{ BigInteger{ vx_32 }, ECCurve::Secp256r1 };
-   ECFieldElement<> Y{ BigInteger{ vy_32 }, ECCurve::Secp256r1 };
+   ECFieldElement X{ BigInteger{ vx_32 }, ECCurveList::Secp256r1() };
+   ECFieldElement Y{ BigInteger{ vy_32 }, ECCurveList::Secp256r1() };
 
-   ECPoint<> ecp{ X, Y, ECCurveList::Secp256r1 };
+   ECPoint ecp{ X, Y, ECCurveList::Secp256r1() };
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
 
    //std::cout << vscript << std::endl;

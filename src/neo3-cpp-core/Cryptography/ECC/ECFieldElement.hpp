@@ -6,7 +6,7 @@
 #include <csbiginteger-cpp/src/csBigIntegerLibClass.hpp>
 using BigInteger = csbigintegerlib::BigInteger;
 
-//#include "ECCurve.hpp"
+#include "ECCurve.hpp"
 
 namespace Neo {
 //
@@ -20,17 +20,17 @@ namespace ECC {
 //template<class unused>
 //class ECCurve; // forward declaration
 //
-template<class unused>
+//template<class unused>
 class ECFieldElement //: IComparable<ECFieldElement>, IEquatable<ECFieldElement>
 {
 public:
    const BigInteger Value;
 
 private:
-   const ECCurve<>& curve;
+   const ECCurve& curve;
 
 public:
-   ECFieldElement(const BigInteger& value, const ECCurve<>& curve)
+   ECFieldElement(const BigInteger& value, const ECCurve& curve)
      : Value{ value }
      , curve{ curve }
    {

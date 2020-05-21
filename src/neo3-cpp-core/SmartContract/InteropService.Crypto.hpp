@@ -55,17 +55,17 @@ public:
 private:
    static bool Crypto_ECDsaSecp256r1Verify(ApplicationEngine& engine)
    {
-      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurve::Secp256r1);
+      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurveList::Secp256r1());
    }
 
 private:
    static bool Crypto_ECDsaSecp256k1Verify(ApplicationEngine& engine)
    {
-      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurve::Secp256k1);
+      return Crypto_ECDsaVerify(engine, Cryptography::ECC::ECCurveList::Secp256k1());
    }
 
 private:
-   static bool Crypto_ECDsaVerify(ApplicationEngine& engine, const Cryptography::ECC::ECCurve<>& curve)
+   static bool Crypto_ECDsaVerify(ApplicationEngine& engine, const Cryptography::ECC::ECCurve& curve)
    {
       /*
       StackItem item0 = engine.CurrentContext.EvaluationStack.Pop();

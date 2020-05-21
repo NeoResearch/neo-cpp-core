@@ -10,26 +10,26 @@ namespace Neo {
 namespace Cryptography {
 namespace ECC {
 //
-template<class unused = nullptr_t>
-class ECPoint; // forward declaration
+//template<class unused = nullptr_t>
+//class ECPoint; // forward declaration
 //
-template<class unused = nullptr_t>
-class ECFieldElement; // forward declaration
+//template<class unused = nullptr_t>
+//class ECFieldElement; // forward declaration
 //
-template<class unused = nullptr_t>
+//template<class unused = nullptr_t>
 class ECCurve
 {
 public:
    const BigInteger Q;
-   const ECFieldElement<>& A;
-   const ECFieldElement<>& B;
+   const BigInteger A; // ECFieldElement
+   const BigInteger B; // ECFieldElement
    const BigInteger N;
 
 public:
-   const ECPoint<>& Infinity;
+   //const ECPoint<>& Infinity;
 
 public:
-   const ECPoint<>& G;
+   const vbyte G; //ECPoint<> G;
 
 public:
    //const int ExpectedECPointLength;
@@ -48,12 +48,13 @@ private:
       //this.G = ECPoint.DecodePoint(G, this);
    }
 */
-   ECCurve(BigInteger Q, const ECFieldElement<>& A, const ECFieldElement<>& B, BigInteger N, const ECPoint<>& G)
+public:
+   ECCurve(BigInteger Q, const BigInteger A, const BigInteger B, BigInteger N, vbyte G) //const ECPoint<>& G)
      : Q{ Q }
      , A{ A }
      , B{ B }
      , N{ N }
-     , Infinity{ Infinity }
+     //, Infinity{ Infinity }
      , G{ G }
    {
       //this.Q = Q;
