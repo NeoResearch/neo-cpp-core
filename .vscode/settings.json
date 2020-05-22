@@ -6,6 +6,15 @@
     "C_Cpp.intelliSenseEngine": "Tag Parser",
     "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle : Mozilla , ColumnLimit : 0, IndentWidth: 3, AccessModifierOffset: -3}",
     "testMate.cpp.test.executables": "{tests,build,Build,BUILD,out,Out,OUT}/**/*{test,Test,TEST}*",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "libs/libcrypton/libopenssl/**" : true,
+        "libs/libcrypton/thirdparty/**" : true
+    },
     "files.associations": {
         "type_traits": "cpp",
         "array": "cpp",
