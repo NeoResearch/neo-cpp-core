@@ -52,13 +52,11 @@ public:
    int Size() { return IsInfinity() ? 1 : 33; };
 
 public:
-   
    /*
    ECPoint()
      : this(null, null, ECCurve.Secp256r1)
    {}
    */
-   
 
    //internal
    ECPoint(const ECFieldElement& x, const ECFieldElement& y, const ECCurve& curve)
@@ -129,12 +127,12 @@ public
       }
       return p;
       */
-     // TODO: implement correctly
-     std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
-     return ECPoint(ECFieldElement{BigInteger::Zero, curve}, ECFieldElement{BigInteger::Zero, curve}, curve);
+      // TODO: implement correctly
+      std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
+      return ECPoint(ECFieldElement{ BigInteger::Zero, curve }, ECFieldElement{ BigInteger::Zero, curve }, curve);
    }
 
-/*
+   /*
 
 private
    static ECPoint DecompressPoint(int yTilde, BigInteger X1, ECCurve curve)
@@ -349,13 +347,14 @@ public
    {
       writer.Write(EncodePoint(true));
    }
-
-public
-   override string ToString()
+*/
+public:
+   std::string ToString() //override
    {
-      return EncodePoint(true).ToHexString();
+      //return EncodePoint(true).ToHexString();
+      return "TODO: ToString ECPoint";
    }
-
+   /*
 public
    static bool TryParse(string value, ECCurve curve, out ECPoint point)
    {

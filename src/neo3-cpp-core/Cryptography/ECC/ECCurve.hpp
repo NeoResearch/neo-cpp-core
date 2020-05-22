@@ -1,6 +1,6 @@
 #pragma once
 
-#include<memory> // unique_ptr
+#include <memory> // unique_ptr
 
 //using System.Globalization;
 //
@@ -28,8 +28,10 @@ public:
 public:
    //const ECPoint<>& Infinity;
 
+private:
+   const std::unique_ptr<ECPoint> _G; // cannot put on stack, must 'heapify' it via unique_ptr
 public:
-   const std::unique_ptr<ECPoint> G; // TODO: make ECPoint and put Decode Point on ECCurveList
+   const ECPoint& G() { return *_G; }; // reference is good!
 
 public:
    //const int ExpectedECPointLength;
@@ -53,23 +55,23 @@ public:
 } // namespace Neo
 //
 // forward declaration
-#include"ECPoint.hpp"
+#include "ECPoint.hpp"
 //
 
 Neo::Cryptography::ECC::ECCurve::ECCurve(BigInteger Q, const BigInteger A, const BigInteger B, BigInteger N, vbyte G) //const ECPoint<>& G)
-     : Q{ Q }
-     , A{ A }
-     , B{ B }
-     , N{ N }
-     //, Infinity{ Infinity }
-     //, G{ G }
-     , G{ std::unique_ptr<ECPoint>{ new ECPoint{ECPoint::DecodePoint(G, *this) }} }
-   {
-      //this.Q = Q;
-      //this.ExpectedECPointLength = (Q.GetBitLength() + 7) / 8;
-      //this.A = new ECFieldElement(A, this);
-      //this.B = new ECFieldElement(B, this);
-      //this.N = N;
-      //this.Infinity = new ECPoint(null, null, this);
-      //this.G = ECPoint.DecodePoint(G, this);
-   }
+  : Q{ Q }
+  , A{ A }
+  , B{ B }
+  , N{ N }
+  //, Infinity{ Infinity }
+  //, G{ G }
+  , _G{ std::unique_ptr<ECPoint>{ new ECPoint{ ECPoint::DecodePoint(G, *this) } } }
+{
+   //this.Q = Q;
+   //this.ExpectedECPointLength = (Q.GetBitLength() + 7) / 8;
+   //this.A = new ECFieldElement(A, this);
+   //this.B = new ECFieldElement(B, this);
+   //this.N = N;
+   //this.Infinity = new ECPoint(null, null, this);
+   //this.G = ECPoint.DecodePoint(G, this);
+}

@@ -50,6 +50,9 @@ main()
    ECFieldElement Y{ BigInteger{ vy_32 }, ECCurveList::Secp256r1 };
 
    ECPoint ecp{ X, Y, ECCurveList::Secp256r1 };
+
+   ECPoint G = ECCurveList::Secp256r1.G();
+   std::cout << "G:" << G.ToString() << std::endl;
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
 
    //std::cout << vscript << std::endl;
