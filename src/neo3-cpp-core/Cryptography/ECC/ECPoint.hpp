@@ -130,6 +130,7 @@ public
       return p;
       */
      // TODO: implement correctly
+     std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
      return ECPoint(ECFieldElement{BigInteger::Zero, curve}, ECFieldElement{BigInteger::Zero, curve}, curve);
    }
 
