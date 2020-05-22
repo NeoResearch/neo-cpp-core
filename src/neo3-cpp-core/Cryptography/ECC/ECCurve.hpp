@@ -41,7 +41,7 @@ public:
    const ucref<ECPoint> G;
 
 public:
-   //const int ExpectedECPointLength;
+   const int ExpectedECPointLength;
 
 public:
    ECCurve(BigInteger Q, BigInteger A, BigInteger B, BigInteger N, vbyte G);
@@ -76,6 +76,7 @@ namespace ECC {
 //
 ECCurve::ECCurve(BigInteger Q, BigInteger A, BigInteger B, BigInteger N, vbyte G) //const ECPoint<>& G)
   : Q{ Q }
+  , ExpectedECPointLength{ (Helper::GetBitLength(Q) + 7) / 8 }
   , A{ ECFieldElement{ A, *this } }
   , B{ ECFieldElement{ B, *this } }
   , N{ N }

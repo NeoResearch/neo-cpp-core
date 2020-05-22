@@ -107,38 +107,34 @@ public
          case 0x02: // compressed
          case 0x03: // compressed
          {
-            if (encoded.Length != (curve.ExpectedECPointLength + 1))
-               throw new FormatException("Incorrect length for compressed encoding");
+            if (encoded.size() != (curve.ExpectedECPointLength + 1)) {
+               //throw new FormatException("Incorrect length for compressed encoding");
+               std::cerr << "ERROR: Incorrect length for compressed encoding" << std::endl;
+               exit(1); // TODO: should avoid these breaking things!!! use optional...
+            }
             int yTilde = encoded[0] & 1;
-            BigInteger X1 = new BigInteger(encoded[1..], isUnsigned
-                                           : true, isBigEndian
-                                           : true);
+            BigInteger X1(vbyte{ encoded.begin() + 1, encoded.end() }, true, true);
             p = DecompressPoint(yTilde, X1, curve);
             break;
          }
          case 0x04: // uncompressed
          {
-            if (encoded.Length != (2 * curve.ExpectedECPointLength + 1))
-               throw new FormatException("Incorrect length for uncompressed/hybrid encoding");
-            BigInteger X1 = new BigInteger(encoded[1..(1 + curve.ExpectedECPointLength)], isUnsigned
-                                           : true, isBigEndian
-                                           : true);
-            BigInteger Y1 = new BigInteger(encoded[(1 + curve.ExpectedECPointLength)..], isUnsigned
-                                           : true, isBigEndian
-                                           : true);
-            p = new ECPoint(new ECFieldElement(X1, curve), new ECFieldElement(Y1, curve), curve);
+            if (encoded.Length != (2 * curve.ExpectedECPointLength + 1)) {
+               //throw new FormatException("Incorrect length for uncompressed/hybrid encoding");
+            }
+            BigInteger X1(vbyte{ encoded.begin() + 1, encoded.begin() + (1 + curve.ExpectedECPointLength) }, true, true);
+            BigInteger Y1(vbyte{ encoded.begin() + (1 + curve.ExpectedECPointLength), encoded.end() }, true, true);
+            p = ECPoint{ ECFieldElement{ X1, curve }, ECFieldElement{ Y1, curve }, curve };
             break;
          }
-         default:
-            throw new FormatException("Invalid point encoding " + encoded[0]);
-      }
-      return p;
-      
-      // TODO: implement correctly
-      
-      return ECPoint(ECFieldElement{ BigInteger::Zero, curve }, ECFieldElement{ BigInteger::Zero, curve }, curve);
+         default: {
+            //throw new FormatException("Invalid point encoding " + encoded[0]);
+            std::cerr << "ERROR: Invalid point encoding " << encoded[0] << std::endl;
+            exit(1); // TODO: avoid these breaks!! use optional...
+         }
+      };
       */
-      std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
+      std::cerr << "WARNING: Must use libcrypton to DecodePoint: bytearray -> ECPoint (x,y)!" << std::endl;
       return p;
    }
 
