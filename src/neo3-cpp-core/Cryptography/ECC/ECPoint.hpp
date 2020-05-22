@@ -52,11 +52,13 @@ public:
    int Size() { return IsInfinity() ? 1 : 33; };
 
 public:
+   
    /*
    ECPoint()
      : this(null, null, ECCurve.Secp256r1)
    {}
    */
+   
 
    //internal
    ECPoint(const ECFieldElement& x, const ECFieldElement& y, const ECCurve& curve)
@@ -89,8 +91,12 @@ public
    }
 
 public
-   static ECPoint DecodePoint(ReadOnlySpan<byte> encoded, ECCurve curve)
+*/
+
+   //static ECPoint DecodePoint(ReadOnlySpan<byte> encoded, ECCurve curve)
+   static ECPoint DecodePoint(vbyte encoded, const ECCurve& curve)
    {
+      /*
       ECPoint p = null;
       switch (encoded[0]) {
          case 0x02: // compressed
@@ -122,7 +128,12 @@ public
             throw new FormatException("Invalid point encoding " + encoded[0]);
       }
       return p;
+      */
+     // TODO: implement correctly
+     return ECPoint(ECFieldElement{BigInteger::Zero, curve}, ECFieldElement{BigInteger::Zero, curve}, curve);
    }
+
+/*
 
 private
    static ECPoint DecompressPoint(int yTilde, BigInteger X1, ECCurve curve)
