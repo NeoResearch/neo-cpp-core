@@ -2,15 +2,7 @@
 
 #include <neo3-cpp-core/Core.hpp>
 //
-#include <neo3-cpp-core/Cryptography/ECC/ECCurve.hpp> // no dependency
-//
-#include <neo3-cpp-core/Cryptography/ECC/ECPoint.hpp> // depends on ECFieldElement
-//
-#include <neo3-cpp-core/Cryptography/ECC/ECCurveList.hpp>
-//
 #include <neo3-cpp-core/Cryptography/ECC/ECCurve.hpp>
-#include <neo3-cpp-core/Cryptography/ECC/ECFieldElement.hpp>
-#include <neo3-cpp-core/Cryptography/ECC/ECPoint.hpp>
 //
 #include <neo3-cpp-core/SmartContract/Contract.hpp>
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
@@ -39,19 +31,19 @@ main()
    BigInteger big(-1);
    std::cout << big.ToString(16) << std::endl;
 
-   //const ECCurve& c = ECCurveList::Secp256r1;
+   //const ECCurve& c = ECCurve::Secp256r1();
 
    ScriptBuilder sb;
 
    vbyte vx_32(32, 8); // little-endian value
    vbyte vy_32(32, 9); // little-endian value
 
-   ECFieldElement X{ BigInteger{ vx_32 }, ECCurveList::Secp256r1 };
-   ECFieldElement Y{ BigInteger{ vy_32 }, ECCurveList::Secp256r1 };
+   ECFieldElement X{ BigInteger{ vx_32 }, ECCurve::Secp256r1() };
+   ECFieldElement Y{ BigInteger{ vy_32 }, ECCurve::Secp256r1() };
 
-   ECPoint ecp{ X, Y, ECCurveList::Secp256r1 };
+   ECPoint ecp{ X, Y, ECCurve::Secp256r1() };
 
-   ECPoint G = ECCurveList::Secp256r1.G();
+   ECPoint G = ECCurve::Secp256r1().G();
    std::cout << "G:" << G.ToString() << std::endl;
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
 
