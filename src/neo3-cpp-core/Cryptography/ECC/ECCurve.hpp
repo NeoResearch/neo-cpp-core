@@ -1,7 +1,8 @@
 #pragma once
 
 #include <unique_ref/unique_ref.hpp>
-using unique_ref::uref; // unique references from optframe project
+using unique_ref::ucref; // 'uref' for 'concrete' types (safer!)
+using unique_ref::uref;  // unique references from optframe project
 
 //using System.Globalization;
 //
@@ -28,16 +29,16 @@ public:
    const BigInteger Q;
 
 public:
-   const uref<ECFieldElement> A;
-   const uref<ECFieldElement> B;
+   const ucref<ECFieldElement> A;
+   const ucref<ECFieldElement> B;
    //
    const BigInteger N;
 
 public:
-   const uref<ECPoint> Infinity;
+   const ucref<ECPoint> Infinity;
 
 public:
-   const uref<ECPoint> G;
+   const ucref<ECPoint> G;
 
 public:
    //const int ExpectedECPointLength;
@@ -46,8 +47,8 @@ public:
    ECCurve(BigInteger Q, BigInteger A, BigInteger B, BigInteger N, vbyte G);
 
 public:
-   static const uref<ECCurve> Secp256k1;
-   static const uref<ECCurve> Secp256r1;
+   static const ucref<ECCurve> Secp256k1;
+   static const ucref<ECCurve> Secp256r1;
 
 }; // class ECCurve
 //
@@ -90,7 +91,7 @@ ECCurve::ECCurve(BigInteger Q, BigInteger A, BigInteger B, BigInteger N, vbyte G
    //this.G = ECPoint.DecodePoint(G, this);
 }
 
-const uref<ECCurve> ECCurve::Secp256r1{
+const ucref<ECCurve> ECCurve::Secp256r1{
    ECCurve{
      BigInteger{ "00FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF", 16 },
      BigInteger{ "00FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFC", 16 },
@@ -103,7 +104,7 @@ const uref<ECCurve> ECCurve::Secp256r1{
    }
 };
 
-const uref<ECCurve> ECCurve::Secp256k1{
+const ucref<ECCurve> ECCurve::Secp256k1{
    ECCurve{
      BigInteger{ "00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F", 16 },
      BigInteger::Zero,

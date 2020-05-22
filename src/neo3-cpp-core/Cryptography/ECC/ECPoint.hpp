@@ -100,8 +100,9 @@ public
    //static ECPoint DecodePoint(ReadOnlySpan<byte> encoded, ECCurve curve)
    static ECPoint DecodePoint(vbyte encoded, const ECCurve& curve)
    {
+      //ECPoint p = null;
+      ECPoint p{ ECFieldElement{ BigInteger::Zero, curve }, ECFieldElement{ BigInteger::Zero, curve }, curve };
       /*
-      ECPoint p = null;
       switch (encoded[0]) {
          case 0x02: // compressed
          case 0x03: // compressed
@@ -132,10 +133,13 @@ public
             throw new FormatException("Invalid point encoding " + encoded[0]);
       }
       return p;
-      */
+      
       // TODO: implement correctly
-      std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
+      
       return ECPoint(ECFieldElement{ BigInteger::Zero, curve }, ECFieldElement{ BigInteger::Zero, curve }, curve);
+      */
+      std::cout << "WARNING: MUST IMPLEMENT ECPoint::Decode!" << std::endl;
+      return p;
    }
 
    /*
