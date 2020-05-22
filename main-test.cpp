@@ -55,7 +55,7 @@ main()
 
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
 
-   ECPoint G = ECCurve::Secp256r1->G;
+   ECPoint G = *ECCurve::Secp256r1->G;
    std::cout << "G:" << G.ToString() << std::endl;
 
    Test test{ G };

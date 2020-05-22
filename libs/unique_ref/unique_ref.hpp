@@ -31,18 +31,28 @@ private:
    std::unique_ptr<T> _t;
 
 public:
+   // 'make_unique' requires concrete type T
+   explicit uref(const uref<T>&& other) noexcept
+     : _t{ std::make_unique<T>(std::move(*other._t)) }
+   {
+   }
+
+   // 'make_unique' requires concrete type T
    explicit uref(const uref<T>& other) noexcept
      : _t{ std::make_unique<T>(*other._t) }
    {
    }
 
+   // 'make_unique' requires concrete type T
    explicit uref(const T& t) noexcept
      : _t{ std::make_unique<T>(t) }
    {
    }
 
+   // constructor useful for abstract reference types
+   // beware that this may inject null inside this reference
    explicit uref(std::unique_ptr<T>&& uptr) noexcept
-     : _t{ uptr }
+     : _t{ std::move(uptr) }
    {
    }
 
@@ -57,9 +67,21 @@ public:
    T& operator*() { return *_t; }
    const T& operator*() const { return *_t; }
 
-   // conversion copy
-   operator T() const { return std::move(T{ *_t }); } // returns copy/move
+   // issue: 'is_abstract' requires type 'T' to be complete at this point... not always the case!
+   /*
+   // conversion copy (requires concrete type T) - SFINAE protection against abstract classes
+   template<typename NonAbstractT =
+              std::enable_if<!std::is_abstract<T>::value>>
+   operator NonAbstractT() const
+   {
+      return std::move(NonAbstractT{ *_t });
+   } // returns copy/move
+
+   // SFINAE protection for the function below
+   //operator T() const { return std::move(T{ *_t }); } // returns copy/move
+*/
 };
+
 //
 } // namespace unique_ref
 //
