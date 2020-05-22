@@ -52,6 +52,12 @@ public:
    int Size() { return IsInfinity() ? 1 : 33; };
 
 public:
+   ECPoint(const ECCurve& curve)
+     : X{ neopt::vbyte{}, curve }
+     , Y{ neopt::vbyte{}, curve }
+     , Curve(curve)
+   {}
+
    /*
    ECPoint()
      : this(null, null, ECCurve.Secp256r1)
