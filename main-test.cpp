@@ -22,6 +22,16 @@ using namespace neopt;
 
 using namespace csbiginteger;
 
+class Test
+{
+public:
+   uref<ECPoint> r;
+   Test(const ECPoint& c)
+     : r{ c }
+   {
+   }
+};
+
 int
 main()
 {
@@ -38,13 +48,16 @@ main()
    vbyte vx_32(32, 8); // little-endian value
    vbyte vy_32(32, 9); // little-endian value
 
-   ECFieldElement X{ BigInteger{ vx_32 }, ECCurve::Secp256r1() };
-   ECFieldElement Y{ BigInteger{ vy_32 }, ECCurve::Secp256r1() };
+   ECFieldElement X{ BigInteger{ vx_32 }, *ECCurve::Secp256r1 };
+   ECFieldElement Y{ BigInteger{ vy_32 }, *ECCurve::Secp256r1 };
 
-   ECPoint ecp{ X, Y, ECCurve::Secp256r1() };
+   ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
 
-   ECPoint G = ECCurve::Secp256r1().G();
+   ECPoint G = ECCurve::Secp256r1->G;
    std::cout << "G:" << G.ToString() << std::endl;
+
+   Test test{ G };
+
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
 
    //std::cout << vscript << std::endl;
