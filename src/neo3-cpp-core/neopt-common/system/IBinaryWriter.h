@@ -75,7 +75,7 @@ public:
 
    virtual void Write(long v)
    {
-      Write(ulong(v));
+      Write(neopt::uint64(v));
    }
 
    // writes var bytes on vector

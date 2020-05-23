@@ -2,6 +2,7 @@
 
 #include <neo3-cpp-core/Core.hpp>
 //
+#include <neo3-cpp-core/Cryptography/ECC/ECC.hpp>
 #include <neo3-cpp-core/Cryptography/ECC/ECCurve.hpp>
 //
 #include <neo3-cpp-core/SmartContract/Contract.hpp>

@@ -68,7 +68,11 @@ typedef unsigned int uint32;
 static_assert(sizeof(uint32)==4);
 
 // unsigned long
-typedef unsigned long uint64;
+#ifdef EMSCRIPTEN
+typedef unsigned long long uint64;
+#else
+typedef unsigned long long uint64;
+#endif
 
 static_assert(sizeof(uint64)==8);
 
