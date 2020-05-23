@@ -9,6 +9,8 @@ let lt_csbn = require('./libs/lib/node_modules/csBigInteger.js/csBigInteger.js')
 
 lNeo3['BN'] = lt_bn.BN; // "injecting" module
 lNeo3['csBN'] = lt_csbn.csBigInteger;
+let csBN = lt_csbn.csBigInteger;
+
 
 function testMain() {
     lNeo3._mytest(5);
@@ -33,6 +35,12 @@ function testMain() {
     for (var i = 0; i < retVector.size(); i++) {
         console.log("Vector Value: ", retVector.get(i));
     }
+
+    console.log(" ======= begin testing csBigInteger.js ======= ");
+    var x = new csBN(1000);
+    console.log(x.toByteArray());
+    console.log(" ======= end testing csBigInteger.js ======= ");
+
 }
 
 // ----------- wait until loading ----------

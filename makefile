@@ -51,21 +51,21 @@ NEO3_SRC=./src/
 jstest: ./jstest.cpp
 	mkdir -p build/
 	#em++ ./src/main.cpp --js-library src/mycrypto.js -o librarytest.html
-	echo "We need Emscripten to proceed (tested with 1.39.16)"
+	@echo "We need Emscripten to proceed (tested with 1.39.16)"
 	echo 
 	em++ --version
-	echo 
+	@echo " ==== Compiling 'jstest.cpp' into './build/librarytest.js' ====== "
 	em++ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library src/libcore-js/libcore_exports.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"' -s ASSERTIONS=1
 	#### -s EXPORT_ES6=1 -s MODULARIZE=1 -s USE_ES6_IMPORT_META=0
 	#
 	#nodejs testnode.js
-	echo
-	echo "testing build!!"
-	echo
+	@echo
+	@echo "======= testing 'node_test.js' ======="
+	@echo
 	nodejs node_test.js
-	echo
-	echo "testing BN.js locally"
-	echo
+	@echo
+	@echo " ====== testing node_bn_test.js ====== "
+	@echo
 	nodejs node_bn_test.js
 
 run:
