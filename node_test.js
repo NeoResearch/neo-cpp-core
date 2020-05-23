@@ -30,7 +30,18 @@ function testMain() {
     
     pubKey.set(0, 50);
 
-    var retVector = lNeo3.cpp_Contract_CreateSignatureRedeemScript(vx);
+    console.log(" ----> testing cpp_Contract_CreateSignatureRedeemScript_Fake");
+    var retVector = lNeo3.cpp_Contract_CreateSignatureRedeemScript_Fake(vx);
+    console.log(retVector);
+    for (var i = 0; i < retVector.size(); i++) {
+        console.log("Vector Value: ", retVector.get(i));
+    }
+
+    console.log(" ----> testing cpp_gen_xy");
+    var ret_point_xy = lNeo3.cpp_gen_xy();
+    console.log(ret_point_xy);
+    console.log(" ----> testing cpp_Contract_CreateSignatureRedeemScript_XY");
+    var retVector = lNeo3.cpp_Contract_CreateSignatureRedeemScript_XY(ret_point_xy);
     console.log(retVector);
     for (var i = 0; i < retVector.size(); i++) {
         console.log("Vector Value: ", retVector.get(i));

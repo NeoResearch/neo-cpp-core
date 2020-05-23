@@ -135,12 +135,63 @@ cpp_Contract_CreateSignatureRedeemScript(vbyte pubkey)
    return v;
 }
 
+vbyte
+cpp_Contract_CreateSignatureRedeemScript_Fake(vbyte pubkey)
+{
+   std::cout << pubkey.size() << std::endl;
+   for (unsigned i = 0; i < pubkey.size(); i++)
+      std::cout << (unsigned)pubkey[i] << std::endl;
+   //
+   // call method from Core! (see class Neo SmartContract Contract, method CreateSignatureRedeemScript)
+   vbyte v(5); // 5 elements
+   for (unsigned i = 0; i < v.size(); i++)
+      v[i] = i;
+   return v;
+}
+
+struct ECPointXYtest
+{
+   vbyte x;
+   vbyte y;
+   std::map<bool, int> toMap()
+   {
+      // bool: first (false-0) or second (true-1)
+      std::map<bool, int> m;
+      m[0] = 40;
+      m[1] = 80;
+      return m;
+   }
+};
+
+
+
+std::map<bool, int>
+cpp_gen_xy()
+{
+   ECPointXYtest xy;
+   xy.x = vbyte(5, -1);
+   xy.y = vbyte(5, -2);
+   return xy.toMap();
+}
+
+vbyte
+cpp_Contract_CreateSignatureRedeemScript_XY(std::map<bool, int> point)
+{
+   std::cout << "complex point: " <<  point[0] << " " << point[1] << std::endl;
+   vbyte v(5); // return 5 elements
+   for (unsigned i = 0; i < v.size(); i++)
+      v[i] = i;
+   return v;  // return 5 elements
+}
+
 // ================================
 
 // these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
    register_vector<unsigned char>("vector<unsigned char>");
+   register_map<bool, int>("map<bool, int>");
+   //register_map<int, int>("map<int, int>");
 
    function("my_cpp_teststr", &my_cpp_teststr);
 
@@ -148,5 +199,7 @@ EMSCRIPTEN_BINDINGS(my_module)
 
    function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
 
-   function("cpp_Contract_CreateSignatureRedeemScript", &cpp_Contract_CreateSignatureRedeemScript);
+   function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
+   function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
+   function("cpp_gen_xy", &cpp_gen_xy);
 }
