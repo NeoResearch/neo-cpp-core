@@ -45,15 +45,15 @@ public:
 
    virtual void Write(short v)
    {
-      Write(ushort(v));
+      Write(neopt::uint16(v));
    }
 
    virtual void Write(neopt::uint32 v)
    {
-      Write((byte)(((v >> 0) << 24) >> 24));
-      Write((byte)(((v >> 8) << 24) >> 24));
-      Write((byte)(((v >> 16) << 24) >> 24));
-      Write((byte)(((v >> 24) << 24) >> 24));
+      Write((neopt::byte)(((v >> 0) << 24) >> 24));
+      Write((neopt::byte)(((v >> 8) << 24) >> 24));
+      Write((neopt::byte)(((v >> 16) << 24) >> 24));
+      Write((neopt::byte)(((v >> 24) << 24) >> 24));
    }
 
    virtual void Write(int v)
@@ -63,14 +63,14 @@ public:
 
    virtual void Write(neopt::uint64 v)
    {
-      Write((byte)(((v >> 0) << 56) >> 56));
-      Write((byte)(((v >> 8) << 56) >> 56));
-      Write((byte)(((v >> 16) << 56) >> 56));
-      Write((byte)(((v >> 24) << 56) >> 56));
-      Write((byte)(((v >> 32) << 56) >> 56));
-      Write((byte)(((v >> 40) << 56) >> 56));
-      Write((byte)(((v >> 48) << 56) >> 56));
-      Write((byte)(((v >> 56) << 56) >> 56));
+      Write((neopt::byte)(((v >> 0) << 56) >> 56));
+      Write((neopt::byte)(((v >> 8) << 56) >> 56));
+      Write((neopt::byte)(((v >> 16) << 56) >> 56));
+      Write((neopt::byte)(((v >> 24) << 56) >> 56));
+      Write((neopt::byte)(((v >> 32) << 56) >> 56));
+      Write((neopt::byte)(((v >> 40) << 56) >> 56));
+      Write((neopt::byte)(((v >> 48) << 56) >> 56));
+      Write((neopt::byte)(((v >> 56) << 56) >> 56));
    }
 
    virtual void Write(long v)

@@ -18,6 +18,8 @@ typedef unsigned char byte; // EVILLLLL
 
 //using byte = std::byte;
 
+static_assert(sizeof(byte)==1);
+
 // half byte: nibble
 //typedef byte nibble;
 //typedef uint_least8_t nibble;
@@ -55,14 +57,20 @@ typedef short int16;
 // unsigned short int
 typedef unsigned short uint16;
 
+static_assert(sizeof(uint16)==2);
+
 // signed int
 typedef int int32;
 
 // unsigned int
 typedef unsigned int uint32;
 
+static_assert(sizeof(uint32)==4);
+
 // unsigned long
 typedef unsigned long uint64;
+
+static_assert(sizeof(uint64)==8);
 
 // unsigned long
 typedef unsigned long ulong;

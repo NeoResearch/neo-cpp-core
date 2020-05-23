@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef NEO3_CRYPTOGRAPHY_ECC_ECC_HPP
+#error Must include ECC before ECPoint
+#endif
+
 #include <neo3-cpp-core/neopt-common/System.hpp>
 //using Neo.IO;
 //using System;

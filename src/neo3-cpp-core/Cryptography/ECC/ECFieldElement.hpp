@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef NEO3_CRYPTOGRAPHY_ECC_ECC_HPP
+#error Must include ECC before ECFieldElement
+#endif
+
 //using System;
 //using System.Numerics;
 

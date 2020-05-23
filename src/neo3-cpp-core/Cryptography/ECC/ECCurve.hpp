@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef NEO3_CRYPTOGRAPHY_ECC_ECC_HPP
+#error Must include ECC before ECCurve
+#endif
+
 #include <unique_ref/unique_ref.hpp>
 using unique_ref::ucref; // 'uref' for 'concrete' types (safer!)
 using unique_ref::uref;  // unique references from optframe project
