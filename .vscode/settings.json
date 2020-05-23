@@ -12,8 +12,10 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
+        "**/.disabled": true,
         "libs/libcrypton/libopenssl/**" : true,
-        "libs/libcrypton/thirdparty/**" : true
+        "libs/libcrypton/thirdparty/**" : true,
+        "libs/csbiginteger-cpp/src/*.cpp" : true
     },
     "files.associations": {
         "type_traits": "cpp",

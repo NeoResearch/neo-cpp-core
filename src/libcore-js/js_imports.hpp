@@ -4,8 +4,8 @@
 // these are useful to javascript ONLY (via emscripten)
 // ------------------------------------------------------
 
-// ===========================================================================
-// these are C++ methods provided to emscripten and connected to C++ Neo3 Core
+// =======================================================================================
+// these are C++ methods provided to emscripten (js part) via connection on C++ Neo3 Core
 //
 #include <neo3-cpp-core/Core.hpp>
 #include <neo3-cpp-core/core_imports.h>
