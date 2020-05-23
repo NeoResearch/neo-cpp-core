@@ -120,12 +120,12 @@ public:
          writer.Write(data);
       } else if (data.size() < 0x10000) {
          Emit(OpCode::PUSHDATA2);
-         writer.Write((ushort)data.size());
+         writer.Write((neopt::uint16)data.size());
          writer.Write(data);
       } else // if (data.Length < 0x100000000L)
       {
          Emit(OpCode::PUSHDATA4);
-         writer.Write(data.size());
+         writer.Write((neopt::uint32)data.size()); // TODO: CHECK THIS TYPE!!! (neopt::uint32)
          writer.Write(data);
       }
       return *this;
@@ -145,7 +145,7 @@ public:
    }
 */
 
-   ScriptBuilder EmitSysCall(uint api)
+   ScriptBuilder EmitSysCall(neopt::uint32 api)
    {
       std::cout << "WARNING: EmitSysCall api = " << api << std::endl;
       return Emit(OpCode::SYSCALL, BitConverter::GetBytes(api));

@@ -62,6 +62,9 @@ typedef int int32;
 typedef unsigned int uint32;
 
 // unsigned long
+typedef unsigned long uint64;
+
+// unsigned long
 typedef unsigned long ulong;
 
 // =================

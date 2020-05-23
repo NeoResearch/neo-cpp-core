@@ -45,10 +45,10 @@ public:
       NEOPT_EXCEPTION("NOT IMPLEMENTED BitConverter::ToInt32");
    }
 
-   static unsigned ToUInt32(vbyte data, int from)
+   static neopt::uint32 ToUInt32(vbyte data, int from)
    {
       vbyte data2(data.begin()+from, data.begin()+from+4);
-      uint u = 0;
+      neopt::uint32 u = 0;
       u += data2[0];
       u += data2[1] * 256;
       u += data2[2] * 256 * 256;

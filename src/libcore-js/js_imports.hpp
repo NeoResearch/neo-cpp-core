@@ -11,11 +11,18 @@
 #include <neo3-cpp-core/core_imports.h>
 // ---------------------------------------------------------------------------
 
+
 #include <iostream>
 #include <memory>   // uptr - TODO REMOVE
 #include <optional> // uptr - TODO REMOVE
 
 #include <emscripten/bind.h>
+
+// ========== load neo3 jsapi methods ========
+
+//#include <neo3-cpp-core/SmartContract/Contract.jsapi.hpp> // TODO: fix clang issues
+
+//
 
 using namespace emscripten;
 
@@ -216,19 +223,19 @@ cpp_Contract_CreateSignatureRedeemScript_XY2(std::map<bool, vbyte> point)
 // these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
-   register_vector<unsigned char>("vector<unsigned char>");
-   register_map<bool, int>("map<bool, int>");
-   register_map<bool, vbyte>("map<int, vector<unsigned char>>");
+   emscripten::register_vector<unsigned char>("vector<unsigned char>");
+   emscripten::register_map<bool, int>("map<bool, int>");
+   emscripten::register_map<bool, vbyte>("map<int, vector<unsigned char>>");
 
-   function("my_cpp_teststr", &my_cpp_teststr);
+   emscripten::function("my_cpp_teststr", &my_cpp_teststr);
 
-   function("cpp_bignum_add", &cpp_bignum_add);
+   emscripten::function("cpp_bignum_add", &cpp_bignum_add);
 
-   function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
+   emscripten::function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
 
-   function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
-   function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
-   function("cpp_gen_xy", &cpp_gen_xy);
-   function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
-   function("cpp_gen_xy2", &cpp_gen_xy2);
+   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
+   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
+   emscripten::function("cpp_gen_xy", &cpp_gen_xy);
+   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
+   emscripten::function("cpp_gen_xy2", &cpp_gen_xy2);
 }

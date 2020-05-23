@@ -37,7 +37,7 @@ public:
       this->Write(part);
    }
 
-   virtual void Write(ushort v)
+   virtual void Write(neopt::uint16 v)
    {
       Write((byte)(((v >> 0) << 8) >> 8));
       Write((byte)(((v >> 8) << 8) >> 8));
@@ -48,7 +48,7 @@ public:
       Write(ushort(v));
    }
 
-   virtual void Write(uint v)
+   virtual void Write(neopt::uint32 v)
    {
       Write((byte)(((v >> 0) << 24) >> 24));
       Write((byte)(((v >> 8) << 24) >> 24));
@@ -58,10 +58,10 @@ public:
 
    virtual void Write(int v)
    {
-      Write(uint(v));
+      Write(neopt::uint32(v));
    }
 
-   virtual void Write(ulong v)
+   virtual void Write(neopt::uint64 v)
    {
       Write((byte)(((v >> 0) << 56) >> 56));
       Write((byte)(((v >> 8) << 56) >> 56));
@@ -118,10 +118,10 @@ public:
          this->Write((byte)value);
       } else if (value <= 0xFFFF) {
          this->Write((byte)0xFD);
-         this->Write((ushort)value);
+         this->Write((neopt::uint16)value);
       } else if (value <= 0xFFFFFFFF) {
          this->Write((byte)0xFE);
-         this->Write((uint)value);
+         this->Write((neopt::uint32)value);
       } else {
          this->Write((byte)0xFF);
          this->Write(value);

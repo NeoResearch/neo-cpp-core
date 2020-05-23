@@ -28,8 +28,8 @@ public:
    }
 
 public:
-   uint Hash;
-   uint getHash()
+   neopt::uint32 Hash;
+   neopt::uint32 getHash()
    {
       return Hash;
    }
@@ -101,7 +101,7 @@ public:
 
 public:
    //static implicit operator uint(InteropDescriptor descriptor)
-   operator uint() const
+   operator neopt::uint32() const
    {
       return this->Hash;
    }

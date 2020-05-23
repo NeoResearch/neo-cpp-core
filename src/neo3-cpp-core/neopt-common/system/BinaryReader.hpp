@@ -96,7 +96,7 @@ public:
          std::cout << "buffer has size of " << sizeof(buffer) << " bytes!" << std::endl;
          for(unsigned i=0; i<bytes.size(); i++)
          {
-            std::cout << "{i=" << i << " " << (uint)buffer[i] << "} ";
+            std::cout << "{i=" << i << " " << ((neopt::uint32))buffer[i] << "} ";
          }
          std::cout << std::endl;
       }

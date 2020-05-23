@@ -24,7 +24,7 @@ namespace InteropService {
 //private
 //static readonly Dictionary<uint, InteropDescriptor> methods = new Dictionary<uint, InteropDescriptor>();
 //Dictionary<uint, InteropDescriptor> methods; // should be like this!! orrrrr, 'constexpr' (TODO)
-Dictionary<uint, InteropDescriptor*> methods; // TODO: remove pointer!!
+Dictionary<neopt::uint32, InteropDescriptor*> methods; // TODO: remove pointer!!
 
 /*
 static InteropService()

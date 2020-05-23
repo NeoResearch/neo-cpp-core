@@ -47,7 +47,7 @@ HexToBytes(const std::string& hex)
    //NEOPT_EXCEPTION("Not implemented yet: HexToBytes");
    vbyte bytes(hex.length() / 2);
 
-   for (uint i = 0; i < hex.length(); i += 2) {
+   for (neopt::uint32 i = 0; i < hex.length(); i += 2) {
       std::string byteString = hex.substr(i, 2);
       neopt::byte b = (neopt::byte)strtol(byteString.c_str(), NULL, 16);
       bytes[i / 2] = b;
