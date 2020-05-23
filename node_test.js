@@ -47,6 +47,16 @@ function testMain() {
         console.log("Vector Value: ", retVector.get(i));
     }
 
+    console.log(" ----> testing cpp_gen_xy2");
+    var ret_point_xy2 = lNeo3.cpp_gen_xy2();
+    console.log(ret_point_xy2);
+    console.log(" ----> testing cpp_Contract_CreateSignatureRedeemScript_XY2");
+    var retVector2 = lNeo3.cpp_Contract_CreateSignatureRedeemScript_XY2(ret_point_xy2);
+    console.log(retVector2);
+    for (var i = 0; i < retVector2.size(); i++) {
+        console.log("Vector2 Value: ", retVector2.get(i));
+    }
+
     console.log(" ======= begin testing csBigInteger.js ======= ");
     var x = new csBN(1000);
     console.log(x.toByteArray());

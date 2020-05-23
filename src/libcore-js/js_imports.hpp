@@ -161,9 +161,16 @@ struct ECPointXYtest
       m[1] = 80;
       return m;
    }
+
+   std::map<bool, vbyte> toMap2()
+   {
+      // bool: first (false-0) or second (true-1)
+      std::map<bool, vbyte> m;
+      m[0] = x;
+      m[1] = y;
+      return m;
+   }
 };
-
-
 
 std::map<bool, int>
 cpp_gen_xy()
@@ -174,14 +181,34 @@ cpp_gen_xy()
    return xy.toMap();
 }
 
+std::map<bool, vbyte>
+cpp_gen_xy2()
+{
+   ECPointXYtest xy;
+   xy.x = vbyte(5, -1);
+   xy.y = vbyte(5, 10);
+   return xy.toMap2();
+}
+
 vbyte
 cpp_Contract_CreateSignatureRedeemScript_XY(std::map<bool, int> point)
 {
-   std::cout << "complex point: " <<  point[0] << " " << point[1] << std::endl;
+   std::cout << "complex point: " << point[0] << " " << point[1] << std::endl;
    vbyte v(5); // return 5 elements
    for (unsigned i = 0; i < v.size(); i++)
       v[i] = i;
-   return v;  // return 5 elements
+   return v; // return 5 elements
+}
+
+vbyte
+cpp_Contract_CreateSignatureRedeemScript_XY2(std::map<bool, vbyte> point)
+{
+   std::cout << "complex point: " << point[0].size() << " " << point[1].size() << std::endl;
+   std::cout << "complex point first element of each: " << (unsigned)point[0][0] << " " << (unsigned)point[1][0] << std::endl;
+   vbyte v(5); // return 5 elements
+   for (unsigned i = 0; i < v.size(); i++)
+      v[i] = i;
+   return v; // return 5 elements
 }
 
 // ================================
@@ -191,7 +218,7 @@ EMSCRIPTEN_BINDINGS(my_module)
 {
    register_vector<unsigned char>("vector<unsigned char>");
    register_map<bool, int>("map<bool, int>");
-   //register_map<int, int>("map<int, int>");
+   register_map<bool, vbyte>("map<int, vector<unsigned char>>");
 
    function("my_cpp_teststr", &my_cpp_teststr);
 
@@ -202,4 +229,6 @@ EMSCRIPTEN_BINDINGS(my_module)
    function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
    function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
    function("cpp_gen_xy", &cpp_gen_xy);
+   function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
+   function("cpp_gen_xy2", &cpp_gen_xy2);
 }
