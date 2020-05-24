@@ -464,6 +464,15 @@ public
       return x + (-y);
    }
    */
+
+public:
+   // special method that encodes this as a json str (for external APIs)
+   std::string toJsonStr()
+   {
+      // TODO: stringify
+      return "{}"; // x... vector.. y .. vector ... curve: string_name
+   }
+
 };
 //
 } // namespace ECC
