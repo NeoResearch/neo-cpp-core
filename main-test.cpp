@@ -36,6 +36,9 @@ public:
 int
 main()
 {
+   BigInteger bigtest{ "0x00FFFFFFFF00000001000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFF", 16 };
+   std::cout << "bigtest = " << bigtest.ToString(10) << std::endl;
+
    OpCode op = OpCode::CLEARITEMS;
    std::cout << op << std::endl;
 

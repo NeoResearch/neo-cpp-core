@@ -13,6 +13,7 @@ let csBN = lt_csbn.csBigInteger;
 
 
 function testMain() {
+    console.log(" ======== testMain() ====== ");
     lNeo3._mytest(5);
     var shello = 'hello';
     var str = myteststr(shello, shello.length);
