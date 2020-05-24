@@ -471,8 +471,12 @@ public:
    {
       std::stringstream ss;
       ss << "{";
-      ss << "\"X\":" << neopt::stringify(X.Value.ToByteArray()) << ",";
-      ss << "\"Y\":" << neopt::stringify(Y.Value.ToByteArray()) << ",";
+      ss << "\"X\":"
+         << "\"" << neopt::vhelper::ToHexString(X.Value.ToByteArray()) << "\""
+         << ",";
+      ss << "\"Y\":"
+         << "\"" << neopt::vhelper::ToHexString(Y.Value.ToByteArray()) << "\""
+         << ",";
       ss << "\"curve\":"
          << "\"secp256r1\""; // default curve
       ss << "}";

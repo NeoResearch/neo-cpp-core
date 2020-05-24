@@ -9,7 +9,7 @@
 //#include<limits>
 
 // neo core
-#include <system/types.h>
+#include "../system/types.h"
 //#include<numbers/UInt160.hpp>
 
 // TODO: is there any real usage for this class?

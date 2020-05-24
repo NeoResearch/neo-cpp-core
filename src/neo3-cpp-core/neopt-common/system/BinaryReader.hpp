@@ -8,9 +8,9 @@
 #include <vector>
 
 // neopt core part
-#include <numbers/nhelper.h>
-#include <system/IBinaryReader.h>
-#include <system/types.h>
+#include "../numbers/nhelper.h"
+#include "../system/IBinaryReader.h"
+#include "../system/types.h"
 
 using namespace std; // TODO: do not use that in the future... prefer std::vector instead
 
