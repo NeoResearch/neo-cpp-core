@@ -143,6 +143,10 @@ mergeInto(
       // returns 'real' size for out...
       return barray.length;
     },
+    external_sha256 : function(ptr1, sz1, ptr_out, sz_out) {
+      console.log("WARNING: EMPTY FUNCTION 'external_sha256' on licore_exports.js");
+      return 0;
+    }
   }
 );
 

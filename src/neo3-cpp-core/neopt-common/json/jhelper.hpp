@@ -30,7 +30,6 @@ class jhelper
 public:
    static uptr<JObject> Parse(ITextReader& reader, int max_nest = 100)
    {
-      std::cout << "BEGIN Parse wth ITextReader" << std::endl;
       if (max_nest < 0)
          NEOPT_EXCEPTION("JObject Parse (max_nest < 0) FormatException");
 
@@ -76,9 +75,7 @@ public:
 
    static uptr<JObject> Parse(string value, int max_nest = 100)
    {
-      std::cout << "will Parse string on jhelper: '" << value << "' max_nest=" << max_nest << std::endl;
       StringReader reader(value);
-      std::cout << "value load on Reader" << std::endl;
       return Parse(reader, max_nest);
    }
 
