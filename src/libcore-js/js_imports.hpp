@@ -16,13 +16,7 @@
 #include <optional> // uptr - TODO REMOVE
 
 #include <emscripten/bind.h>
-
-// ========== load neo3 jsapi methods ========
-
-#include <neo3-cpp-core/SmartContract/Contract.jsapi.hpp> // TODO: fix clang issues
-
 //
-
 using namespace emscripten;
 
 template<class X>
@@ -233,17 +227,17 @@ EMSCRIPTEN_BINDINGS(my_module)
 
    emscripten::function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
 
-   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
-   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
-   emscripten::function("cpp_gen_xy", &cpp_gen_xy);
-   emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
-   emscripten::function("cpp_gen_xy2", &cpp_gen_xy2);
+   //emscripten::function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
+   //emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);
+   //emscripten::function("cpp_gen_xy", &cpp_gen_xy);
+   //emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
+   //emscripten::function("cpp_gen_xy2", &cpp_gen_xy2);
    //
    // ECPoint.jsapi.hpp
    // jsapi_ECPoint new_ECPoint(vbyte X, vbyte Y)
-   emscripten::function("cpp_ECPoint_new_ECPoint", &neo3_cpp_jsapi::cpp_ECPoint_new_ECPoint);
+   //emscripten::function("cpp_ECPoint_new_ECPoint", &neo3_cpp_jsapi::cpp_ECPoint_new_ECPoint);
    //
-   emscripten::function("cpp_ECPoint_ToString", &neo3_cpp_jsapi::cpp_ECPoint_ToString);
+   //emscripten::function("cpp_ECPoint_ToString", &neo3_cpp_jsapi::cpp_ECPoint_ToString);
 
    //
    // Contract.jsapi.hpp
