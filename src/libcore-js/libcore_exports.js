@@ -108,7 +108,41 @@ mergeInto(
 
       // returns 'real' size for out...
       return barray.length;
-    }
+    },
+    // perform big1 % big2 and return its size (in bytes). output vr must be pre-allocated
+    // cs_int32 csbiginteger_mod(cs_byte* big1, int sz_big1, cs_byte* big2, int sz_big2, cs_byte* vr, int sz_vr);
+    csbiginteger_mod : function(ptr1, sz1, ptr2, sz2, ptr_out, sz_out) {
+      // inputs are pre-allocated
+      let csBN = Module['csBN'];
+      //
+      var v1 = Module.HEAPU8.subarray(ptr1, ptr1+sz1);
+      var v2 = Module.HEAPU8.subarray(ptr2, ptr2+sz2);
+      //
+      var lst1 = [];
+      for(var i=0; i<sz1; i++)
+        lst1.push(v1[i]);
+      var big1 = new csBN(lst1);
+      var big1bn = big1.asBN();
+      //
+      var lst2 = [];
+      for(var i=0; i<sz2; i++)
+        lst2.push(v2[i]);
+      var big2 = new csBN(lst2);
+      var big2bn = big2.asBN();
+      //
+      console.log("csbiginteger_mod big1='"+big1.ToString(10)+"' big2='"+big1.ToString(10)+"' -> ");
+      // ====== perform operation ======
+      var big3bn = big1bn.mod(big2bn);
+      //
+      var big3 = new csBN(big3bn);
+      console.log("big3 ='"+big3.ToString(10)+"'");
+      var barray = big3.toByteArray();
+      const myUint8Array = new Uint8Array(barray);
+      Module.HEAPU8.set(myUint8Array, ptr_out);
+
+      // returns 'real' size for out...
+      return barray.length;
+    },
   }
 );
 

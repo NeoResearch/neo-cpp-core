@@ -142,6 +142,12 @@ public:
       vbyte v = CreateSignatureRedeemScript(ecp);
       return neopt::vhelper::ToHexString(v);
    }
+
+   static std::string
+my_Contract_cpp_teststr(std::string a)
+{
+   return a.append("x");
+}
 };
 //
 } // namespace SmartContract

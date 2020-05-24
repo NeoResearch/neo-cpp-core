@@ -11,7 +11,6 @@
 #include <neo3-cpp-core/core_imports.h>
 // ---------------------------------------------------------------------------
 
-
 #include <iostream>
 #include <memory>   // uptr - TODO REMOVE
 #include <optional> // uptr - TODO REMOVE
@@ -246,9 +245,9 @@ EMSCRIPTEN_BINDINGS(my_module)
    //
    emscripten::function("cpp_ECPoint_ToString", &neo3_cpp_jsapi::cpp_ECPoint_ToString);
 
-
    //
    // Contract.jsapi.hpp
    // vbyte cpp_Contract_CreateSignatureRedeemScript(jsapi_ECPoint point)
-   emscripten::function("SmartContract_Contract_CreateSignatureRedeemScript", &Neo::SmartContract::Contract::API_CreateSignatureRedeemScript);
+   emscripten::function("cpp_SmartContract_Contract_CreateSignatureRedeemScript", &Neo::SmartContract::Contract::API_CreateSignatureRedeemScript);
+   emscripten::function("cpp_Contract_cpp_teststr", &Neo::SmartContract::Contract::my_Contract_cpp_teststr);
 }

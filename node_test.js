@@ -14,12 +14,18 @@ let csBN = lt_csbn.csBigInteger;
 function testMain() {
     console.log(" ======== testMain() ====== ");
     lNeo3._mytest(5);
+    console.log("");
+    console.log(" ------- will test string ---- ");
     var shello = 'hello';
     var str = myteststr(shello, shello.length);
     console.log(str);
     var str_cpp = lNeo3.my_cpp_teststr("Hello World!");
     console.log(str_cpp);
-
+    console.log("");
+    var str_cpp2 = lNeo3.cpp_Contract_cpp_teststr("Hello World!");
+    console.log(str_cpp2);
+    console.log("");
+    console.log("");
     var pubKey = lNeo3.cpp_Util_GenerateVectorByte(8, 2);
     console.log(typeof(pubKey)); // console.log(
     //
@@ -67,12 +73,18 @@ function testMain() {
     console.log("experimenting with ECPoint");
     console.log("");
     //
-    var vx = lNeo3.cpp_Util_GenerateVectorByte(32, 0);
-    var vy = lNeo3.cpp_Util_GenerateVectorByte(32, 0);
+    var vx = new csBN("43563478194357645732161043749214420341576583724275881899443933055754116882936", 10);
+    var vy = new csBN("6800198406926458502571476951697947402787919362010374841430910815761615021861", 10);
 
-    var ecpoint = lNeo3.cpp_ECPoint_new_ECPoint(vx, vy);
-    console.log(ecpoint);
-    console.log(lNeo3.cpp_ECPoint_ToString(ecpoint));
+    var ecpoint = {
+        "X" : vx.toHexString(),
+        "Y" : vx.toHexString(),
+        "curve" : "secp256r1"
+    };
+    var strJson = JSON.stringify(ecpoint);
+    console.log("json str point: "+strJson);
+    var vout = lNeo3.cpp_SmartContract_Contract_CreateSignatureRedeemScript("{}");
+    console.log(vout);
 
 }
 
