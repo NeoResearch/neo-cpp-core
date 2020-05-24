@@ -17,6 +17,7 @@ vendor: update_submodules get_libcrypton get_csbiginteger  #get_bn-js already pr
 get_bn-js:
 	npm install bn.js --prefix libs/ -g
 	#npm install csbiginteger.js --prefix libs/ -g   ## TODO:
+	npm install crypto-js --prefix libs/ -g
 
 update_submodules:
 	git submodule update --init --recursive
