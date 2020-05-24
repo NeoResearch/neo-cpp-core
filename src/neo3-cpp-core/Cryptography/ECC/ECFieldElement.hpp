@@ -31,12 +31,12 @@ public:
    const BigInteger Value;
 
 private:
-   const ECCurve& curve;
+   //const ECCurve& curve;
 
 public:
    ECFieldElement(const BigInteger& value, const ECCurve& curve)
      : Value{ value }
-     , curve{ curve }
+     //, curve{ curve }
    {
       //if (curve is null)
       //    throw new ArgumentNullException(nameof(curve));

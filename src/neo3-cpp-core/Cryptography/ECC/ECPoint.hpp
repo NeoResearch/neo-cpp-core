@@ -37,14 +37,8 @@ class ECPoint // TODO: inheritances........
 {
 
    const ECFieldElement X, Y;
-   //internal readonly ECCurve Curve;
+   //const ECCurve& Curve; // unused for now
 
-   const ECCurve& Curve;
-   //
-   //const vbyte X;               // do NOT use ECField
-   //const vbyte Y;               // do NOT use ECField
-   //const bool Y_IsEven{ true }; // from ECField
-   //
 public:
    bool IsInfinity()
    {
@@ -59,7 +53,7 @@ public:
    ECPoint(const ECCurve& curve)
      : X{ neopt::vbyte{}, curve }
      , Y{ neopt::vbyte{}, curve }
-     , Curve(curve)
+     //, Curve(curve)
    {}
 
    /*
@@ -71,9 +65,9 @@ public:
    //internal
    ECPoint(const ECFieldElement& x, const ECFieldElement& y, const ECCurve& curve)
      //ECPoint(vbyte x, vbyte y, ECCurve curve)
-     : Curve(curve)
-     , X(x)
+     : X(x)
      , Y(y)
+     //, Curve(curve)
    {
       //if ((x is null ^ y is null) || (curve is null))
       //   throw new ArgumentException("Exactly one of the field elements is null");

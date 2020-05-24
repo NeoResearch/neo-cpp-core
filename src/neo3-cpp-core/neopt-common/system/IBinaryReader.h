@@ -95,12 +95,12 @@ public:
    }
 
    // little-endian
-   virtual ulong ReadUInt64()
+   virtual uint64 ReadUInt64()
    {
       vbyte bytes = ReadBytes(8);
       uint32 val1 = bytes[0] | (bytes[1] << 8) | (bytes[2] << 16) | (bytes[3] << 24);
-      ulong val2 = bytes[4] | (bytes[5] << 8) | (bytes[6] << 16) | (bytes[7] << 24);
-      ulong val = val1 | val2 << 32;
+      uint64 val2 = bytes[4] | (bytes[5] << 8) | (bytes[6] << 16) | (bytes[7] << 24);
+      uint64 val = val1 | val2 << 32;
       return val;
    }
 

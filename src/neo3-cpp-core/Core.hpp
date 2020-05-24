@@ -12,7 +12,7 @@ using vbyte = neopt::vbyte;
 // --------------------------------
 // load ECC "internal" classes
 //
-//#include "Cryptography/ECC/ECC.hpp"
+#include "Cryptography/ECC/ECC.hpp"
 
 //
 //
