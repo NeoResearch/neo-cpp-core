@@ -80,12 +80,12 @@ namespace ECC {
 //
 ECCurve::ECCurve(BigInteger Q, BigInteger A, BigInteger B, BigInteger N, vbyte G) //const ECPoint<>& G)
   : Q{ Q }
-  , ExpectedECPointLength{ (Helper::GetBitLength(Q) + 7) / 8 }
   , A{ ECFieldElement{ A, *this } }
   , B{ ECFieldElement{ B, *this } }
   , N{ N }
   , Infinity{ ECPoint{ *this } }
   , G{ ECPoint::DecodePoint(G, *this) }
+  , ExpectedECPointLength{ (Helper::GetBitLength(Q) + 7) / 8 }
 {
    //this.Q = Q;
    //this.ExpectedECPointLength = (Q.GetBitLength() + 7) / 8;

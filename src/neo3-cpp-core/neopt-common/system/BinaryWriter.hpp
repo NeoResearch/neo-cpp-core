@@ -23,16 +23,17 @@ class BinaryWriter : public IBinaryWriter
 private:
    //ostream* output;
    //bool mustDelete;
+   MemoryStream* mstream{ nullptr };
    vbyte* data_bytes; // if available, write here
    bool delete_array;
 
-   MemoryStream* mstream{ nullptr };
+   
 
 public:
    BinaryWriter(MemoryStream* _mstream)
      : mstream(_mstream)
-     , delete_array(false)
      , data_bytes(nullptr)
+     , delete_array(false)
    {
    }
 

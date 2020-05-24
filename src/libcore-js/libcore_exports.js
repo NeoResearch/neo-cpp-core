@@ -39,6 +39,24 @@ mergeInto(
       //////return ptr; // string
       // NO RETURN... pass by parameter 'ptr_str_out'
       return lengthBytesUTF8(rstr);
+    },
+    csbiginteger_gt:  function(ptr1, sz1, ptr2, sz2) {
+      // inputs are pre-allocated
+
+      // returns 'bool'
+      return false;
+    },
+    csbiginteger_lt:  function(ptr1, sz1, ptr2, sz2) {
+      // inputs are pre-allocated
+
+      // returns 'bool'
+      return false;
+    },
+    csbiginteger_init_s:  function(str_val, int_base, ptr_out, sz_out) {
+      // inputs are pre-allocated
+
+      // returns 'real' size for out...
+      return 0;
     }
   }
 );
