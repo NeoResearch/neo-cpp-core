@@ -19,7 +19,7 @@
 
 namespace neopt {
 
-class JArray : public JObject
+class JArray final : public JObject
 {
 public:
    vector<JObject*> items;

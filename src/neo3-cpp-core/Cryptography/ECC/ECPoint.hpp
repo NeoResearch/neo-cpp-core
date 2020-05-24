@@ -495,9 +495,14 @@ public:
    // special method that encodes this from a json str (for external APIs)
    static ECPoint API_FromJsonStr(std::string json)
    {
-      auto& jobj = *neopt::jhelper::Parse(json);
+      std::string json2 = json;
+      std::cout << "API_FromJsonStr: " << json2 << std::endl;
+      neopt::uptr<neopt::JObject> jobj_p = neopt::jhelper::Parse(json2);
+      auto& jobj = *jobj_p;
       std::string x = jobj["X"]; // "little-endian" hexstring
       std::string y = jobj["Y"]; // "little-endian" hexstring
+
+      std::cout << "after Parse!" << std::endl;
 
       return ECPoint{
          ECFieldElement{ BigInteger{ x, 16 }, ECCurve::Secp256r1 },

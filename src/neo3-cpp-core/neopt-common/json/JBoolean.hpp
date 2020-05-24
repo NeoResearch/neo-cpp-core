@@ -19,7 +19,7 @@
 
 namespace neopt {
 
-class JBoolean : public JObject
+class JBoolean final : public JObject
 {
 private:
    bool _b;

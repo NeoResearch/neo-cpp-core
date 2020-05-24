@@ -19,7 +19,7 @@
 
 namespace neopt {
 
-class JString : public JObject
+class JString final : public JObject
 {
 private:
    std::string _s;

@@ -19,7 +19,7 @@
 
 namespace neopt {
 
-class JNumber : public JObject
+class JNumber final : public JObject
 {
 private:
    double _d;
