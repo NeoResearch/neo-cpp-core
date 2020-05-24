@@ -20,7 +20,7 @@
 
 // ========== load neo3 jsapi methods ========
 
-//#include <neo3-cpp-core/SmartContract/Contract.jsapi.hpp> // TODO: fix clang issues
+#include <neo3-cpp-core/SmartContract/Contract.jsapi.hpp> // TODO: fix clang issues
 
 //
 
@@ -226,6 +226,7 @@ EMSCRIPTEN_BINDINGS(my_module)
    emscripten::register_vector<unsigned char>("vector<unsigned char>");
    emscripten::register_map<bool, int>("map<bool, int>");
    emscripten::register_map<bool, vbyte>("map<int, vector<unsigned char>>");
+   emscripten::register_map<std::string, vbyte>("map<string, vector<unsigned char>>");
 
    emscripten::function("my_cpp_teststr", &my_cpp_teststr);
 
@@ -238,4 +239,16 @@ EMSCRIPTEN_BINDINGS(my_module)
    emscripten::function("cpp_gen_xy", &cpp_gen_xy);
    emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY2", &cpp_Contract_CreateSignatureRedeemScript_XY2);
    emscripten::function("cpp_gen_xy2", &cpp_gen_xy2);
+   //
+   // ECPoint.jsapi.hpp
+   // jsapi_ECPoint new_ECPoint(vbyte X, vbyte Y)
+   emscripten::function("cpp_ECPoint_new_ECPoint", &neo3_cpp_jsapi::cpp_ECPoint_new_ECPoint);
+   //
+   emscripten::function("cpp_ECPoint_ToString", &neo3_cpp_jsapi::cpp_ECPoint_ToString);
+
+
+   //
+   // Contract.jsapi.hpp
+   // vbyte cpp_Contract_CreateSignatureRedeemScript(jsapi_ECPoint point)
+   emscripten::function("cpp_Contract_CreateSignatureRedeemScript", &cpp_Contract_CreateSignatureRedeemScript);
 }

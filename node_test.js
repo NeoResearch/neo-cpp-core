@@ -62,6 +62,18 @@ function testMain() {
     console.log(x.toByteArray());
     console.log(" ======= end testing csBigInteger.js ======= ");
 
+    // =============
+    console.log("");
+    console.log("experimenting with ECPoint");
+    console.log("");
+    //
+    var vx = lNeo3.cpp_Util_GenerateVectorByte(32, 0);
+    var vy = lNeo3.cpp_Util_GenerateVectorByte(32, 0);
+
+    var ecpoint = lNeo3.cpp_ECPoint_new_ECPoint(vx, vy);
+    console.log(ecpoint);
+    console.log(lNeo3.cpp_ECPoint_ToString(ecpoint));
+
 }
 
 // ----------- wait until loading ----------

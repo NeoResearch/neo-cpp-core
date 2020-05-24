@@ -36,6 +36,7 @@ class ECPoint // TODO: inheritances........
 //  , ISerializable
 {
 
+public:
    const ECFieldElement X, Y;
    //const ECCurve& Curve; // unused for now
 

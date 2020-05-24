@@ -9,19 +9,45 @@ namespace neo3_cpp_jsapi {
 
 using jsapi_ECPoint = std::map<std::string, neopt::vbyte>;
 
-// X -> "X" (vbyte instead of ECFieldElement)
-// Y -> "Y" (vbyte instead of ECFieldElement)
+// X -> "X" (vbyte representing ECFieldElement)
+// Y -> "Y" (vbyte representing ECFieldElement)
 
 jsapi_ECPoint
 from_ECPoint(const ECPoint& p)
 {
-   // TODO
+   jsapi_ECPoint xy;
+   xy["X"] = p.X.Value.ToByteArray();
+   xy["Y"] = p.X.Value.ToByteArray();
+   return xy;
 }
 
 ECPoint
-to_ECPoint(const jsapi_ECPoint& jsp)
+to_ECPoint(jsapi_ECPoint p)
 {
-   // TODO
+   return ECPoint{
+      ECFieldElement{ BigInteger{ p["X"] }, ECCurve::Secp256r1 },
+      ECFieldElement{ BigInteger{ p["Y"] }, ECCurve::Secp256r1 },
+      ECCurve::Secp256r1
+   };
+}
+
+// ========== PUBLIC ===========
+
+// defaults to curve secp256r1
+jsapi_ECPoint
+cpp_ECPoint_new_ECPoint(vbyte X, vbyte Y)
+{
+   return from_ECPoint(
+     ECPoint{
+       ECFieldElement{ BigInteger{ X }, ECCurve::Secp256r1 },
+       ECFieldElement{ BigInteger{ Y }, ECCurve::Secp256r1 },
+       ECCurve::Secp256r1 });
+}
+
+std::string
+cpp_ECPoint_ToString(jsapi_ECPoint p)
+{
+   return to_ECPoint(p).ToString();
 }
 
 } // namespace neo3_cpp_jsapi
