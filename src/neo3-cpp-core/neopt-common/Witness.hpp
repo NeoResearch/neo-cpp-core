@@ -7,7 +7,7 @@
 #include <crypto/chelper.hpp>
 #include <json/JObject.hpp>
 #include <numbers/UInt160.hpp>
-#include <system/ISerializable.h>
+#include "../system/ISerializable.h"
 #include <system/types.h>
 
 using namespace std; // TODO: do not use that in the future... prefer std::vector instead

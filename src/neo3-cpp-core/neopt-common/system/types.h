@@ -5,6 +5,7 @@
 #include <limits>
 #include <sstream>
 #include <vector>
+#include <memory> // unique_ptr
 
 // core includes
 // ... none
@@ -89,6 +90,10 @@ typedef std::vector<byte> vbyte;
 
 // nibble array definition
 typedef std::vector<nibble> vnibble;
+
+template<class T>
+using uptr = std::unique_ptr<T>; // neopt shortcut for unique_ptr
+
 
 // please follow JSON standard to allow deserialization (JSON.stringify)
 // TODO: hex string or array of numbers? must choose one.

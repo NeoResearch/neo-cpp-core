@@ -5,12 +5,12 @@
 #include <vector>
 
 // neopt core part
-#include <system/IBinaryReader.h>
-#include <system/IBinaryWriter.h>
-#include <system/IEquatable.h>
-#include <system/IObject.h>
-#include <system/ISerializable.h>
-#include <system/vhelper.hpp>
+#include "../system/IBinaryReader.h"
+#include "../system/IBinaryWriter.h"
+#include "../system/IEquatable.h"
+#include "../system/IObject.h"
+#include "../system/ISerializable.h"
+#include "../system/vhelper.hpp"
 
 namespace neopt {
 

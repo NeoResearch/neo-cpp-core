@@ -14,9 +14,9 @@
 #include <crypto/ICrypto.h>
 #include <numbers/Fixed8.hpp>
 #include <numbers/UInt160.hpp>
-#include <numbers/UIntBase.hpp>
+#include "../numbers/UIntBase.hpp"
 #include <system/BinaryReader.hpp>
-#include <system/IEquatable.h>
+#include "../system/IEquatable.h"
 #include <system/printable.h>
 #include <wallets/whelper.hpp>
 

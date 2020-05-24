@@ -7,9 +7,9 @@
 // neopt core part
 #include <numbers/BigInteger.h>
 #include <numbers/nhelper.h>
-#include <system/IComparable.h>
-#include <system/IEquatable.h>
-#include <system/ISerializable.h>
+#include "../system/IComparable.h"
+#include "../system/IEquatable.h"
+#include "../system/ISerializable.h"
 #include <system/printable.h>
 #include <system/types.h>
 

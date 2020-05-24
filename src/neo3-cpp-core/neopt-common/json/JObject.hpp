@@ -7,16 +7,19 @@
 #include <vector>
 
 // neopt core part
-#include <numbers/UIntBase.hpp>
-#include <system/IComparable.h>
-#include <system/IEquatable.h>
-#include <system/ISerializable.h>
-#include <system/ITextReader.h>
-#include <system/StringReader.hpp>
-#include <system/mhelper.h>
-#include <system/shelper.h>
+#include "../numbers/UIntBase.hpp"
+#include "../system/IComparable.h"
+#include "../system/IEquatable.h"
+#include "../system/ISerializable.h"
+#include "../system/ITextReader.h"  
+#include "../system/StringReader.hpp"
+#include "../system/mhelper.h"
+#include "../system/shelper.h"
 
 namespace neopt {
+
+// forward declaration
+class JString;
 
 class JObject
 {
@@ -47,7 +50,7 @@ public:
       return NAN;
    }
 
-   virtual string AsString()
+   virtual string AsString() const
    {
       return "[object Object]";
    }
@@ -116,12 +119,14 @@ public:
            {
                return new JNumber(value);
            }
-
-           public static implicit operator JObject(string value)
+*/
+// return value == null ? null : new JString(value);
+           public:
+            operator std::string () const
            {
-               return value == null ? null : new JString(value);
+               return this->ToString();
           }
-          */
+          
 public:
    JObject& operator=(const string value)
    {

@@ -7,19 +7,19 @@
 #include <vector>
 
 // neopt core part
+#include "../numbers/UIntBase.hpp"
+#include "../system/IComparable.h"
+#include "../system/IEquatable.h"
+#include "../system/ISerializable.h"
+#include "../system/ITextReader.h"
+#include "../system/StringReader.hpp"
+#include "../system/mhelper.h"
+#include "../system/shelper.h"
 #include "JArray.hpp"
 #include "JBoolean.hpp"
 #include "JNumber.hpp"
 #include "JObject.hpp"
 #include "JString.hpp"
-#include <numbers/UIntBase.hpp>
-#include <system/IComparable.h>
-#include <system/IEquatable.h>
-#include <system/ISerializable.h>
-#include <system/ITextReader.h>
-#include <system/StringReader.hpp>
-#include <system/mhelper.h>
-#include <system/shelper.h>
 
 // JSON Helper Class
 
@@ -28,7 +28,7 @@ namespace neopt {
 class jhelper
 {
 public:
-   static JObject* Parse(ITextReader& reader, int max_nest = 100)
+   static uptr<JObject> Parse(ITextReader& reader, int max_nest = 100)
    {
       if (max_nest < 0)
          NEOPT_EXCEPTION("JObject Parse (max_nest < 0) FormatException");
@@ -56,7 +56,7 @@ public:
          NEOPT_EXCEPTION("JObject Parse (read '{') FormatException");
       }
       SkipSpace(reader);
-      JObject* obj = new JObject();
+      uptr<JObject> obj{ new JObject() };
       while (reader.Peek() != '}') {
          if (reader.Peek() == ',')
             reader.Read();
@@ -65,22 +65,22 @@ public:
          SkipSpace(reader);
          if (reader.Read() != ':')
             NEOPT_EXCEPTION("JObject Parse (read ':') FormatException");
-         JObject* value = Parse(reader, max_nest - 1);
-         obj->properties[name] = value; // .Add
+         uptr<JObject> value = Parse(reader, max_nest - 1);
+         obj->properties[name] = value.release(); // .Add
          SkipSpace(reader);
       }
       reader.Read(); // consume what?
       return obj;
    }
 
-   static JObject* Parse(string value, int max_nest = 100)
+   static uptr<JObject> Parse(string value, int max_nest = 100)
    {
       StringReader reader(value);
       return Parse(reader, max_nest);
    }
 
 private:
-   static JObject* ParseNull(ITextReader& reader)
+   static uptr<JObject> ParseNull(ITextReader& reader)
    {
       char firstChar = (char)reader.Read();
       if (firstChar == 'n') {
@@ -104,7 +104,7 @@ private: // TODO test
    }
 
 public:
-   static JString* ParseString(ITextReader& reader, int max_nest = 100)
+   static uptr<JString> ParseString(ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       char* buffer = new char[4];
@@ -145,16 +145,16 @@ public:
       }
       delete[] buffer;
       string sf = sb.str();
-      return new JString(sf);
+      return uptr<JString>{ new JString(sf) };
    }
 
-   static JString* ParseString(string value, int max_nest = 100)
+   static uptr<JString> ParseString(string value, int max_nest = 100)
    {
       StringReader reader(value);
       return ParseString(reader, max_nest);
    }
 
-   static JNumber* ParseNumber(ITextReader& reader, int max_nest = 100)
+   static uptr<JNumber> ParseNumber(ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       //StringBuilder sb = new StringBuilder();
@@ -170,16 +170,16 @@ public:
       }
       std::string sf = sb.str();
       //return new JNumber(double.Parse(sf));
-      return new JNumber(shelper::ParseDouble(sf));
+      return uptr<JNumber>{ new JNumber(shelper::ParseDouble(sf)) };
    }
 
-   static JNumber* ParseNumber(string value, int max_nest = 100)
+   static uptr<JNumber> ParseNumber(string value, int max_nest = 100)
    {
       StringReader reader(value);
       return ParseNumber(reader, max_nest);
    }
 
-   static JBoolean* ParseBoolean(ITextReader& reader, int max_nest = 100)
+   static uptr<JBoolean> ParseBoolean(ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       char firstChar = (char)reader.Read();
@@ -188,7 +188,7 @@ public:
          int c3 = reader.Read();
          int c4 = reader.Read();
          if (c2 == 'r' && c3 == 'u' && c4 == 'e') {
-            return new JBoolean(true);
+            return uptr<JBoolean>{ new JBoolean(true) };
          }
       } else if (firstChar == 'f') {
          int c2 = reader.Read();
@@ -196,7 +196,7 @@ public:
          int c4 = reader.Read();
          int c5 = reader.Read();
          if (c2 == 'a' && c3 == 'l' && c4 == 's' && c5 == 'e') {
-            return new JBoolean(false);
+            return uptr<JBoolean>{ new JBoolean(false) };
          }
       }
       NEOPT_EXCEPTION("JBoolean Parse FormatException");
@@ -204,13 +204,13 @@ public:
       return nullptr;
    }
 
-   static JBoolean* ParseBoolean(string value, int max_nest = 100)
+   static uptr<JBoolean> ParseBoolean(string value, int max_nest = 100)
    {
       StringReader reader(value);
       return ParseBoolean(reader, max_nest);
    }
 
-   static JArray* ParseArray(ITextReader& reader, int max_nest = 100)
+   static uptr<JArray> ParseArray(ITextReader& reader, int max_nest = 100)
    {
       if (max_nest < 0)
          NEOPT_EXCEPTION("JArray FormatException");
@@ -218,20 +218,20 @@ public:
       if (reader.Read() != '[')
          NEOPT_EXCEPTION("JArray FormatException");
       SkipSpace(reader);
-      JArray* array = new JArray();
+      uptr<JArray> array{ new JArray() };
       while (reader.Peek() != ']') {
          if (reader.Peek() == ',')
             reader.Read();
-         JObject* obj = Parse(reader, max_nest - 1);
+         uptr<JObject> obj = Parse(reader, max_nest - 1);
          //array->items.Add(obj);
-         array->items.push_back(obj);
+         array->items.push_back(obj.release());
          SkipSpace(reader);
       }
       reader.Read();
       return array;
    }
 
-   static JArray* ParseArray(string value, int max_nest = 100)
+   static uptr<JArray> ParseArray(string value, int max_nest = 100)
    {
       StringReader reader(value);
       return ParseArray(reader, max_nest);

@@ -6,11 +6,11 @@
 #include <vector>
 
 // neopt core part
-#include <numbers/UIntBase.hpp>
-#include <system/IComparable.h>
-#include <system/IEquatable.h>
-#include <system/ISerializable.h>
-#include <system/shelper.h>
+#include "../numbers/UIntBase.hpp"
+#include "../system/IComparable.h"
+#include "../system/IEquatable.h"
+#include "../system/ISerializable.h"
+#include "../system/shelper.h"
 
 namespace neopt {
 // TODO: THIS CLASS IS A MIRROR OF UInt256!!!!

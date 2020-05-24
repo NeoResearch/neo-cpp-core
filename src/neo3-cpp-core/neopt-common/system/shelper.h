@@ -10,7 +10,7 @@
 
 // neo core
 #include "types.h"
-#include <system/BinaryReader.hpp>
+#include "../system/BinaryReader.hpp"
 
 using namespace std; // TODO: avoid!
 
@@ -30,7 +30,7 @@ public:
       return s.substr(from);
    }
 
-   static ushort ParseHexToShort(const string& hex)
+   static uint16 ParseHexToShort(const string& hex)
    {
       vbyte vb = HexToBytes(hex);
       BinaryReader reader(vb);
@@ -48,7 +48,7 @@ public:
       //NEOPT_EXCEPTION("Not implemented yet: HexToBytes");
       vbyte bytes(hex.length() / 2);
 
-      for (uint i = 0; i < hex.length(); i += 2) {
+      for (uint32 i = 0; i < hex.length(); i += 2) {
          std::string byteString = hex.substr(i, 2);
          byte b = (byte)strtol(byteString.c_str(), NULL, 16);
          bytes[i / 2] = b;

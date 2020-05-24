@@ -11,7 +11,7 @@
 
 // neopt core part
 #include "ITextReader.h"
-#include <system/types.h>
+#include "../system/types.h"
 
 using namespace std; // TODO: do not use that in the future... prefer std::vector instead
 

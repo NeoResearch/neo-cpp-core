@@ -5,6 +5,8 @@
 #endif
 
 #include <neo3-cpp-core/neopt-common/System.hpp>
+// JSON lib for external APIs
+#include <neo3-cpp-core/neopt-common/json/jhelper.hpp>
 //using Neo.IO;
 //using System;
 //using System.IO;
@@ -465,10 +467,17 @@ public
    }
    */
 
+   // ===================== EXPORT API METHODS =====================
+   // these methods below provide service to APIs, like 'neopt-js'
+   // --------------------------------------------------------------
+
 public:
    // special method that encodes this as a json str (for external APIs)
    std::string ToJsonStr()
    {
+      // X : "little-endian" hexstring
+      // Y : "little-endian" hexstring
+
       std::stringstream ss;
       ss << "{";
       ss << "\"X\":"
@@ -481,6 +490,20 @@ public:
          << "\"secp256r1\""; // default curve
       ss << "}";
       return ss.str();
+   }
+
+   // special method that encodes this from a json str (for external APIs)
+   ECPoint FromJsonStr(std::string json)
+   {
+      auto& jobj = *neopt::jhelper::Parse(json);
+      std::string x = jobj["X"]; // "little-endian" hexstring
+      std::string y = jobj["Y"]; // "little-endian" hexstring
+
+      return ECPoint{
+         ECFieldElement{ BigInteger{ x, 16 }, ECCurve::Secp256r1 },
+         ECFieldElement{ BigInteger{ y, 16 }, ECCurve::Secp256r1 },
+         ECCurve::Secp256r1
+      };
    }
 };
 //
