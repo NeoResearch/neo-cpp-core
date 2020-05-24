@@ -3,6 +3,7 @@
 
 // system includes
 #include <limits>
+#include <sstream>
 #include <vector>
 
 // core includes
@@ -18,7 +19,7 @@ typedef unsigned char byte; // EVILLLLL
 
 //using byte = std::byte;
 
-static_assert(sizeof(byte)==1);
+static_assert(sizeof(byte) == 1);
 
 // half byte: nibble
 //typedef byte nibble;
@@ -57,7 +58,7 @@ typedef short int16;
 // unsigned short int
 typedef unsigned short uint16;
 
-static_assert(sizeof(uint16)==2);
+static_assert(sizeof(uint16) == 2);
 
 // signed int
 typedef int int32;
@@ -65,7 +66,7 @@ typedef int int32;
 // unsigned int
 typedef unsigned int uint32;
 
-static_assert(sizeof(uint32)==4);
+static_assert(sizeof(uint32) == 4);
 
 // unsigned long
 #ifdef EMSCRIPTEN
@@ -74,7 +75,7 @@ typedef unsigned long long uint64;
 typedef unsigned long long uint64;
 #endif
 
-static_assert(sizeof(uint64)==8);
+static_assert(sizeof(uint64) == 8);
 
 // unsigned long
 typedef unsigned long ulong;
@@ -88,6 +89,22 @@ typedef std::vector<byte> vbyte;
 
 // nibble array definition
 typedef std::vector<nibble> vnibble;
+
+// please follow JSON standard to allow deserialization (JSON.stringify)
+// TODO: hex string or array of numbers? must choose one.
+std::string
+stringify(const vbyte& vb)
+{
+   std::stringstream ss;
+   ss << "[";
+   for (int i = 0; i < (int)vb.size(); i++)
+      if (i != ((int)vb.size()) - 1) // not last
+         ss << (unsigned int)vb[i] << ",";
+      else // last
+         ss << (unsigned int)vb[i];
+   ss << "]";
+   return ss.str();
+}
 
 #define NEOPT_EXCEPTION(str)                          \
    {                                                  \

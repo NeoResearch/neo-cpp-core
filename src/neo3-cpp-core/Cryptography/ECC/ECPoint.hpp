@@ -54,7 +54,7 @@ public:
    ECPoint(const ECCurve& curve)
      : X{ neopt::vbyte{}, curve }
      , Y{ neopt::vbyte{}, curve }
-     //, Curve(curve)
+   //, Curve(curve)
    {}
 
    /*
@@ -68,7 +68,7 @@ public:
      //ECPoint(vbyte x, vbyte y, ECCurve curve)
      : X(x)
      , Y(y)
-     //, Curve(curve)
+   //, Curve(curve)
    {
       //if ((x is null ^ y is null) || (curve is null))
       //   throw new ArgumentException("Exactly one of the field elements is null");
@@ -467,12 +467,17 @@ public
 
 public:
    // special method that encodes this as a json str (for external APIs)
-   std::string toJsonStr()
+   std::string ToJsonStr()
    {
-      // TODO: stringify
-      return "{}"; // x... vector.. y .. vector ... curve: string_name
+      std::stringstream ss;
+      ss << "{";
+      ss << "\"X\":" << neopt::stringify(X.Value.ToByteArray()) << ",";
+      ss << "\"Y\":" << neopt::stringify(Y.Value.ToByteArray()) << ",";
+      ss << "\"curve\":"
+         << "\"secp256r1\""; // default curve
+      ss << "}";
+      return ss.str();
    }
-
 };
 //
 } // namespace ECC
