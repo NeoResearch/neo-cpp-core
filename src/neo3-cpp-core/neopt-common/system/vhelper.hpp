@@ -140,7 +140,7 @@ public:
       vbyte bytes(nibbles.size() / 2);
       for (unsigned i = 0; i < bytes.size(); i++)
          bytes[i] = 16 * byte(nibbles[2 * i]) + byte(nibbles[2 * i + 1]);
-      return std::move(bytes);
+      return bytes;
    }
 
    static vnibble BytesToNibbles(const vbyte& bytes)
@@ -150,7 +150,7 @@ public:
          nibbles[2 * i] = bytes[i] / 16;
          nibbles[2 * i + 1] = bytes[i] % 16;
       }
-      return std::move(nibbles);
+      return nibbles;
    }
 
    static int GetVarSize(const vbyte& v)
@@ -164,9 +164,9 @@ public:
    {
       if (count < v.size()) {
          vbyte p(v.begin() + count, v.end());
-         return std::move(p);
+         return p;
       } else
-         return std::move(vbyte(0));
+         return vbyte(0);
    }
 
    /*

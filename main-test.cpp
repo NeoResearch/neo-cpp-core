@@ -58,7 +58,7 @@ main()
    //expected verification { 12, 33, 3, 96, 80, 14, 12, 163, 115, 233, 65, 231, 174, 155, 203, 149, 91, 129, 86, 126, 183, 82, 81, 220, 101, 149, 154, 212, 175, 97, 250, 138, 177, 97, 248, 11, 65, 138, 107, 30, 117, }
 
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
-   std::cout << "point (JSON): " << ecp.ToJsonStr() << std::endl;
+   std::cout << "point (JSON): " << ECPoint::API_ToJsonStr(ecp) << std::endl;
 
    ECPoint G = ECCurve::Secp256r1->G; // allowed copy on 'ucref' type.. beware slicing!
    std::cout << "G:" << G.ToString() << std::endl;

@@ -473,7 +473,7 @@ public
 
 public:
    // special method that encodes this as a json str (for external APIs)
-   std::string ToJsonStr()
+   static std::string API_ToJsonStr(const ECPoint& ecpoint)
    {
       // X : "little-endian" hexstring
       // Y : "little-endian" hexstring
@@ -481,10 +481,10 @@ public:
       std::stringstream ss;
       ss << "{";
       ss << "\"X\":"
-         << "\"" << neopt::vhelper::ToHexString(X.Value.ToByteArray()) << "\""
+         << "\"" << neopt::vhelper::ToHexString(ecpoint.X.Value.ToByteArray()) << "\""
          << ",";
       ss << "\"Y\":"
-         << "\"" << neopt::vhelper::ToHexString(Y.Value.ToByteArray()) << "\""
+         << "\"" << neopt::vhelper::ToHexString(ecpoint.Y.Value.ToByteArray()) << "\""
          << ",";
       ss << "\"curve\":"
          << "\"secp256r1\""; // default curve
@@ -493,7 +493,7 @@ public:
    }
 
    // special method that encodes this from a json str (for external APIs)
-   ECPoint FromJsonStr(std::string json)
+   static ECPoint API_FromJsonStr(std::string json)
    {
       auto& jobj = *neopt::jhelper::Parse(json);
       std::string x = jobj["X"]; // "little-endian" hexstring

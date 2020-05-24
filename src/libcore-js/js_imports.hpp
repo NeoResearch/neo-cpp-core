@@ -250,5 +250,5 @@ EMSCRIPTEN_BINDINGS(my_module)
    //
    // Contract.jsapi.hpp
    // vbyte cpp_Contract_CreateSignatureRedeemScript(jsapi_ECPoint point)
-   emscripten::function("cpp_Contract_CreateSignatureRedeemScript", &cpp_Contract_CreateSignatureRedeemScript);
+   emscripten::function("SmartContract_Contract_CreateSignatureRedeemScript", &Neo::SmartContract::Contract::API_CreateSignatureRedeemScript);
 }

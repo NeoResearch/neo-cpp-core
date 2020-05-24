@@ -5,10 +5,14 @@ using namespace Neo::Cryptography::ECC;
 #include <neo3-cpp-vm/ScriptBuilder.hpp>
 using namespace Neo::VM;
 //using Neo.Wallets;
+//
+#include <neo3-cpp-core/neopt-common/System.hpp>
 //using System;
 //using System.Linq;
 //
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
+
+
 
 namespace Neo {
 //
@@ -124,6 +128,19 @@ public:
          sb.EmitSysCall(Neo::SmartContract::InteropService::Crypto::VerifyWithECDsaSecp256r1());
          return sb.ToArray();
       }
+   }
+
+   // ===================== EXPORT API METHODS =====================
+   // these methods below provide service to APIs, like 'neopt-js'
+   // --------------------------------------------------------------
+
+public:
+   // returns 'hexstring' and gets 'ECPoint'
+   static std::string API_CreateSignatureRedeemScript(std::string jsonECPoint)
+   {
+      auto ecp = ECPoint::API_FromJsonStr(jsonECPoint);
+      vbyte v = CreateSignatureRedeemScript(ecp);
+      return neopt::vhelper::ToHexString(v);
    }
 };
 //
