@@ -67,7 +67,7 @@ main()
 
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
 
-   //std::cout << vscript << std::endl;
+   std::cout << "vscript: " << vhelper::ToHexString(vscript) << std::endl;
    std::cout << "vscript: ";
    for (auto i : vscript)
       std::cout << ((unsigned int)i) << " ";

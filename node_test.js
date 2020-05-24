@@ -5,8 +5,11 @@ var myteststr = lNeo3.cwrap('myteststr', 'string', ['string', 'number']);
 // loading BigNum module
 let lt_bn = require('./libs/lib/node_modules/bn.js/lib/bn.js');
 let lt_csbn = require('./libs/lib/node_modules/csBigInteger.js/csBigInteger.js');
+let lt_cryptojs = require('./libs/lib/node_modules/crypto-js/crypto-js.js');
+
 lNeo3['BN'] = lt_bn.BN; // "injecting" module
 lNeo3['csBN'] = lt_csbn.csBigInteger;
+lNeo3['CryptoJS'] = lt_cryptojs;
 
 let csBN = lt_csbn.csBigInteger;
 
