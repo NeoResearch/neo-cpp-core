@@ -97,6 +97,9 @@ using uptr = std::unique_ptr<T>; // neopt shortcut for unique_ptr
 
 // please follow JSON standard to allow deserialization (JSON.stringify)
 // TODO: hex string or array of numbers? must choose one.
+// =======================
+// CANNOT DEFINE FUNCTIONS HERE!!! ONLY .h things here, PLEASEEEEEEEEEEEEE
+/*
 std::string
 stringify(const vbyte& vb)
 {
@@ -110,6 +113,7 @@ stringify(const vbyte& vb)
    ss << "]";
    return ss.str();
 }
+*/
 
 #define NEOPT_EXCEPTION(str)                          \
    {                                                  \

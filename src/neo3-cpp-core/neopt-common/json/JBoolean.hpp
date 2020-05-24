@@ -22,11 +22,11 @@ namespace neopt {
 class JBoolean final : public JObject
 {
 private:
-   bool _b;
+   //bool _b;
 
 public:
    JBoolean(bool b)
-     : _b{ b }
+     //: _b{ b }
    {
    }
 

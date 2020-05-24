@@ -10,8 +10,8 @@ using namespace Neo::VM;
 //
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 
-// UGLY!!
-#include <libcrypton/src/Crypto.h>
+// this may 'glue' to 'libcrypton' or any 'js' crypto library
+#include <neo3-cpp-core/ExternalCrypto.h>
 
 namespace Neo {
 //
@@ -20,12 +20,12 @@ namespace SmartContract {
 namespace cHelper {
 
 static vbyte
-Sha256(vbyte value)
+Sha256(vbyte input)
 {
-   const libcrypton::ICrypto& ic = libcrypton::Crypto::Default();
-   std::cout << "Running libcrypton" << std::endl;
-   vbyte val = ic.Sha256(value);
-   return val;
+   vbyte vout(32, 0);
+   external_sha256(input.data(), input.size(), vout.data(), vout.size());
+   // TODO: verify 'used' bytes
+   return vout;
 }
 
 } // namespace cHelper

@@ -1,9 +1,8 @@
 #pragma once
 
-// perform big1 >> big2 and return its size (in bytes). output vr must be pre-allocated
-extern "C" int32
-external_sha256(byte* big1, int sz_big1, byte* big2, int sz_big2, byte* vr, int sz_vr);
+#include <neo3-cpp-core/neopt-common/system/types.h>
 
-namespace External {
-
-} // namespace External
+// perform sha256 on input and returns used size (in bytes). output must be pre-allocated.
+//extern "C" int
+extern "C" int
+external_sha256(neopt::byte* input, int sz_input, neopt::byte* output, int sz_output);

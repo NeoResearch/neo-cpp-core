@@ -3,7 +3,7 @@ OPENSSL_PATH=./libs/libcrypton/build/openssl
 
 all:
 	mkdir -p build/
-	g++ -std=c++17 main-test.cpp -Isrc/ -Ilibs/ -Ilibs/libcrypton/src -I$(OPENSSL_PATH)/include -L$(OPENSSL_PATH)  libs/libcrypton/src/CryptoNeoOpenSSL.cpp -L./libs/csbiginteger-cpp/lib -o build/app_main -lcsbiginteger -lgmp -lgmpxx           -llinux-openssl-crypto-x86_64 -lpthread -ldl 
+	g++ -std=c++17 main-test.cpp src/neo3-cpp-core/ExternalCrypto.cpp -Isrc/ -Ilibs/ -Ilibs/libcrypton/src -I$(OPENSSL_PATH)/include -L$(OPENSSL_PATH)  libs/libcrypton/src/CryptoNeoOpenSSL.cpp -L./libs/csbiginteger-cpp/lib -o build/app_main -lcsbiginteger -lgmp -lgmpxx           -llinux-openssl-crypto-x86_64 -lpthread -ldl 
 
 
 

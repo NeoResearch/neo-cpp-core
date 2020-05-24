@@ -12,8 +12,6 @@ using namespace Neo::VM;
 //
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 
-
-
 namespace Neo {
 //
 namespace SmartContract {
@@ -142,16 +140,6 @@ public:
       vbyte v = CreateSignatureRedeemScript(ecp);
       return neopt::vhelper::ToHexString(v);
    }
-
-   static std::string
-my_Contract_cpp_teststr(std::string a)
-{
-   std::string b = a;
-   std::cout << "b=" << b << std::endl;
-   auto ecp = ECPoint::API_FromJsonStr(b);
-   std::cout << "b2=" << b << std::endl;
-   return a.append("x");
-}
 };
 //
 } // namespace SmartContract

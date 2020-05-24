@@ -75,7 +75,7 @@ public:
       items.push_back(item);
    }
 
-   virtual std::string AsString()
+   virtual std::string AsString() const override
    {
       std::stringstream ss;
       for (unsigned i = 0; i < items.size(); i++) {
