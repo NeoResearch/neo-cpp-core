@@ -42,39 +42,56 @@ mergeInto(
     },
     csbiginteger_gt:  function(ptr1, sz1, ptr2, sz2) {
       // inputs are pre-allocated
-      console.log("csbiginteger_gt ptr1="+ptr1+ " sz1="+sz1+ " ptr2="+ptr2+ " sz2"+sz2);
-      console.log(ptr1);
-      var input1 = [];
+      //console.log("csbiginteger_gt ptr1="+ptr1+ " sz1="+sz1+ " ptr2="+ptr2+ " sz2="+sz2);
+      //
+      let csBN = Module['csBN'];
+      var v1 = Module.HEAPU8.subarray(ptr1, ptr1+sz1);
+      var v2 = Module.HEAPU8.subarray(ptr2, ptr2+sz2);
+      //
+      var lst1 = [];
       for(var i=0; i<sz1; i++)
-      {
-        input1.push(Module.getValue(ptr_str1,i8));
-        console.log(input1);
-      }
-
-      // returns 'bool'
-      return false;
+        lst1.push(v1[i]);
+      var big1 = new csBN(lst1);
+      var big1bn = big1.asBN();
+      //
+      var lst2 = [];
+      for(var i=0; i<sz2; i++)
+        lst2.push(v2[i]);
+      var big2 = new csBN(lst2);
+      var big2bn = big2.asBN();
+      //
+      return big1bn.gt(big2bn);
     },
     csbiginteger_lt:  function(ptr1, sz1, ptr2, sz2) {
       // inputs are pre-allocated
-      console.log("csbiginteger_lt ptr1="+ptr1+ " sz1="+sz1+ " ptr2="+ptr2+ " sz2"+sz2);
-      console.log(ptr1);
-      var input1 = [];
+      //console.log("csbiginteger_gt ptr1="+ptr1+ " sz1="+sz1+ " ptr2="+ptr2+ " sz2="+sz2);
+      //
+      let csBN = Module['csBN'];
+      var v1 = Module.HEAPU8.subarray(ptr1, ptr1+sz1);
+      var v2 = Module.HEAPU8.subarray(ptr2, ptr2+sz2);
+      //
+      var lst1 = [];
       for(var i=0; i<sz1; i++)
-      {
-        input1.push(Module.getValue(ptr_str1,i8));
-        console.log(input1);
-      }
-      // returns 'bool'
-      return false;
+        lst1.push(v1[i]);
+      var big1 = new csBN(lst1);
+      var big1bn = big1.asBN();
+      //
+      var lst2 = [];
+      for(var i=0; i<sz2; i++)
+        lst2.push(v2[i]);
+      var big2 = new csBN(lst2);
+      var big2bn = big2.asBN();
+      //
+      return big1bn.lt(big2bn);
     },
     csbiginteger_init_s:  function(str_val, int_base, ptr_out, sz_out) {
       // inputs are pre-allocated
       var vstr1 = Module.UTF8ToString(str_val);
       let csBN = Module['csBN'];
       var big1 = new csBN(vstr1, int_base);
-      console.log("csbiginteger_init_s str='"+vstr1+"' base="+int_base+ " ptr_out="+ptr_out+ " sz_out"+sz_out);
+      //console.log("csbiginteger_init_s str='"+vstr1+"' base="+int_base+ " ptr_out="+ptr_out+ " sz_out"+sz_out);
+      //console.log(big1.toString());
       //
-      console.log(big1.toString());
       var barray = big1.toByteArray();
       const myUint8Array = new Uint8Array(barray);
       //console.log(barray);
@@ -88,25 +105,6 @@ mergeInto(
       //console.log(Module.HEAPU8.subarray(ptr_out, ptr_out+myUint8Array.length));
       //console.log("will free");
       //Module._free(buffer);
-
-      /*
-      //
-      var list8 = Module.HEAPU8.subarray(ptr_out, ptr_out + barray.length);
-      Module.HEAPU8.
-      console.log(list8);
-      for(var i=0; i<barray.length; i++)
-        Module.setValue(ptr_out+i, barray[i], Module.i8);
-      //
-      // CHECK
-      //
-      for(var i=0; i<barray.length; i++)
-      {
-        console.log("checking value i="+i+" length="+barray.length);
-        console.log("barray[i]="+barray[i]);
-        console.log("getValue ptr i -> "+Module.getValue(ptr_out+i, Module.i8));
-        //assert(Module.getValue(ptr_out+4*i, Module.i8) == barray[i]); 
-      }
-      */
 
       // returns 'real' size for out...
       return barray.length;
