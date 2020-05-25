@@ -78,7 +78,12 @@ main()
    UInt160 script_hash = Neo::SmartContract::scHelper::ToScriptHash(vscript);
    std::cout << "ScriptHash:" << std::endl;
    std::cout << script_hash.ToString() <<std::endl;
-   std::cout << "Base58:" << std::endl;   
+
+   const Neo::ProtocolSettings ps;
+   std::cout << "Base58:" << std::endl;
+   std::cout << Neo::Wallet::wHelper::ToAddress(ps, script_hash) << std::endl;
+
+   std::cout << "Encode from Base58:" << std::endl;
    std::cout << Neo::Cryptography::Base58::Encode(script_hash.ToArray()) << std::endl;
 
    std::cout

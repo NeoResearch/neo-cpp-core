@@ -5,7 +5,7 @@ namespace Neo {
 class ProtocolSettings
 {
 public:
-   char AddressVersion = {0x35};
+   neopt::byte AddressVersion = {0x35};
 };
 
 }

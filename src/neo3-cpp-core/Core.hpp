@@ -9,6 +9,8 @@
 
 using vbyte = neopt::vbyte;
 
+#include "ProtocolSettings.hpp"
+
 // --------------------------------
 // load ECC "internal" classes
 //
