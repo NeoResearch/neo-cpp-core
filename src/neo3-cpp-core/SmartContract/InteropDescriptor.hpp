@@ -18,6 +18,7 @@
 namespace Neo {
 
 namespace SmartContract {
+   
 class InteropDescriptor
 {
 public:
