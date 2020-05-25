@@ -20,7 +20,7 @@ Sha256(vbyte input)
 static vbyte
 RIPEMD160(vbyte input)
 {
-   vbyte vout(32, 0);
+   vbyte vout(20, 0);
    external_ripemd160(input.data(), input.size(), vout.data(), vout.size());
    // TODO: verify 'used' bytes
    return vout;
