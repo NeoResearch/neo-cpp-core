@@ -69,7 +69,7 @@ public:
    {
       std::string str;
       for (unsigned i = 0; i < s.size(); i++)
-         if (f(s[i]))
+         if (!f(s[i]))
             return str;
          else {
             char c = s[i];
