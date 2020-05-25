@@ -8,9 +8,11 @@
 // https://github.com/catchorg/Catch2/blob/master/docs/test-cases-and-sections.md
 
 #include <neo3-cpp-core/neopt-common/system/BitConverter.hpp> // 'src' included
+#include <neo3-cpp-core/Core.hpp>
 
+using vbyte = neopt::vbyte;
+using vbyte = neopt::vbyte;
 using namespace std;
-using namespace neopt;
 
 TEST_CASE("neopt extra tests - BitConverter 16385")
 {
