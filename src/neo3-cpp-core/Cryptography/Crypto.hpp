@@ -4,6 +4,9 @@
 //using System.Numerics;
 //using System.Security.Cryptography;
 
+// TODO: add Base58 here!
+//#include "Base58.hpp"
+//
 #include "cHelper.hpp"
 #include <neo3-cpp-core/ExternalCrypto.h>
 

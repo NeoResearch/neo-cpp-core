@@ -14,6 +14,7 @@ using vbyte = neopt::vbyte;
 //
 #include "Cryptography/ECC/ECC.hpp"
 #include "Cryptography/cHelper.hpp"
+#include "Cryptography/cHelper.hpp"
 #include "SmartContract/Contract.hpp"
 #include "SmartContract/scHelper.hpp"
 
