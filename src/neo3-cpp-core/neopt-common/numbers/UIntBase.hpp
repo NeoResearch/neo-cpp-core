@@ -50,7 +50,10 @@ protected:
    UIntBase(int bytes, vbyte value)
    {
       if (value.size() != (unsigned)bytes)
+      {
+         std::cerr << "expected size=" << bytes << " and got " << value.size() << std::endl; 
          NEOPT_EXCEPTION("ArgumentException"); //throw new ArgumentException(); // TODO: throw or NOT? exceptions are not good for performance...
+      }
       this->data_bytes = value;                // receiving value (use move semantics?)
    }
 
