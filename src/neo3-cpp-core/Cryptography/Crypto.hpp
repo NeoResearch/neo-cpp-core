@@ -13,7 +13,7 @@ namespace Cryptography {
 //
 namespace Crypto {
 
-using Neo::Cryptography::cHelper;
+using namespace Neo::Cryptography::cHelper;
 
 static vbyte
 Hash160(const vbyte& message)

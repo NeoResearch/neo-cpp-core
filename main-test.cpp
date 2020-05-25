@@ -13,6 +13,8 @@
 #include <csbiginteger-cpp/src/csBigIntegerLibClass.hpp>
 using BigInteger = csbigintegerlib::BigInteger;
 
+#include <neo3-cpp-core/Cryptography/Crypto.hpp>
+
 //using namespace std;
 
 using namespace Neo::VM;
