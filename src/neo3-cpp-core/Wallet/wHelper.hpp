@@ -1,6 +1,29 @@
 #pragma once 
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
+#include <neo3-cpp-core/ProtocolSettings.hpp>
+
+namespace Neo {
+//
+namespace Wallet {
+//
+namespace wHelper {
+
+static string
+ToAddress(const ProtocolSettings& settings, const UInt160& scriptHash)
+{
+      vbyte data(21);
+      data[0] = settings.AddressVersion;
+      neopt::Buffer::BlockCopy(scriptHash.ToArray(), 0, data, 1, 20);
+      return Neo::Cryptography::Base58::Base58CheckEncode(data);
+}
+
+} // namespace wHelper
+//
+} // namespace Wallet
+//
+} // namespace Neo
+  //
 
 // Wallet Helper: whelper
 
