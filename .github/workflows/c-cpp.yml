@@ -7,15 +7,36 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  
+  testEmscripten:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: make vendor
-      run: make vendor
+    - uses: docker://trzeci/emscripten:latest     
+
+    - name: make vendor_js
+      run: make vendor_js
+        
+    - name: Make using emscripten image
+      run: docker run -v $(pwd):/src trzeci/emscripten make js
+
+    - name: Make runjs
+      run: make runjs
+
+  testC:
+    
+    runs-on: ubuntu-latest    
+    
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: make vendor_cpp
+      run: make vendor_cpp
+      
     - name: make
       run: make
+      
     - name: make test
       run: make test
