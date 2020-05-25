@@ -3,6 +3,11 @@
 #include <csbiginteger-cpp/src/csBigIntegerLibClass.hpp>
 using BigInteger = csbigintegerlib::BigInteger;
 
+#include <neo3-cpp-core/neopt-common/system/shelper.h>
+#include <neo3-cpp-core/neopt-common/system/vhelper.hpp>
+
+#include <neo3-cpp-core/neopt-common/system/StringBuilder.hpp>
+
 //using System;
 //using System.Linq;
 //using System.Numerics;
@@ -74,17 +79,25 @@ public:
       BigInteger bi = BigInteger::Zero;
       for (int i = 0; i < input.size(); i++) {
          //int digit = Alphabet.IndexOf(input[i]);
-         string::size_type digit = Alphabet.find(input[i], 0);
-         if (digit == string::npos) {
+         std::string::size_type digit = Alphabet.find(input[i], 0);
+         if (digit == std::string::npos) {
             //throw new FormatException($ "Invalid Base58 character '{input[i]}' at position {i}");
             NEOPT_EXCEPTION("Invalid Base58 Char");
          }
-         bi = BigInteger{ bi * Alphabet.size() + digit };
+         BigInteger calc{ bi * Alphabet.size() + digit };
+         //
+         bi = BigInteger{ calc };
       }
 
       // Encode BigInteger to byte[]
       // Leading zero bytes get encoded as leading `1` characters
-      int leadingZeroCount = input.TakeWhile(c = > c == Alphabet[0]).Count();
+      //int leadingZeroCount = input. TakeWhile(c => c == Alphabet[0]).Count();
+      int leadingZeroCount = neopt::shelper::TakeWhile(
+                               input,
+                               [](char c) -> bool {
+                                  return c == Alphabet[0];
+                               })
+                               .size();
       vbyte leadingZeros(leadingZeroCount, 0);
       if (bi.IsZero())
          return leadingZeros;
@@ -100,15 +113,17 @@ public:
       BigInteger value(input, true, true);
 
       // Encode BigInteger to Base58 string
-      StringBuilder sb; // = new StringBuilder();
+      neopt::StringBuilder sb; // = new StringBuilder();
 
       while (value > 0) {
-         value = BigInteger.DivRem(value, Alphabet.size(), out var remainder);
-         sb.Insert(0, Alphabet[(int)remainder]);
+         BigInteger remainder; // out variable
+         BigInteger asize{ (int)Alphabet.size() };
+         value = BigInteger::DivRem(value, asize, remainder);
+         sb.Insert(0, Alphabet[(int)remainder.toInt()]);
       }
 
       // Append `1` for each leading 0 byte
-      for (int i = 0; i < input.Length && input[i] == 0; i++) {
+      for (int i = 0; i < input.size() && input[i] == 0; i++) {
          sb.Insert(0, Alphabet[0]);
       }
       return sb.ToString();

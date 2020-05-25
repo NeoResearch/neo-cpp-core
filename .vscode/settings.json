@@ -15,7 +15,8 @@
         "**/.disabled": true,
         "libs/libcrypton/libopenssl/**" : true,
         "libs/libcrypton/thirdparty/**" : true,
-        "libs/csbiginteger-cpp/src/*.cpp" : true
+        "libs/csbiginteger-cpp/src/*.cpp" : true,
+        "libs/csbiginteger-cpp/src/dotnet/**" : true
     },
     "files.associations": {
         "type_traits": "cpp",

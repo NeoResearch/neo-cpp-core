@@ -5,12 +5,13 @@
 
 // system
 #include <algorithm>
+#include <functional>
 #include <sstream>
 #include <vector>
 
 // neo core
-#include "types.h"
 #include "../system/BinaryReader.hpp"
+#include "types.h"
 
 using namespace std; // TODO: avoid!
 
@@ -64,6 +65,18 @@ public:
       return ss.str();
    }
 
+   static string TakeWhile(string s, std::function<bool(char)> f)
+   {
+      std::string str;
+      for (unsigned i = 0; i < s.size(); i++)
+         if (f(s[i]))
+            return str;
+         else {
+            char c = s[i];
+            str += (c);
+         }
+      return str;
+   }
 };
 
 // TODO: define all operators here that are necessary

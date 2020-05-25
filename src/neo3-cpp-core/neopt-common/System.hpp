@@ -9,6 +9,7 @@
 #include "system/IComparable.h"
 #include "system/IEquatable.h"
 #include "system/ISerializable.h"
+#include "system/shelper.h"
 #include "system/vhelper.hpp"
 
 using neopt::byte;
