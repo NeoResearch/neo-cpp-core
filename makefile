@@ -55,20 +55,19 @@ BN_JS=./libs/lib/node_modules/bn.js/lib/bn.js
 
 NEO3_SRC=./src/
 
-jstest: ./jstest.cpp
+js: ./jstest.cpp
 	mkdir -p build/
 	@echo "We need Emscripten to proceed (tested with 1.39.16)"
 	echo 
 	em++ --version
 	@echo " ==== Compiling 'jstest.cpp' into './build/librarytest.js' ====== "
 	em++ -Ilibs/ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library src/libcore-js/libcore_exports.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"' -s ASSERTIONS=1
+
+run_js:
 	@echo
 	@echo "======= testing 'node_test.js' ======="
 	@echo
-	nodejs node_test.js
-
-run:
-	nodejs build/test.js
+	node node_test.js
 
 
 test:
