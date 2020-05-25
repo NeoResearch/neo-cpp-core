@@ -23,6 +23,7 @@ ToScriptHash(string address)
 {
       vbyte data = Neo::Cryptography::Base58::Base58CheckDecode(address);
       neopt::byte version = {0x35};
+      std::cout << "DataSize after Decode is " << data.size() << std::endl;
       if (data.size() != 21)
          NEOPT_EXCEPTION("Data to be converted problem");
       if (data[0] != version ) // TODO fix to static Default from Protocol Settings

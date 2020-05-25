@@ -49,7 +49,7 @@ public:
       var ret = buffer[..^ 4];
       Array.Clear(buffer, 0, buffer.Length);
       */
-      vbyte ret(buffer.begin(), buffer.begin() + 4); // TODO: verify
+      vbyte ret(buffer.begin(), buffer.begin() + buffer.size() - 4); // TODO: verify
       return ret;
    }
 
