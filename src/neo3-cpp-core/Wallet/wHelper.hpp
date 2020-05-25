@@ -18,6 +18,20 @@ ToAddress(const ProtocolSettings& settings, const UInt160& scriptHash)
       return Neo::Cryptography::Base58::Base58CheckEncode(data);
 }
 
+static UInt160
+ToScriptHash(string address)
+{
+      vbyte data = Neo::Cryptography::Base58::Base58CheckDecode(address);
+      neopt::byte version = {0x35};
+      if (data.size() != 21)
+         NEOPT_EXCEPTION("Data to be converted problem");
+      if (data[0] != version ) // TODO fix to static Default from Protocol Settings
+         NEOPT_EXCEPTION("Address Version Problem");
+      // data.AsSpan(1)
+      vbyte dataCut(data.begin()+1,data.end());    
+      return UInt160(dataCut);
+}
+
 } // namespace wHelper
 //
 } // namespace Wallet
