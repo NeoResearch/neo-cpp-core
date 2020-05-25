@@ -59,6 +59,7 @@ main()
    //  Address: NSh6STZ6K4jUVDNZHwYSLc4ViuEm9Q1JtU
    //  PublicKey: 02cc52682ea36700b93dce82823fd88647f6056af36cce2f6ee14c572277ef30ca
    // scripthash: 0x0eec9e10f6491c39f3e8dbc8af7186282487594a
+   // L1TKE6hbWSMaBESkZJ3PPbQHkHN8DdSRa7F82konNAf3ejhgMpD9
 
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
    std::cout << "point (JSON): " << ECPoint::API_ToJsonStr(ecp) << std::endl;
