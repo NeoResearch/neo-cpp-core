@@ -216,16 +216,16 @@ cpp_Contract_CreateSignatureRedeemScript_XY2(std::map<bool, vbyte> point)
 // these methods are provided to the external world (for nodejs, for example)
 EMSCRIPTEN_BINDINGS(my_module)
 {
-   emscripten::register_vector<unsigned char>("vector<unsigned char>");
-   emscripten::register_map<bool, int>("map<bool, int>");
-   emscripten::register_map<bool, vbyte>("map<int, vector<unsigned char>>");
-   emscripten::register_map<std::string, vbyte>("map<string, vector<unsigned char>>");
+   //emscripten::register_vector<unsigned char>("vector<unsigned char>");
+   //emscripten::register_map<bool, int>("map<bool, int>");
+   //emscripten::register_map<bool, vbyte>("map<int, vector<unsigned char>>");
+   //emscripten::register_map<std::string, vbyte>("map<string, vector<unsigned char>>");
 
-   emscripten::function("my_cpp_teststr", &my_cpp_teststr);
+   //emscripten::function("my_cpp_teststr", &my_cpp_teststr);
 
-   emscripten::function("cpp_bignum_add", &cpp_bignum_add);
+   //emscripten::function("cpp_bignum_add", &cpp_bignum_add);
 
-   emscripten::function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
+   //emscripten::function("cpp_Util_GenerateVectorByte", &cpp_Util_GenerateVectorByte);
 
    //emscripten::function("cpp_Contract_CreateSignatureRedeemScript_Fake", &cpp_Contract_CreateSignatureRedeemScript_Fake);
    //emscripten::function("cpp_Contract_CreateSignatureRedeemScript_XY", &cpp_Contract_CreateSignatureRedeemScript_XY);

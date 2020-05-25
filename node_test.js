@@ -16,6 +16,7 @@ let csBN = lt_csbn.csBigInteger;
 
 function testMain() {
     console.log(" ======== testMain() ====== ");
+    /*
     lNeo3._mytest(5);
     console.log("");
     console.log(" ------- will test string ---- ");
@@ -34,7 +35,7 @@ function testMain() {
     var x = new csBN(1000);
     console.log(x.toByteArray());
     console.log(" ======= end testing csBigInteger.js ======= ");
-
+    */
     // =============
     console.log("");
     console.log("experimenting with ECPoint");
