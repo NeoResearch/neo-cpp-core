@@ -66,5 +66,8 @@ run:
 	nodejs build/test.js
 
 
+test:
+	cd tests && make test
+
 clean: 
 	rm -f build/*
