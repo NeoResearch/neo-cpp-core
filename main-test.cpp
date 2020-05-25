@@ -75,6 +75,10 @@ main()
       std::cout << ((unsigned int)i) << " ";
    std::cout << std::endl;
 
+   UInt160 script_hash = Neo::SmartContract::scHelper::ToScriptHash(vscript);
+
+   std::cout << script_hash.ToString() << std::endl;
+
    std::cout
      << "Finished successfully" << std::endl;
    return 0;
