@@ -28,6 +28,15 @@ Sha256(vbyte input)
    return vout;
 }
 
+static vbyte
+Ripemd160(vbyte input)
+{
+   vbyte vout(32, 0);
+   external_ripemd160(input.data(), input.size(), vout.data(), vout.size());
+   // TODO: verify 'used' bytes
+   return vout;
+}
+
 } // namespace cHelper
 //
 } // namespace SmartContract

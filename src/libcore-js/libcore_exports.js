@@ -182,6 +182,46 @@ mergeInto(
 
     //console.log("WARNING: EMPTY FUNCTION 'external_sha256' on licore_exports.js");
     return vout.length;
+  },
+  external_ripemd160: function (ptr1, sz1, ptr_out, sz_out) {
+    let CryptoJS = Module['CryptoJS'];
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    //
+    // helper function
+    const toHexString = bytes =>
+      bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+    //
+    //console.log("SHA256 v1 = "+v1);
+    //
+    var hexv1 = toHexString(v1);
+    //
+    //console.log("SHA256 hexv1 = "+hexv1);
+    //
+    var hexEnc1 = CryptoJS.enc.Hex.parse(hexv1);
+    //
+    //console.log("SHA256 hexEnc1 = "+hexEnc1);
+    //
+    var outEnc1 = CryptoJS.Ripemd160(hexEnc1);
+    //
+    //console.log("SHA256 outEnc1 = "+outEnc1);
+    //
+    // MAYBE THIS IS USEFUL ON WEB PLATFORMS (NON-NODE)
+    const fromHexString = hexString =>
+      new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    //
+    var hex_out = CryptoJS.enc.Hex.stringify(outEnc1);
+    //
+    var vout = Uint8Array.from(Buffer.from(hex_out, 'hex'));
+    //var vout = fromHexString(outEnc1);
+    //
+    //console.log("SHA256 vout = "+vout);
+    Module.HEAPU8.set(vout, ptr_out); // TODO: test 'sz_out' for size checks
+
+    //var v2 = Module.HEAPU8.subarray(ptr2, ptr2+sz2);
+
+    //console.log("WARNING: EMPTY FUNCTION 'external_sha256' on licore_exports.js");
+    return vout.length;
   }
 }
 );
