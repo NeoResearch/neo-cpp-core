@@ -109,8 +109,12 @@ public:
    //static string Encode(ReadOnlySpan<byte> input)
    static std::string Encode(const vbyte& input)
    {
+      std::cout << "Base58::Encode " << neopt::vhelper::ToHexString(input) << std::endl;
       // Decode byte[] to BigInteger
       BigInteger value(input, true, true);
+
+      std::cout << "value=" << value.ToString(16) << std::endl;
+      std::cout << "value=" << value.ToString(10) << std::endl;
 
       // Encode BigInteger to Base58 string
       neopt::StringBuilder sb; // = new StringBuilder();
@@ -120,6 +124,7 @@ public:
          BigInteger asize{ (int)Alphabet.size() };
          value = BigInteger::DivRem(value, asize, remainder);
          sb.Insert(0, Alphabet[(int)remainder.toInt()]);
+         std::cout << "adding char " << Alphabet[(int)remainder.toInt()] << std::endl;
       }
 
       // Append `1` for each leading 0 byte

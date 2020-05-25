@@ -79,6 +79,9 @@ main()
 
    std::cout << script_hash.ToString() << std::endl;
 
+   std::cout << "Base58:" << std::endl;
+   std::cout << Neo::Cryptography::Base58::Encode(script_hash.ToArray()) << std::endl;
+
    std::cout
      << "Finished successfully" << std::endl;
    return 0;
