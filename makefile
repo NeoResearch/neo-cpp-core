@@ -67,7 +67,7 @@ run:
 
 
 test:
-	cd tests && make test
+	cd tests && make
 
 clean: 
 	rm -f build/*

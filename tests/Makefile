@@ -59,6 +59,7 @@ deps:
 
 # cleaning tests
 clean:
+	mkdir -p build/
 	rm -f *.test
 	rm -f *_test
 	rm -f *.gcda
