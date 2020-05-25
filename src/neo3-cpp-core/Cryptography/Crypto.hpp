@@ -4,7 +4,6 @@
 //using System.Numerics;
 //using System.Security.Cryptography;
 
-// TODO: add Base58 here!
 //#include "Base58.hpp"
 //
 #include "cHelper.hpp"

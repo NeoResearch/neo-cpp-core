@@ -4,6 +4,8 @@
 
 //#include "Base58.hpp"
 
+#define CREATED_CHELPER
+
 namespace Neo {
 //
 namespace Cryptography {

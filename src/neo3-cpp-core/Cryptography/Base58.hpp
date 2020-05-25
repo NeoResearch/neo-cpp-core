@@ -9,13 +9,17 @@ using BigInteger = csbigintegerlib::BigInteger;
 //using System.Text;
 //using static Neo.Helper;
 
+//#ifdef CREATED_CHELPER
+//#error Should include Base58 BEFORE than cHelper
+//#endif
+
 #include "cHelper.hpp"
 
 namespace Neo {
 //
 namespace Cryptography {
 //
-using namespace Neo::Cryptography::cHelper;
+//using namespace Neo::Cryptography::cHelper;
 //
 class Base58
 {
@@ -32,7 +36,7 @@ public:
          //throw new FormatException();
          NEOPT_EXCEPTION("Format Exception");
       }
-      vbyte checksum = Sha256(Sha256(buffer, 0, buffer.size() - 4));
+      vbyte checksum = cHelper::Sha256(cHelper::Sha256(buffer, 0, buffer.size() - 4));
       // TODO: perform CHECKSUM
       /*
       if (!buffer.AsSpan(^4).SequenceEqual(checksum.AsSpan(..4)))
@@ -48,7 +52,7 @@ public:
    //static string Base58CheckEncode(this ReadOnlySpan<byte> data)
    static std::string Base58CheckEncode(const vbyte& data)
    {
-      vbyte checksum = Sha256(Sha256(data));
+      vbyte checksum = cHelper::Sha256(cHelper::Sha256(data));
       //Span<byte> buffer = stackalloc byte[data.Length + 4];
       vbyte buffer(data.size() + 4);
       //data.CopyTo(buffer);
@@ -75,7 +79,7 @@ public:
             //throw new FormatException($ "Invalid Base58 character '{input[i]}' at position {i}");
             NEOPT_EXCEPTION("Invalid Base58 Char");
          }
-         bi = BigInteger{bi * Alphabet.size() + digit};
+         bi = BigInteger{ bi * Alphabet.size() + digit };
       }
 
       // Encode BigInteger to byte[]

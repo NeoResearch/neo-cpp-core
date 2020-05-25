@@ -12,9 +12,8 @@ using vbyte = neopt::vbyte;
 // --------------------------------
 // load ECC "internal" classes
 //
-#include "Cryptography/ECC/ECC.hpp"
-#include "Cryptography/cHelper.hpp"
-#include "Cryptography/cHelper.hpp"
+#include "Cryptography/Cryptography.hpp"
+//
 #include "SmartContract/Contract.hpp"
 #include "SmartContract/scHelper.hpp"
 

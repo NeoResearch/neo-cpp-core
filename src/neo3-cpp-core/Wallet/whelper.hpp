@@ -1,8 +1,10 @@
-#ifndef WHELPER_HPP
-#define WHELPER_HPP
+#pragma once 
+
+#include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 
 // Wallet Helper: whelper
 
+/*
 // system
 #include <limits>
 #include <sstream>
@@ -48,3 +50,4 @@ public:
 }
 
 #endif
+*/
