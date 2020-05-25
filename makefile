@@ -11,13 +11,13 @@ run:
 	./build/app_main
 
 
-vendor: update_submodules vendor_js vendor_cpp  #get_bn-js already provided
+vendor: vendor_js vendor_cpp  #get_bn-js already provided
 	@echo "Finished 'make vendor' successfully"
 
-vendor_js: 
+vendor_js: update_submodules
 	# empty
 
-vendor_cpp: get_libcrypton get_csbiginteger
+vendor_cpp: update_submodules get_libcrypton get_csbiginteger
 
 get_bn-js:
 	npm install bn.js --prefix libs/ -g
