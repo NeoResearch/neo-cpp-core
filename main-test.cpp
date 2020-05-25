@@ -54,10 +54,11 @@ main()
    vbyte vx_32(32, 8); // little-endian value
    vbyte vy_32(32, 9); // little-endian value
 
-   ECFieldElement X{ BigInteger{ "43563478194357645732161043749214420341576583724275881899443933055754116882936", 10 }, *ECCurve::Secp256r1 };
-   ECFieldElement Y{ BigInteger{ "6800198406926458502571476951697947402787919362010374841430910815761615021861", 10 }, *ECCurve::Secp256r1 };
-   //expected publicKey.EncodePoint(true) { 3, 96, 80, 14, 12, 163, 115, 233, 65, 231, 174, 155, 203, 149, 91, 129, 86, 126, 183, 82, 81, 220, 101, 149, 154, 212, 175, 97, 250, 138, 177, 97, 248, }
-   //expected verification { 12, 33, 3, 96, 80, 14, 12, 163, 115, 233, 65, 231, 174, 155, 203, 149, 91, 129, 86, 126, 183, 82, 81, 220, 101, 149, 154, 212, 175, 97, 250, 138, 177, 97, 248, 11, 65, 138, 107, 30, 117, }
+   ECFieldElement X{ BigInteger{ "92417421609284060097852441734141491128266387380656748836951019715045385777354", 10 }, *ECCurve::Secp256r1 };
+   ECFieldElement Y{ BigInteger{ "81306213973968698003399946097148256829885864908442466985789085263601870844340", 10 }, *ECCurve::Secp256r1 };
+   //  Address: NSh6STZ6K4jUVDNZHwYSLc4ViuEm9Q1JtU
+   //  PublicKey: 02cc52682ea36700b93dce82823fd88647f6056af36cce2f6ee14c572277ef30ca
+   // scripthash: 0x0eec9e10f6491c39f3e8dbc8af7186282487594a
 
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
    std::cout << "point (JSON): " << ECPoint::API_ToJsonStr(ecp) << std::endl;
