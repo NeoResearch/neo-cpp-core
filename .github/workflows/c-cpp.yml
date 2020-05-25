@@ -22,8 +22,8 @@ jobs:
     - name: Make using emscripten image
       run: docker run -v $(pwd):/src trzeci/emscripten make js
 
-    - name: Make runjs
-      run: make runjs
+    - name: Make run_js
+      run: make run_js
 
   testC:
     
