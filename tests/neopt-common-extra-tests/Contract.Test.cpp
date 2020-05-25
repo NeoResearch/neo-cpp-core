@@ -22,7 +22,7 @@
 using BigInteger = csbigintegerlib::BigInteger;
 
 using namespace std;
-using namespace neopt;
+using namespace Neo::SmartContract;
 
 TEST_CASE("neopt extra tests - Contract CreateSignatureRedeemScript from BigIntenger - I")
 {
@@ -31,5 +31,5 @@ TEST_CASE("neopt extra tests - Contract CreateSignatureRedeemScript from BigInte
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
    vbyte vscript = Contract::CreateSignatureRedeemScript(ecp);
    vbyte expectedVerification = { 12, 33, 3, 96, 80, 14, 12, 163, 115, 233, 65, 231, 174, 155, 203, 149, 91, 129, 86, 126, 183, 82, 81, 220, 101, 149, 154, 212, 175, 97, 250, 138, 177, 97, 248, 11, 65, 138, 107, 30, 117 };
-   REQUIRE(vbyte == vbyte);
+   REQUIRE(vscript == expectedVerification);
 }
