@@ -18,7 +18,7 @@
 namespace Neo {
 
 namespace SmartContract {
-   
+
 class InteropDescriptor
 {
 public:
@@ -68,7 +68,7 @@ public:
    //InteropDescriptor(std::string method, const std::function<bool(ApplicationEngine&)>& handler, long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
    InteropDescriptor(std::string method, bool (*handler)(ApplicationEngine&), long fixedPrice, TriggerType allowedTriggers, CallFlags requiredCallFlags)
      : Method{ method }
-     , Hash{ BitConverter::ToUInt32(cHelper::Sha256(neopt::Encoding::ASCII::GetBytes(method)), 0) }
+     , Hash{ BitConverter::ToUInt32(Neo::Cryptography::cHelper::Sha256(neopt::Encoding::ASCII::GetBytes(method)), 0) }
      , Handler{ handler }
      , FixedPrice{ fixedPrice }
      , AllowedTriggers(allowedTriggers)
