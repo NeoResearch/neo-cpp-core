@@ -3,6 +3,8 @@ ROOT_PATH=..
 SRC_PATH=../src
 LIBS_PATH=../libs
 
+OPENSSL_PATH=../libs/libcrypton/build/openssl
+
 all: test
 	@echo "Executing tests"
 	./build/neopt-extra_test -d yes
@@ -11,7 +13,7 @@ test: clean neopt-extra_test
 	
 
 neopt-extra_test : neopt-extra.Test.cpp
-	g++ --coverage -g -O0 -fconcepts -fmax-errors=5 -std=c++17 -I$(SRC_PATH) -I$(LIBS_PATH) -DCATCH_CONFIG_MAIN $< -o ./build/$@   
+	g++ --coverage -L../libs/csbiginteger-cpp/lib  ../libs/libcrypton/src/CryptoNeoOpenSSL.cpp -I../libs/ -I../libs/libcrypton/src ../src/neo3-cpp-core/ExternalCrypto.cpp -I$(OPENSSL_PATH)/include -L$(OPENSSL_PATH)  -g -O0 -fconcepts -fmax-errors=5 -std=c++17 -I$(SRC_PATH) -I$(LIBS_PATH) -DCATCH_CONFIG_MAIN $< -o ./build/$@   -lcsbiginteger -lgmp -lgmpxx           -llinux-openssl-crypto-x86_64 -lpthread -ldl 
 
 
 test-install:
