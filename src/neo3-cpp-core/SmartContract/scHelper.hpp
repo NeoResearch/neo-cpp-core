@@ -12,7 +12,11 @@ using System.Buffers.Binary;
 using System.Collections.Generic;
 */
 
+#include <neo3-cpp-core/neopt-common/numbers/UInt160.hpp>
+using UInt160 = neopt::UInt160;
+
 #include <neo3-cpp-core/Cryptography/cHelper.hpp>
+#include <neo3-cpp-core/Cryptography/Crypto.hpp>
 
 namespace Neo {
 //

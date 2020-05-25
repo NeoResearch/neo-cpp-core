@@ -19,7 +19,7 @@ namespace neopt {
 /// Only basic comparison/serialization are proposed for these classes. For arithmetic purposes, use BigInteger class.
 /// </summary>
 class UIntBase : public IEquatable<UIntBase>
-  , public ISerializable //, public IObject (TODO: add only if very necessary)
+  //, public ISerializable //, public IObject (TODO: add only if very necessary)
 {
 protected: // TODO: make private?
    /// <summary>
