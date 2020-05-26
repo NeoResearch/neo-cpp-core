@@ -240,25 +240,28 @@ public
    {
       return Equals(obj as ECPoint);
    }
-
-public
-   static ECPoint FromBytes(byte[] pubkey, ECCurve curve)
+*/
+public:
+   static ECPoint FromBytes(vbyte pubkey, ECCurve curve)
    {
-      switch (pubkey.Length) {
+      switch (pubkey.size()) {
          case 33:
          case 65:
             return DecodePoint(pubkey, curve);
          case 64:
          case 72:
-            return DecodePoint(Concat(new byte[]{ 0x04 }, pubkey[^64..]), curve);
+            return DecodePoint(pubkey, curve); // TODO
+            //return DecodePoint(Concat(new byte[]{ 0x04 }, pubkey[^64..]), curve);
          case 96:
          case 104:
-            return DecodePoint(Concat(new byte[]{ 0x04 }, pubkey[^96.. ^ 32]), curve);
+             return DecodePoint(pubkey, curve); // TODO
+            //return DecodePoint(Concat(new byte[]{ 0x04 }, pubkey[^96.. ^ 32]), curve);
          default:
-            throw new FormatException();
+            NEOPT_EXCEPTION("Format Exception");
       }
    }
 
+/*
 public
    override int GetHashCode()
    {

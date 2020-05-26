@@ -83,11 +83,11 @@ main()
 
    const Neo::ProtocolSettings ps;
    std::cout << "Base58:" << std::endl;
-   string address = Neo::Wallet::wHelper::ToAddress(ps, script_hash);
+   string address = Neo::Wallets::wHelper::ToAddress(ps, script_hash);
    std::cout << address << std::endl;
 
    std::cout << "ScriptHash back from Base58:" << std::endl;
-   UInt160 script_hash_2 = Neo::Wallet::wHelper::ToScriptHash(address);
+   UInt160 script_hash_2 = Neo::Wallets::wHelper::ToScriptHash(address);
    std::cout << script_hash_2.ToString() << std::endl;
 
    std::cout << "Encode from Base58:" << std::endl;

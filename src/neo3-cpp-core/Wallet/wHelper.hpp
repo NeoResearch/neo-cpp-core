@@ -5,7 +5,7 @@
 
 namespace Neo {
 //
-namespace Wallet {
+namespace Wallets {
 //
 namespace wHelper {
 
