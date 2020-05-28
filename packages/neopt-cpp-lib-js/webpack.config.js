@@ -17,11 +17,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /neopt-raw-lib\.js$/,
+        test: /neopt_raw_lib\.js$/,
         loader: "exports-loader"
       },
       {
-        test: /neopt-raw-lib\.wasm$/,
+        test: /neopt_raw_lib\.wasm$/,
         type: "javascript/auto",
         loader: "file-loader",
         options: {

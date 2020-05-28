@@ -1,6 +1,6 @@
 //
-import ourtest from '../build/neopt-raw-lib.js';
-import ourtestWasm from '../build/neopt-raw-lib.wasm';
+import ourtest from '../build/neopt_raw_lib.js';
+import ourtestWasm from '../build/neopt_raw_lib.wasm';
 
 //
 export const mymodule = ourtest({

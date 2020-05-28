@@ -1,5 +1,5 @@
 {
-  "name": "neopt-cpp-lib",
+  "name": "neopt_cpp_lib",
   "scripts": {
     "build:emscripten": "./compile.sh",
     "build:bundle": "webpack",
