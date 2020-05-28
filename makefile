@@ -41,33 +41,31 @@ get_csbiginteger:
 
 
 GCC_FLAGS = -g -O3 -Wall --std=c++17 -fno-exceptions
-EMCC_FLAGS = -g -O3 -Wall -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 --std=c++17
 OPENMP_FLAGS = #-fopenmp -lpthread
 
-#-s DISABLE_EXCEPTION_CATCHING=0
-# -s ALLOW_MEMORY_GROWTH=1
-#EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_main']"
-EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString', 'stringToUTF8', 'writeStringToMemory', 'getValue', 'setValue']"
 ####PATH_EMCC = "em++"
 RESTSDK_FGLAS = #-lboost_system -lcrypto -lssl -lcpprest
 
-BN_JS=./libs/lib/node_modules/bn.js/lib/bn.js
-
 NEO3_SRC=./src/
 
-js: ./jstest.cpp
-	mkdir -p build/
-	@echo "We need Emscripten to proceed (tested with 1.39.16)"
-	echo 
-	em++ --version
-	@echo " ==== Compiling 'jstest.cpp' into './build/librarytest.js' ====== "
-	em++ -Ilibs/ --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library src/libcore-js/libcore_exports.js --js-library $(BN_JS) -o ./build/librarytest.js # -s MODULARIZE=1 -s 'EXPORT_NAME="Neo3CPP"' -s ASSERTIONS=1
+js:
+	cd tests/node_tests && make js
+#js: ./tests/node_tests/jstest.cpp
+#	mkdir -p build/
+#	@echo "We need Emscripten to proceed (tested with 1.39.16)"
+#	echo 
+#	em++ --version
+#	@echo " ==== Compiling 'jstest.cpp' into './build/librarytest.js' ====== "
+#	em++ -Ilibs/ -Ipackages/ --pre-js ./packages/neopt-cpp-lib-js/src/prefix-node-require.js --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./tests/node_tests/jstest.cpp -I$(NEO3_SRC) --js-library ./packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js -o ./build/librarytest.js  -s 'EXPORT_NAME="Neo3CppLib"' # -s MODULARIZE=1 -s ASSERTIONS=1
 
 run_js:
-	@echo
-	@echo "======= testing 'node_test.js' ======="
-	@echo
-	node node_test.js
+	cd tests/node_tests && make run_js
+
+#run_js:
+#	@echo
+#	@echo "======= testing 'node_test.js' ======="
+#	@echo
+#	node ./tests/node_tests/node_test.js
 
 
 test:
