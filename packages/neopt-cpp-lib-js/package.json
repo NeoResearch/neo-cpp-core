@@ -1,0 +1,21 @@
+{
+  "name": "neopt-cpp-lib",
+  "scripts": {
+    "build:emscripten": "./compile.sh",
+    "build:bundle": "webpack",
+    "build": "npm run build:emscripten && npm run build:bundle",
+    "serve": "http-server",
+    "start": "npm run build && npm run serve"
+  },
+  "devDependencies": {
+    "exports-loader": "^0.7.0",
+    "file-loader": "^1.1.11",
+    "http-server": "^0.11.1",
+    "webpack": "^4.8.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "crypto-js": "",
+    "csbiginteger": ""
+  }
+}
