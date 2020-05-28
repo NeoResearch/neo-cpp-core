@@ -8,7 +8,7 @@ on:
 
 jobs:
   
-  testEmscripten:
+  testEmscriptenNode:
 
     runs-on: ubuntu-latest
 
@@ -24,6 +24,15 @@ jobs:
 
     - name: Make run_js
       run: make run_js
+
+  testEmscriptenWeb:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: npm run build
+      working-directory: ./packages/neopt-cpp-lib-js/
+      run: npm run build
 
   testC:
     
