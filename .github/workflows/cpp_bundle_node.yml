@@ -51,7 +51,7 @@ jobs:
       run: cd ./packages/neopt-cpp-lib-js/ && nohup npm serve &
 
     - name: run install for test
-      run: cd ./packages/neopt-cpp-lib-js/tests && npm install
+      run: cd ./packages/neopt-cpp-lib-js/tests && npm run install
     
     - name: run bundle test on server
       run: cd ./packages/neopt-cpp-lib-js/tests && npm test
