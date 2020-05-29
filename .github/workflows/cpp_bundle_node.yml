@@ -48,13 +48,13 @@ jobs:
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
 
     - name: run npm start for starting an express server
-      run: npm start
+      run: cd ./packages/neopt-cpp-lib-js/ && npm start
 
     - name: run install for test
-      run: npm install
+      run: cd ./packages/neopt-cpp-lib-js/tests && npm install
     
     - name: run bundle test on server
-      run: npm test
+      run: cd ./packages/neopt-cpp-lib-js/tests && npm test
 
   testC:
     
