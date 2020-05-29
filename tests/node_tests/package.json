@@ -1,0 +1,11 @@
+{
+  "name": "jstest-on-neo3-cpp-core",
+  "main": "node_test.js",
+  "devDependencies": {
+    "crypto-js": "",
+    "csbiginteger": "file:../../libs/csbiginteger-js"
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0"
+  }
+}
