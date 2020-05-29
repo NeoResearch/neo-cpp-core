@@ -48,10 +48,10 @@ jobs:
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
 
     - name: run npm start for starting an express server with nohup
-      run: cd ./packages/neopt-cpp-lib-js/ && nohup npm serve &
+      run: cd ./packages/neopt-cpp-lib-js/ && nohup npm run serve &
 
     - name: run install for test
-      run: cd ./packages/neopt-cpp-lib-js/tests && npm run install
+      run: cd ./packages/neopt-cpp-lib-js/tests && npm install
     
     - name: run bundle test on server
       run: cd ./packages/neopt-cpp-lib-js/tests && npm test
