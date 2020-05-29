@@ -11,7 +11,7 @@ MAIN_CPP=./packages/neopt-cpp-lib-js/src/neopt_raw_lib.cpp
 OUTPUT_FILE=./packages/neopt-cpp-lib-js/build/neopt_raw_lib.js
 
 # note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src
-EMCC_SOURCE_DOCKER=docker run --rm -v $(pwd)/../../:/src trzeci/emscripten em++
+EMCC_SOURCE_DOCKER=docker run --rm -v $(PWD)/../../:/src trzeci/emscripten em++
 
 compile:
 	@echo
