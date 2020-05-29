@@ -47,8 +47,8 @@ jobs:
     - run: cd ./packages/neopt-cpp-lib-js/ && npm install    
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
 
-    - name: run npm start for starting an express server
-      run: cd ./packages/neopt-cpp-lib-js/ && screen -L -dmS http-server npm serve
+    - name: run npm start for starting an express server with nohup
+      run: cd ./packages/neopt-cpp-lib-js/ && nohup npm serve &
 
     - name: run install for test
       run: cd ./packages/neopt-cpp-lib-js/tests && npm install
