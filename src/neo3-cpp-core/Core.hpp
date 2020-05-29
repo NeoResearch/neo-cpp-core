@@ -20,6 +20,7 @@ using vbyte = neopt::vbyte;
 #include "SmartContract/scHelper.hpp"
 
 #include "Wallets/wHelper.hpp"
+#include "Wallets/WalletAccount.hpp"
 
 //
 //

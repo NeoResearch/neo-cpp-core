@@ -10,10 +10,10 @@ namespace Wallets {
 namespace wHelper {
 
 static string
-ToAddress(const ProtocolSettings& settings, const UInt160& scriptHash)
+ToAddress(const UInt160& scriptHash)
 {
       vbyte data(21);
-      data[0] = settings.AddressVersion;
+      data[0] = ProtocolSettings::Default->AddressVersion;//settings.AddressVersion;
       neopt::Buffer::BlockCopy(scriptHash.ToArray(), 0, data, 1, 20);
       return Neo::Cryptography::Base58::Base58CheckEncode(data);
 }

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 using Neo.Cryptography;
 using Neo.Cryptography.ECC;
