@@ -34,11 +34,14 @@ jobs:
         node-version: [12.x]
     
     steps:
-    - uses: actions/checkout@v2 
+    - uses: actions/checkout@v2
+    - uses: docker://trzeci/emscripten:latest
+      
     - name: npm run build
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    
     - run: cd ./packages/neopt-cpp-lib-js/ && npm install
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
 
