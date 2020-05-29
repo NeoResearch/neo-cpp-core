@@ -36,6 +36,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: docker://trzeci/emscripten:latest
+
+    - name: make vendor_js
+      run: make vendor_js
       
     - name: npm run build
       uses: actions/setup-node@v1
