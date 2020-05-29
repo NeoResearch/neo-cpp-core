@@ -1,8 +1,4 @@
 EXPORT_NAME='EXPORT_NAME="neopt_raw_lib"'
-
-# note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src
-$EMCC_SOURCE_DOCKER=docker run --rm -v $(pwd)/../../:/src trzeci/emscripten em++
-
 PRE_NODE_LOAD=./packages/neopt-cpp-lib-js/src/prefix-node-require.js
 EXTRA_EXPORTED=EXTRA_EXPORTED_RUNTIME_METHODS='["ccall",  "cwrap", "UTF8ToString", "stringToUTF8"]'
 LIB_JS_TO_BIND=../../packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
@@ -11,6 +7,9 @@ LIBS=./libs/
 LIBS_JS_BUNDLE=./packages/neopt-cpp-lib-js/src/
 MAIN_CPP=./packages/neopt-cpp-lib-js/src/neopt_raw_lib.cpp
 EXTRA_PARAMS=--std=c++17 -g -O3 -Wall -s WASM=1 -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1
+
+# note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src
+EMCC_SOURCE_DOCKER=docker run --rm -v $(pwd)/../../:/src trzeci/emscripten em++
 
 compile:
 	@echo
