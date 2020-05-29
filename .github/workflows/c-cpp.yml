@@ -29,10 +29,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
     steps:
     - name: npm run build
-      working-directory: ./packages/neopt-cpp-lib-js/
-      run: npm run build
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - working-directory: ./packages/neopt-cpp-lib-js/
+    - run: npm run build  
 
   testC:
     
