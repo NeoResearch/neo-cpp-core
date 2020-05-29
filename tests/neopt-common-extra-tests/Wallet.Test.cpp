@@ -35,13 +35,13 @@ TEST_CASE("neopt extra tests - FromBigIntenger to ScriptHash")
    REQUIRE(script_hash.ToString() == "0x0eec9e10f6491c39f3e8dbc8af7186282487594a");
 
    const Neo::ProtocolSettings ps;
-   string address = Neo::Wallet::wHelper::ToAddress(ps, script_hash);
+   string address = Neo::Wallets::wHelper::ToAddress(ps, script_hash);
    REQUIRE(address == "NSh6STZ6K4jUVDNZHwYSLc4ViuEm9Q1JtU");
 }
 
 TEST_CASE("neopt extra tests - Address(String) to ScriptHash(UInt160")
 {
    string address = "NSh6STZ6K4jUVDNZHwYSLc4ViuEm9Q1JtU";
-   UInt160 script_hash = Neo::Wallet::wHelper::ToScriptHash(address);
+   UInt160 script_hash = Neo::Wallets::wHelper::ToScriptHash(address);
    REQUIRE(script_hash.ToString() == "0x0eec9e10f6491c39f3e8dbc8af7186282487594a");
 }
