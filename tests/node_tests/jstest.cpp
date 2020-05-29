@@ -6,7 +6,7 @@ myteststr(const char* cs_in)
 {
    std::string s_in(cs_in);
    //append 'x' in the end
-   s_in.append('x');
+   s_in += ('x');
    return s_in.c_str();
 }
 
