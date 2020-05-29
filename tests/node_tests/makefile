@@ -4,8 +4,11 @@ EMCC_FLAGS = -g -O3 -Wall -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH
 # -s ALLOW_MEMORY_GROWTH=1
 #EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_main']"
 EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr', '_c_API_CreateSignatureRedeemScript']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString', 'stringToUTF8']"
-
+PRE_JS_FILE=../../packages/neopt-cpp-lib-js/src/prefix-node-require.js
 NEO3_SRC=../../src/
+LIB_JS_TO_BIND=../../packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
+MODULE_NAME='EXPORT_NAME="Neo3CppLib"'
+ASSERTIONS=ASSERTIONS=1
 
 js: ./jstest.cpp
 	mkdir -p build/
@@ -13,7 +16,7 @@ js: ./jstest.cpp
 	echo 
 	em++ --version
 	@echo " ==== Compiling 'jstest.cpp' into './build/librarytest.js' ====== "
-	em++ -I../../libs/ -I../../packages/ --pre-js ../../packages/neopt-cpp-lib-js/src/prefix-node-require.js --bind $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library ../../packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js -o ./build/librarytest.js  -s 'EXPORT_NAME="Neo3CppLib"' -s ASSERTIONS=1
+	em++ --bind -I../../libs/ -I../../packages/ --pre-js $(PRE_JS_FILE) $(EMCC_EXPORTED_FUNCTIONS) $(EMCC_FLAGS) ./jstest.cpp -I$(NEO3_SRC) --js-library $(LIB_JS_TO_BIND) -s $(MODULE_NAME) -s $(ASSERTIONS) -o ./build/librarytest.js
 
 run_js:
 	@echo

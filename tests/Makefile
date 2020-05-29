@@ -1,4 +1,3 @@
-
 ROOT_PATH=..
 SRC_PATH=../src
 LIBS_PATH=../libs
@@ -32,7 +31,6 @@ bench: FCore.bench.cpp
 #PERF=./perf-4.19.0/tools/perf/perf
 PERF=linux-4.16.12/tools/perf/perf
 
-
 #######################
 
 pair: pair17 pair20
@@ -53,7 +51,6 @@ test-coverage:
 	mkdir -p reports
 	lcov --directory . --capture --output-file reports/app.info
 	(cd reports && genhtml app.info)
-
 
 deps:
     # export CXX=/usr/bin/clang++ && make deps

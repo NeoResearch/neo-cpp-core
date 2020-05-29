@@ -4,9 +4,5 @@
 int
 main()
 {
-
-   //std::cout << "Hello World" << std::endl;
-   //std::cout << mytest(10) << std::endl;
-
    return 0;
 }
