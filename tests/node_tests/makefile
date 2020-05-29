@@ -4,8 +4,8 @@ EMCC_FLAGS = -g -O3 -Wall -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH
 # -s ALLOW_MEMORY_GROWTH=1
 #EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_main']"
 EMCC_EXPORTED_FUNCTIONS = -s EXPORTED_FUNCTIONS="['_mytest', '_myteststr', '_c_API_CreateSignatureRedeemScript']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString', 'stringToUTF8']"
-PRE_JS_FILE=../../packages/neopt-cpp-lib-js/src/prefix-node-require.js
 NEO3_SRC=../../src/
+PRE_JS_FILE=../../packages/neopt-cpp-lib-js/src/prefix-node-require.js
 LIB_JS_TO_BIND=../../packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
 MODULE_NAME='EXPORT_NAME="Neo3CppLib"'
 ASSERTIONS=ASSERTIONS=1
