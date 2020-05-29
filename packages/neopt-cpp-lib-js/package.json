@@ -1,7 +1,7 @@
 {
   "name": "neopt_cpp_lib",
   "scripts": {
-    "build:emscripten": "mkdir -p build/ && make compile",
+    "build:emscripten": "make compile",
     "build:bundle": "webpack",
     "build": "npm run build:emscripten && npm run build:bundle",
     "serve": "http-server",
