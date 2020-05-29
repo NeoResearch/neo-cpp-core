@@ -43,10 +43,18 @@ jobs:
     - name: npm run build
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-        
+        node-version: ${{ matrix.node-version }}        
     - run: cd ./packages/neopt-cpp-lib-js/ && npm install    
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
+
+    - name: run npm start for starting an express server
+      run: npm start
+
+    - name: run install for test
+      run: npm install
+    
+    - name: run bundle test on server
+      run: npm test
 
   testC:
     

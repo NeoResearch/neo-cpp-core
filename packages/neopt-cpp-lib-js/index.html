@@ -19,21 +19,22 @@
     function testConversionToVerification(){
         let csbiginteger = Neo3CppLib.csbig;
         console.log(csbiginteger);
-    var vx = csbiginteger.csBigInteger("92417421609284060097852441734141491128266387380656748836951019715045385777354", 10)
-    var vy = csbiginteger.csBigInteger("81306213973968698003399946097148256829885864908442466985789085263601870844340", 10)
-    var ecpoint = {
-        "X" : vx.toHexString(),
-        "Y" : vy.toHexString(),
-        "curve" : "secp256r1"
-    };
-    var strJson = JSON.stringify(ecpoint);
-    console.log(strJson);
-  
-    var strInp = "                                                    ";
-    //var vout = neoptFib.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
-    var vout = Neo3CppLib.c_API_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
-    //var vout = neoptFib.Neo3.Contract_CreateSignatureRedeemScript(strJson);
-
-    console.log("out='"+vout+"'");
+        var vx = csbiginteger.csBigInteger("92417421609284060097852441734141491128266387380656748836951019715045385777354", 10)
+        var vy = csbiginteger.csBigInteger("81306213973968698003399946097148256829885864908442466985789085263601870844340", 10)
+        var ecpoint = {
+            "X" : vx.toHexString(),
+            "Y" : vy.toHexString(),
+            "curve" : "secp256r1"
+        };
+        var strJson = JSON.stringify(ecpoint);
+        console.log(strJson);
+    
+        var strInp = "                                                    ";
+        //var vout = neoptFib.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
+        var vout = Neo3CppLib.c_API_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
+        //var vout = neoptFib.Neo3.Contract_CreateSignatureRedeemScript(strJson);
+        output="out='"+vout+"'";
+        console.log(output);
+        return output;
     }
   </script>
