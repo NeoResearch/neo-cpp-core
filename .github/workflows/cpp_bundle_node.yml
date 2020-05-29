@@ -44,17 +44,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}        
-    - run: cd ./packages/neopt-cpp-lib-js/ && npm install    
-    - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
+    - run: cd ./packages/lib-neopt-core-js/ && npm install    
+    - run: cd ./packages/lib-neopt-core-js/ && npm run build
 
     - name: run npm start for starting an express server with nohup
-      run: cd ./packages/neopt-cpp-lib-js/ && nohup npm run serve &
+      run: cd ./packages/lib-neopt-core-js/ && nohup npm run serve &
 
     - name: run install for test
-      run: cd ./packages/neopt-cpp-lib-js/tests && npm install
+      run: cd ./packages/lib-neopt-core-js/tests && npm install
     
     - name: run bundle test on server
-      run: cd ./packages/neopt-cpp-lib-js/tests && npm test
+      run: cd ./packages/lib-neopt-core-js/tests && npm test
 
   testC:
     
