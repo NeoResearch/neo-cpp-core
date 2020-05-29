@@ -7,3 +7,6 @@
 [submodule "libs/lib/node_modules/csBigInteger.js"]
 	path = libs/lib/node_modules/csBigInteger.js
 	url = https://github.com/NeoResearch/csBigInteger.js.git
+[submodule "libs/csbiginteger-js"]
+	path = libs/csbiginteger-js
+	url = https://github.com/NeoResearch/csbiginteger-js.git
