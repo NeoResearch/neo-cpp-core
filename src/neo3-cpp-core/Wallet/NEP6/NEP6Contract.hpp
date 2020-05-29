@@ -15,37 +15,35 @@ class NEP6Contract : Contract
         public:
          bool Deployed;
 
-        private:
-         void AddAccount(NEP6Account account, bool is_import)
+         /*
+        public static NEP6Contract FromJson(JObject json)
         {
-            lock (accounts)
+            if (json == null) return null;
+            return new NEP6Contract
             {
-                if (accounts.TryGetValue(account.ScriptHash, out NEP6Account account_old))
-                {
-                    account.Label = account_old.Label;
-                    account.IsDefault = account_old.IsDefault;
-                    account.Lock = account_old.Lock;
-                    if (account.Contract == null)
-                    {
-                        account.Contract = account_old.Contract;
-                    }
-                    else
-                    {
-                        NEP6Contract contract_old = (NEP6Contract)account_old.Contract;
-                        if (contract_old != null)
-                        {
-                            NEP6Contract contract = (NEP6Contract)account.Contract;
-                            contract.ParameterNames = contract_old.ParameterNames;
-                            contract.Deployed = contract_old.Deployed;
-                        }
-                    }
-                    account.Extra = account_old.Extra;
-                }
-                accounts[account.ScriptHash] = account;
-            }
+                Script = Convert.FromBase64String(json["script"].AsString()),
+                ParameterList = ((JArray)json["parameters"]).Select(p => p["type"].TryGetEnum<ContractParameterType>()).ToArray(),
+                ParameterNames = ((JArray)json["parameters"]).Select(p => p["name"].AsString()).ToArray(),
+                Deployed = json["deployed"].AsBoolean()
+            };
         }
 
-} // class Wallet
+        public JObject ToJson()
+        {
+            JObject contract = new JObject();
+            contract["script"] = Convert.ToBase64String(Script);
+            contract["parameters"] = new JArray(ParameterList.Zip(ParameterNames, (type, name) =>
+            {
+                JObject parameter = new JObject();
+                parameter["name"] = name;
+                parameter["type"] = type;
+                return parameter;
+            }));
+            contract["deployed"] = Deployed;
+            return contract;
+        }*/
+
+} // class NEP6Contract
 //
 } // namespace NEP6
 //
