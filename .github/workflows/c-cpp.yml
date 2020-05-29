@@ -44,7 +44,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    
+        
+    - run: cd ./packages/neopt-cpp-lib-js/ && npm install    
     - run: cd ./packages/neopt-cpp-lib-js/ && npm run build
 
   testC:
