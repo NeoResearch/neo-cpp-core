@@ -1,12 +1,13 @@
-EXPORT_NAME='EXPORT_NAME="neopt_raw_lib"'
-PRE_NODE_LOAD=./packages/neopt-cpp-lib-js/src/prefix-node-require.js
+
 EXTRA_EXPORTED=EXTRA_EXPORTED_RUNTIME_METHODS='["ccall",  "cwrap", "UTF8ToString", "stringToUTF8"]'
-LIB_JS_TO_BIND=../../packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
 NEO3_SRC=./src/
 LIBS=./libs/
+EXTRA_PARAMS=--std=c++17 -g -O3 -Wall -s WASM=1 -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1
+EXPORT_NAME='EXPORT_NAME="neopt_raw_lib"'
+PRE_NODE_LOAD=./packages/neopt-cpp-lib-js/src/prefix-node-require.js
+LIB_JS_TO_BIND=./packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
 LIBS_JS_BUNDLE=./packages/neopt-cpp-lib-js/src/
 MAIN_CPP=./packages/neopt-cpp-lib-js/src/neopt_raw_lib.cpp
-EXTRA_PARAMS=--std=c++17 -g -O3 -Wall -s WASM=1 -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1
 OUTPUT_FILE=./packages/neopt-cpp-lib-js/build/neopt_raw_lib.js
 
 # note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src
