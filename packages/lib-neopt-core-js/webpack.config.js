@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "neopt-cpp-lib.js",
+    filename: "lib-neopt-core.js",
     library: 'Neo3CppLib',
     libraryTarget: 'umd'
   },

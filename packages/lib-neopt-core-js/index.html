@@ -1,14 +1,14 @@
 <!doctype html>
-<script src="./dist/neopt-cpp-lib.js"></script>
+<script src="./dist/lib-neopt-core.js"></script>
 <script>
-    console.log("myfib:" + Neo3CppLib);
-    console.log("myOnInit:" + Neo3CppLib.myOnInit);
+    console.log("lib-neopt-core (Neo3CppLib object): " + Neo3CppLib);
+    console.log("Neo3CppLib.myOnInit:" + Neo3CppLib.myOnInit);
     //
     Neo3CppLib.myOnInit(
         function () {
-            console.log("INIT!");
+            console.log("INITIALIZED lib-neopt-core!");
             // can use functions now!
-            console.log(Neo3CppLib.myfib(10));
+            //console.log(Neo3CppLib.xyz(10));
         }
     );
 //
@@ -17,7 +17,7 @@
 
 <script>
     function testConversionToVerification(){
-        let csbiginteger = Neo3CppLib.csbig;
+        let csbiginteger = Neo3CppLib.csbiginteger;
         console.log(csbiginteger);
         var vx = csbiginteger.csBigInteger("92417421609284060097852441734141491128266387380656748836951019715045385777354", 10)
         var vy = csbiginteger.csBigInteger("81306213973968698003399946097148256829885864908442466985789085263601870844340", 10)
@@ -31,7 +31,7 @@
     
         var strInp = "                                                    ";
         //var vout = neoptFib.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
-        var vout = Neo3CppLib.c_API_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
+        var vout = Neo3CppLib.Neo3_SmartContract_Contract_CreateSignatureRedeemScript(strJson); //Module.cpp_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
         //var vout = neoptFib.Neo3.Contract_CreateSignatureRedeemScript(strJson);
         output="out='"+vout+"'";
         console.log(output);

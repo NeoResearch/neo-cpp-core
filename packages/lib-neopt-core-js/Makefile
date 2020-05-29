@@ -4,11 +4,11 @@ NEO3_SRC=./src/
 LIBS=./libs/
 EXTRA_PARAMS=--std=c++17 -g -O3 -Wall -s WASM=1 -s DISABLE_EXCEPTION_CATCHING=1 -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1
 EXPORT_NAME='EXPORT_NAME="neopt_raw_lib"'
-PRE_NODE_LOAD=./packages/neopt-cpp-lib-js/src/prefix-node-require.js
-LIB_JS_TO_BIND=./packages/neopt-cpp-lib-js/src/neo3-cpp-bindings-js/web-libcore_exports.js
-LIBS_JS_BUNDLE=./packages/neopt-cpp-lib-js/src/
-MAIN_CPP=./packages/neopt-cpp-lib-js/src/neopt_raw_lib.cpp
-OUTPUT_FILE=./packages/neopt-cpp-lib-js/build/neopt_raw_lib.js
+PRE_NODE_LOAD=./packages/lib-neopt-core-js/src/prefix-node-require.js
+LIB_JS_TO_BIND=./packages/lib-neopt-core-js/src/bindings-cpp-js/web-libcore_exports.js
+LIBS_JS_BUNDLE=./packages/lib-neopt-core-js/src/
+MAIN_CPP=./packages/lib-neopt-core-js/src/lib-neopt-core-js.cpp
+OUTPUT_FILE=./packages/lib-neopt-core-js/build/neopt_raw_lib.js
 
 # note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src
 EMCC_SOURCE_DOCKER=docker run --rm -v $(PWD)/../../:/src trzeci/emscripten em++

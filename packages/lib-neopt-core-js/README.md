@@ -1,5 +1,8 @@
 # neopt-cpp-lib  (in JS)
 
+neopt core library.
+
+
 This subproject of `neo3-cpp-core` intends to provide a library available for javascript users (and other subprojects such as `neopt-sdk-js`).
 
 ## Rationale

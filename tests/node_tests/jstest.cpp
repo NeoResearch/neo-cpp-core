@@ -1,5 +1,15 @@
-#include <neopt-cpp-lib-js/src/neo3-cpp-bindings-js/neo3-bindings.hpp>
-#include <neo3-cpp-core/core_imports.h>
+#include <lib-neopt-core-js/src/lib-neopt-core-js.cpp>
+
+EMSCRIPTEN_KEEPALIVE
+extern "C" const char*
+myteststr(const char* cs_in)
+{
+   std::string s_in(cs_in);
+   //append 'x' in the end
+   s_in.append('x');
+   return s_in.c_str();
+}
+
 
 int
 main()

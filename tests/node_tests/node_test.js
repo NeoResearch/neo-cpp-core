@@ -1,8 +1,8 @@
-let libModuleNeo3 = require('./build/librarytest');
+let Neo3CppLib = require('./build/librarytest');
 // c function needs wrapping... cpp don't!
-var myteststr = libModuleNeo3.cwrap('myteststr', 'string', ['string', 'number']);
+var myteststr = Neo3CppLib.cwrap('myteststr', 'string', ['string', 'number']);
 
-let c_API_CreateSignatureRedeemScript = libModuleNeo3.cwrap('c_API_CreateSignatureRedeemScript', 'string', ['string'])
+let Neo3_SmartContract_Contract_CreateSignatureRedeemScript = Neo3CppLib.cwrap('Neo3_SmartContract_Contract_CreateSignatureRedeemScript', 'string', ['string'])
 
 /*
 // loading BigNum module
@@ -45,8 +45,8 @@ function testMain() {
     console.log("");
     //
  
-    var vx = new libModuleNeo3.csBN("43563478194357645732161043749214420341576583724275881899443933055754116882936", 10);
-    var vy = new libModuleNeo3.csBN("6800198406926458502571476951697947402787919362010374841430910815761615021861", 10);
+    var vx = new Neo3CppLib.csBN("43563478194357645732161043749214420341576583724275881899443933055754116882936", 10);
+    var vy = new Neo3CppLib.csBN("6800198406926458502571476951697947402787919362010374841430910815761615021861", 10);
     //console.log(vx);
     //console.log(vy);
     var ecpoint = {
@@ -56,7 +56,7 @@ function testMain() {
     };
     var strJson = JSON.stringify(ecpoint);
     console.log("json str point: "+strJson);
-    var vout = c_API_CreateSignatureRedeemScript(strJson);
+    var vout = Neo3_SmartContract_Contract_CreateSignatureRedeemScript(strJson);
     console.log(vout);
 
 }
