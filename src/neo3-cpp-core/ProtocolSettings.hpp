@@ -13,6 +13,6 @@ public:
 };
 
 //
-unique_ref::uref<ProtocolSettings> ProtocolSettings::Default =unique_ref::uref<ProtocolSettings>{ ProtocolSettings{} };
+unique_ref::uref<ProtocolSettings> ProtocolSettings::Default = unique_ref::uref<ProtocolSettings>{ ProtocolSettings{} };
 
 } // namespace Neo
