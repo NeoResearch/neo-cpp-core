@@ -96,7 +96,7 @@ public:
          NEOPT_EXCEPTION("UInt160 Parse FormatException");
       //throw new FormatException();
       UInt160 uint160(vhelper::Reverse(shelper::HexToBytes(value)));
-      return std::move(uint160);
+      return uint160;
    }
 
    /*

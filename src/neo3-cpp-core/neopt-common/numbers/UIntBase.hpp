@@ -73,7 +73,7 @@ public:
    /// Method Equals returns true if objects are equal, false otherwise
    /// If null is passed as parameter, this method returns false. If it's a self-reference, it returns true.
    /// </summary>
-   virtual bool Equals(UIntBase* other)
+   virtual bool Equals(const UIntBase* other)
    {
       if (other == nullptr)
          return false;

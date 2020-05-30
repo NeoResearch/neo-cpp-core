@@ -11,7 +11,7 @@
 #include "../system/IComparable.h"
 #include "../system/IEquatable.h"
 #include "../system/ISerializable.h"
-#include "../system/ITextReader.h"  
+#include "../system/ITextReader.h"
 #include "../system/StringReader.hpp"
 #include "../system/mhelper.h"
 #include "../system/shelper.h"
@@ -30,6 +30,10 @@ public:
    map<string, JObject*> properties;
 
 public:
+   virtual ~JObject()
+   {
+   }
+
    JObject& operator[](string name)
    {
       return *properties[name];
@@ -120,13 +124,13 @@ public:
                return new JNumber(value);
            }
 */
-// return value == null ? null : new JString(value);
-           public:
-            operator std::string () const
-           {
-               return this->ToString();
-          }
-          
+   // return value == null ? null : new JString(value);
+public:
+   operator std::string() const
+   {
+      return this->ToString();
+   }
+
 public:
    JObject& operator=(const string value)
    {
@@ -134,6 +138,7 @@ public:
       return *this;
    }
 };
-}
+//
+} // namespace neopt
 
 #endif

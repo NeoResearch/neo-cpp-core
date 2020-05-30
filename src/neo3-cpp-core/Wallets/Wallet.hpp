@@ -3,6 +3,10 @@
 // using Neo.Cryptography;
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 using ECPoint = Neo::Cryptography::ECC::ECPoint;
+
+#include <neo3-cpp-core/Cryptography/cHelper.hpp>
+
+#include <neo3-cpp-core/ExternalCrypto.h>
 /*
 using Neo.IO;
 using Neo.Ledger;
@@ -31,25 +35,32 @@ namespace Wallets {
 //
 class Wallet
 {
-   public:
-          Wallet()
-        {
-        }
+public:
+   Wallet()
+   {
+   }
 
+   virtual ~Wallet()
+   {
+   }
 
-        public:
-         WalletAccount CreateAccount()
-        {
-            vbyte privateKey(32);
-            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(privateKey);
-            }
-            WalletAccount account = CreateAccount(privateKey);
-            Array.Clear(privateKey, 0, privateKey.Length);
-            return account;
-        }
-      
+public:
+   uptr<WalletAccount> CreateAccount()
+   {
+      vbyte privateKey(32);
+      //using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+      {
+
+         privateKey = Neo::Cryptography::cHelper::RandBytes(privateKey.size());
+      }
+      uptr<WalletAccount> account{ CreateAccount(privateKey) };
+      //Array.Clear(privateKey, 0, privateKey.Length);
+      return account;
+   }
+
+public:
+   virtual uptr<WalletAccount> CreateAccount(const vbyte& privateKey) = 0;
+
    /*
         public abstract string Name { get; }
         public string Path { get; }
@@ -454,7 +465,7 @@ class Wallet
     }
     */
 
-} // class Wallet
+}; // class Wallet
 //
 } // namespace Wallet
 //

@@ -22,6 +22,11 @@ namespace Wallets {
 class WalletAccount
 {
 public:
+
+   virtual ~WalletAccount()
+   {
+   }
+
    const UInt160 ScriptHash;
    std::string Label;
    bool IsDefault;

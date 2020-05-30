@@ -22,5 +22,6 @@ Neo3_SmartContract_Contract_CreateSignatureRedeemScript(const char* cs_in)
 {
    std::string s_in(cs_in);
    // note that return stacked string pointer will "trust" emscripten to build JS-string for us
-   return Neo::SmartContract::Contract::API_CreateSignatureRedeemScript(s_in).c_str();
+   std::string s_out = Neo::SmartContract::Contract::API_CreateSignatureRedeemScript(s_in);
+   return s_out.c_str(); // ignore this warning, it works. TODO: find better solution.
 }

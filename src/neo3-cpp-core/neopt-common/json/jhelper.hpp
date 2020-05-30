@@ -116,9 +116,10 @@ public:
       std::stringstream sb;
       while (true) {
          char c = (char)reader.Read();
-         if (c == 65535)
-            //throw new FormatException();
-            NEOPT_EXCEPTION("JString 65535 FormatException");
+         // TODO: note that 'char' is NOT UTF-8, it's ASCII (1-byte)
+         //if (c == 65535)
+         //throw new FormatException();
+         //   NEOPT_EXCEPTION("JString 65535 FormatException");
          if (c == firstChar)
             break;
          if (c == '\\') {
@@ -161,7 +162,7 @@ public:
       std::stringstream sb;
       while (true) {
          char c = (char)reader.Peek();
-         if (c >= '0' && c <= '9' || c == '.' || c == '-') {
+         if (((c >= '0') && (c <= '9')) || c == '.' || c == '-') {
             sb << c;
             reader.Read();
          } else {

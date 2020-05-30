@@ -37,6 +37,15 @@ RIPEMD160(vbyte input)
    return vout;
 }
 
+static vbyte
+RandBytes(int byte_count)
+{
+   vbyte vout(byte_count, 0);
+   external_rand(byte_count,  vout.data(), vout.size());
+   // TODO: verify 'used' bytes
+   return vout;
+}
+
 } // namespace cHelper
 //
 } // namespace SmartContract
