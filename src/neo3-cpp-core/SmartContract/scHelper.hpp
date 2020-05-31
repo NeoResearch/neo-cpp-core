@@ -133,6 +133,12 @@ ToScriptHash(const vbyte& script)
    return UInt160(Neo::Cryptography::Crypto::Hash160(script));
 }
 
+string NEO3API_ToScriptHash(string hexstring)
+{
+   vbyte bytes = Helper::HexToBytes(hexstring);
+   return ToScriptHash(bytes).ToString();
+}
+
 /*
         public static UInt160 ToScriptHash(this ReadOnlySpan<byte> script)
         {

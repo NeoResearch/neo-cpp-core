@@ -134,9 +134,9 @@ public:
 
 public:
    // returns 'hexstring' and gets 'ECPoint'
-   static std::string API_CreateSignatureRedeemScript(std::string jsonECPoint)
+   static std::string NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint)
    {
-      auto ecp = ECPoint::API_FromJsonStr(jsonECPoint);
+      auto ecp = ECPoint::NEO3API_FromJsonStr(jsonECPoint);
       vbyte v = CreateSignatureRedeemScript(ecp);
       return neopt::vhelper::ToHexString(v);
    }

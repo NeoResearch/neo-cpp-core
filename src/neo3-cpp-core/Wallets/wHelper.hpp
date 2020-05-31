@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 #include <neo3-cpp-core/ProtocolSettings.hpp>
@@ -12,25 +12,37 @@ namespace wHelper {
 static string
 ToAddress(const UInt160& scriptHash)
 {
-      vbyte data(21);
-      data[0] = ProtocolSettings::Default->AddressVersion;//settings.AddressVersion;
-      neopt::Buffer::BlockCopy(scriptHash.ToArray(), 0, data, 1, 20);
-      return Neo::Cryptography::Base58::Base58CheckEncode(data);
+   vbyte data(21);
+   data[0] = ProtocolSettings::Default->AddressVersion; //settings.AddressVersion;
+   neopt::Buffer::BlockCopy(scriptHash.ToArray(), 0, data, 1, 20);
+   return Neo::Cryptography::Base58::Base58CheckEncode(data);
+}
+
+static string
+NEO3API_ToAddress(string uint160)
+{
+   return ToAddress(UInt160::Parse(uint160));
 }
 
 static UInt160
 ToScriptHash(string address)
 {
-      vbyte data = Neo::Cryptography::Base58::Base58CheckDecode(address);
-      neopt::byte version = {0x35};
-      std::cout << "DataSize after Decode is " << data.size() << std::endl;
-      if (data.size() != 21)
-         NEOPT_EXCEPTION("Data to be converted problem");
-      if (data[0] != version ) // TODO fix to static Default from Protocol Settings
-         NEOPT_EXCEPTION("Address Version Problem");
-      // data.AsSpan(1)
-      vbyte dataCut(data.begin()+1,data.end());    
-      return UInt160(dataCut);
+   vbyte data = Neo::Cryptography::Base58::Base58CheckDecode(address);
+   neopt::byte version = { 0x35 };
+   std::cout << "DataSize after Decode is " << data.size() << std::endl;
+   if (data.size() != 21)
+      NEOPT_EXCEPTION("Data to be converted problem");
+   if (data[0] != version) // TODO fix to static Default from Protocol Settings
+      NEOPT_EXCEPTION("Address Version Problem");
+   // data.AsSpan(1)
+   vbyte dataCut(data.begin() + 1, data.end());
+   return UInt160(dataCut);
+}
+
+static string
+NEO3API_ToScriptHash(string address)
+{
+   return ToScriptHash(address).ToString();
 }
 
 } // namespace wHelper
@@ -50,8 +62,8 @@ ToScriptHash(string address)
 
 // neo core
 #include <ProtocolSettings.hpp>
-#include <crypto/chelper.hpp>
 #include <crypto/ICrypto.h>
+#include <crypto/chelper.hpp>
 #include <numbers/UInt160.hpp>
 #include <system/Buffer.hpp>
 #include <system/types.h>
