@@ -476,7 +476,7 @@ public
 
 public:
    // special method that encodes this as a json str (for external APIs)
-   static std::string NEO3API_ToJsonStr(const ECPoint& ecpoint)
+   static std::string _NEO3API_ToJsonStr(const ECPoint& ecpoint)
    {
       // X : "little-endian" hexstring
       // Y : "little-endian" hexstring
@@ -496,7 +496,7 @@ public:
    }
 
    // special method that encodes this from a json str (for external APIs)
-   static ECPoint NEO3API_FromJsonStr(std::string json)
+   static ECPoint _NEO3API_FromJsonStr(std::string json)
    {
       neopt::uptr<neopt::JObject> jobj_p = neopt::jhelper::Parse(json);
       auto& jobj = *jobj_p;

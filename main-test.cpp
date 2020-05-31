@@ -62,7 +62,7 @@ main()
    // L1TKE6hbWSMaBESkZJ3PPbQHkHN8DdSRa7F82konNAf3ejhgMpD9
 
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
-   std::cout << "point (JSON): " << ECPoint::NEO3API_ToJsonStr(ecp) << std::endl;
+   std::cout << "point (JSON): " << ECPoint::_NEO3API_ToJsonStr(ecp) << std::endl;
 
    ECPoint G = ECCurve::Secp256r1->G; // allowed copy on 'ucref' type.. beware slicing!
    std::cout << "G:" << G.ToString() << std::endl;

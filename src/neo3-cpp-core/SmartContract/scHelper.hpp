@@ -17,8 +17,8 @@ using System.Collections.Generic;
 #include <neo3-cpp-core/neopt-common/numbers/UInt160.hpp>
 using UInt160 = neopt::UInt160;
 
-#include <neo3-cpp-core/Cryptography/cHelper.hpp>
 #include <neo3-cpp-core/Cryptography/Crypto.hpp>
+#include <neo3-cpp-core/Cryptography/cHelper.hpp>
 
 namespace Neo {
 //
@@ -133,11 +133,8 @@ ToScriptHash(const vbyte& script)
    return UInt160(Neo::Cryptography::Crypto::Hash160(script));
 }
 
-string NEO3API_ToScriptHash(string hexstring)
-{
-   vbyte bytes = Helper::HexToBytes(hexstring);
-   return ToScriptHash(bytes).ToString();
-}
+string
+NEO3API_ToScriptHash(string hexstring);
 
 /*
         public static UInt160 ToScriptHash(this ReadOnlySpan<byte> script)
@@ -195,3 +192,13 @@ string NEO3API_ToScriptHash(string hexstring)
 } //namespace SmartContract
 //
 } //namespace Neo
+
+// =====================
+// define API methods
+
+string
+Neo::SmartContract::scHelper::NEO3API_ToScriptHash(string hexstring)
+{
+   vbyte bytes = Helper::HexToBytes(hexstring);
+   return ToScriptHash(bytes).ToString();
+}

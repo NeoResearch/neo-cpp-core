@@ -19,10 +19,7 @@ ToAddress(const UInt160& scriptHash)
 }
 
 static string
-NEO3API_ToAddress(string uint160)
-{
-   return ToAddress(UInt160::Parse(uint160));
-}
+NEO3API_ToAddress(string uint160);
 
 static UInt160
 ToScriptHash(string address)
@@ -40,17 +37,29 @@ ToScriptHash(string address)
 }
 
 static string
-NEO3API_ToScriptHash(string address)
-{
-   return ToScriptHash(address).ToString();
-}
+NEO3API_ToScriptHash(string address);
 
 } // namespace wHelper
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //
+
+// ======================
+// Define NEO3API methods
+
+string
+Neo::Wallets::wHelper::NEO3API_ToAddress(string uint160)
+{
+   return ToAddress(UInt160::Parse(uint160));
+}
+
+string
+Neo::Wallets::wHelper::NEO3API_ToScriptHash(string address)
+{
+   return ToScriptHash(address).ToString();
+}
 
 // Wallet Helper: whelper
 
