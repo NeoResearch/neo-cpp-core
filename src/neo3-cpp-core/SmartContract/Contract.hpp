@@ -134,7 +134,7 @@ public:
 
 public:
    // returns 'hexstring' and gets 'ECPoint'
-   static std::string NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint);
+   static std::string EXPORT_NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint);
 }; // class contract
 //
 } // namespace SmartContract
@@ -142,7 +142,7 @@ public:
 } // namespace Neo
 
 std::string
-Neo::SmartContract::Contract::NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint)
+Neo::SmartContract::Contract::EXPORT_NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint)
 {
    auto ecp = ECPoint::_NEO3API_FromJsonStr(jsonECPoint);
    vbyte v = CreateSignatureRedeemScript(ecp);

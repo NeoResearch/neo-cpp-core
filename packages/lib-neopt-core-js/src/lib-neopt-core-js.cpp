@@ -16,19 +16,16 @@
 #include <lib-neopt-core/lib-neopt-core.h>
 // ---------------------------------------------------------------------------
 
-// ===================== Cryptography module =====================
-// -----
-// -----
+// ===================== MANUAL exports =====================
 
-// ===================== SmartContract module =====================
-
+/*
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
 Neo3_SmartContract_Contract_CreateSignatureRedeemScript(const char* cs_in)
 {
    std::string s_in(cs_in);
    // note that return stacked string pointer will "trust" emscripten to build JS-string for us
-   std::string s_out = Neo::SmartContract::Contract::NEO3API_CreateSignatureRedeemScript(s_in);
+   std::string s_out = Neo::SmartContract::Contract::EXPORT_NEO3API_CreateSignatureRedeemScript(s_in);
    return s_out.c_str(); // ignore this warning, it works. TODO: find better solution.
 }
 
@@ -36,7 +33,7 @@ EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
 Neo3_SmartContract_scHelper_ToScriptHash(const char* cs_in)
 {
-   return Neo::SmartContract::scHelper::NEO3API_ToScriptHash(std::string(cs_in)).c_str();
+   return Neo::SmartContract::scHelper::EXPORT_NEO3API_ToScriptHash(std::string(cs_in)).c_str();
 }
 
 // ===================== Wallets module =====================
@@ -45,12 +42,14 @@ EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
 Neo3_Wallets_wHelper_ToAddress(const char* cs_in)
 {
-   return Neo::Wallets::wHelper::NEO3API_ToAddress(std::string(cs_in)).c_str();
+   return Neo::Wallets::wHelper::EXPORT_NEO3API_ToAddress(std::string(cs_in)).c_str();
 }
 
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
 Neo3_Wallets_wHelper_ToScriptHash(const char* cs_in)
 {
-   return Neo::Wallets::wHelper::NEO3API_ToScriptHash(std::string(cs_in)).c_str();
+   return Neo::Wallets::wHelper::EXPORT_NEO3API_ToScriptHash(std::string(cs_in)).c_str();
 }
+
+*/

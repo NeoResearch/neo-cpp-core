@@ -134,7 +134,7 @@ ToScriptHash(const vbyte& script)
 }
 
 string
-NEO3API_ToScriptHash(string hexstring);
+EXPORT_NEO3API_ToScriptHash(string hexstring);
 
 /*
         public static UInt160 ToScriptHash(this ReadOnlySpan<byte> script)
@@ -197,7 +197,7 @@ NEO3API_ToScriptHash(string hexstring);
 // define API methods
 
 string
-Neo::SmartContract::scHelper::NEO3API_ToScriptHash(string hexstring)
+Neo::SmartContract::scHelper::EXPORT_NEO3API_ToScriptHash(string hexstring)
 {
    vbyte bytes = Helper::HexToBytes(hexstring);
    return ToScriptHash(bytes).ToString();
