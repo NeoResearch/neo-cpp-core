@@ -31,14 +31,26 @@ mymodule.onRuntimeInitialized = () => {
 // -----------------------------------------------------
 
 export const csbiginteger = require('csbiginteger');
-export const CryptoJS = require('crypto-js');
+//export const CryptoJS = require('crypto-js');
 
 // =====================================================
 //                 exported functions 
 // -----------------------------------------------------
 
+// ===================== SmartContract module =====================
+
 export const Neo3_SmartContract_Contract_CreateSignatureRedeemScript =
   mymodule.cwrap('Neo3_SmartContract_Contract_CreateSignatureRedeemScript', 'string', ['string']);
 
+export const Neo3_SmartContract_scHelper_ToScriptHash =
+  mymodule.cwrap('Neo3_SmartContract_scHelper_ToScriptHash', 'string', ['string']);
+  
+// ===================== Wallets module =====================
+  
+export const Neo3_Wallets_wHelper_ToAddress =
+  mymodule.cwrap('Neo3_Wallets_wHelper_ToAddress', 'string', ['string']);
+
+export const Neo3_Wallets_wHelper_ToScriptHash =
+  mymodule.cwrap('Neo3_Wallets_wHelper_ToScriptHash', 'string', ['string']);
 
 // ------ finished

@@ -156,6 +156,120 @@ mergeInto(
     // returns 'real' size for out...
     return barray.length;
   },
+  csbiginteger_div: function (ptr1, sz1, ptr2, sz2, ptr_out, sz_out) {
+    // inputs are pre-allocated
+    //let csBN = Module['csBN'];
+    let csBN = Module['csBN'];//csbiginteger.csBigInteger;
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    var v2 = Module.HEAPU8.subarray(ptr2, ptr2 + sz2);
+    //
+    var lst1 = [];
+    for (var i = 0; i < sz1; i++)
+      lst1.push(v1[i]);
+    var big1 = new csBN(lst1);
+    var big1bn = big1.asBN();
+    //
+    var lst2 = [];
+    for (var i = 0; i < sz2; i++)
+      lst2.push(v2[i]);
+    var big2 = new csBN(lst2);
+    var big2bn = big2.asBN();
+    //
+    //console.log("csbiginteger_mod big1='" + big1.toString(10) + "' big2='" + big1.toString(10) + "' -> ");
+    // ====== perform operation ======
+    var big3bn = big1bn.div(big2bn);
+    //
+    var big3 = new csBN(big3bn);
+    console.log("big3 ='" + big3.toString(10) + "'");
+    var barray = big3.toByteArray();
+    const myUint8Array = new Uint8Array(barray);
+    Module.HEAPU8.set(myUint8Array, ptr_out);
+
+    // returns 'real' size for out...
+    return barray.length;
+  },
+  csbiginteger_mul: function (ptr1, sz1, ptr2, sz2, ptr_out, sz_out) {
+    // inputs are pre-allocated
+    //let csBN = Module['csBN'];
+    let csBN = Module['csBN'];//csbiginteger.csBigInteger;
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    var v2 = Module.HEAPU8.subarray(ptr2, ptr2 + sz2);
+    //
+    var lst1 = [];
+    for (var i = 0; i < sz1; i++)
+      lst1.push(v1[i]);
+    var big1 = new csBN(lst1);
+    var big1bn = big1.asBN();
+    //
+    var lst2 = [];
+    for (var i = 0; i < sz2; i++)
+      lst2.push(v2[i]);
+    var big2 = new csBN(lst2);
+    var big2bn = big2.asBN();
+    //
+    //console.log("csbiginteger_mod big1='" + big1.toString(10) + "' big2='" + big1.toString(10) + "' -> ");
+    // ====== perform operation ======
+    var big3bn = big1bn.mul(big2bn);
+    //
+    var big3 = new csBN(big3bn);
+    console.log("big3 ='" + big3.toString(10) + "'");
+    var barray = big3.toByteArray();
+    const myUint8Array = new Uint8Array(barray);
+    Module.HEAPU8.set(myUint8Array, ptr_out);
+
+    // returns 'real' size for out...
+    return barray.length;
+  },
+  csbiginteger_add: function (ptr1, sz1, ptr2, sz2, ptr_out, sz_out) {
+    // inputs are pre-allocated
+    //let csBN = Module['csBN'];
+    let csBN = Module['csBN'];//csbiginteger.csBigInteger;
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    var v2 = Module.HEAPU8.subarray(ptr2, ptr2 + sz2);
+    //
+    var lst1 = [];
+    for (var i = 0; i < sz1; i++)
+      lst1.push(v1[i]);
+    var big1 = new csBN(lst1);
+    var big1bn = big1.asBN();
+    //
+    var lst2 = [];
+    for (var i = 0; i < sz2; i++)
+      lst2.push(v2[i]);
+    var big2 = new csBN(lst2);
+    var big2bn = big2.asBN();
+    //
+    //console.log("csbiginteger_mod big1='" + big1.toString(10) + "' big2='" + big1.toString(10) + "' -> ");
+    // ====== perform operation ======
+    var big3bn = big1bn.add(big2bn);
+    //
+    var big3 = new csBN(big3bn);
+    console.log("big3 ='" + big3.toString(10) + "'");
+    var barray = big3.toByteArray();
+    const myUint8Array = new Uint8Array(barray);
+    Module.HEAPU8.set(myUint8Array, ptr_out);
+
+    // returns 'real' size for out...
+    return barray.length;
+  },
+  csbiginteger_to_int: function (ptr1, sz1) {
+    // inputs are pre-allocated
+    //let csBN = Module['csBN'];
+    let csBN = Module['csBN'];//csbiginteger.csBigInteger;
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    //
+    var lst1 = [];
+    for (var i = 0; i < sz1; i++)
+      lst1.push(v1[i]);
+    var big1 = new csBN(lst1);
+
+    // returns 'real' size for out...
+    return big1.valueOf();
+  },
   external_sha256: function (ptr1, sz1, ptr_out, sz_out) {
     let myCryptoJS = Module['CryptoJS'];
     //console.log("need cryptojs...");
@@ -210,8 +324,64 @@ mergeInto(
 
     //console.log("WARNING: EMPTY FUNCTION 'external_sha256' on licore_exports.js");
     return vout.length;
+  },
+  external_ripemd160: function (ptr1, sz1, ptr_out, sz_out) {
+    let myCryptoJS = Module['CryptoJS'];
+    //console.log("need cryptojs...");
+    //console.log(myCryptoJS);
+    //let CryptoJS = Module['CryptoJS'];
+    //
+    var v1 = Module.HEAPU8.subarray(ptr1, ptr1 + sz1);
+    //
+    // helper function
+    // ============ VANILLA JS =============
+    const toHexString = bytes =>
+      bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+    //
+    //console.log("SHA256 v1 = "+v1);
+    //
+    var hexv1 = toHexString(v1);
+    //
+    //console.log("SHA256 hexv1 = "+hexv1);
+    //
+    var hexEnc1 = myCryptoJS.enc.Hex.parse(hexv1);
+    //
+    //console.log("SHA256 hexEnc1 = "+hexEnc1);
+    //
+    var outEnc1 = myCryptoJS.RIPEMD160(hexEnc1);
+    //
+    //console.log("SHA256 outEnc1 = "+outEnc1);
+    //
+    // MAYBE THIS IS USEFUL ON WEB PLATFORMS (NON-NODE)
+    //const fromHexString = hexString =>
+    //  new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    //
+    var hex_out = myCryptoJS.enc.Hex.stringify(outEnc1);
+    //
+    // ============ VANILLA JS =============
+    const fromHexString = hexString =>
+    new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    //
+    var vout = fromHexString(hex_out);
+    //
+    //
+    // ============ CommonJS (NodeJS) =============
+    //var vout = Uint8Array.from(Buffer.from(hex_out, 'hex'));
+    //
+    //
+    //
+    //var vout = fromHexString(outEnc1);
+    //
+    //console.log("SHA256 vout = "+vout);
+    Module.HEAPU8.set(vout, ptr_out); // TODO: test 'sz_out' for size checks
+
+    //var v2 = Module.HEAPU8.subarray(ptr2, ptr2+sz2);
+
+    //console.log("WARNING: EMPTY FUNCTION 'external_sha256' on licore_exports.js");
+    return vout.length;
   }
-}
+} // mergeInto
+
 );
 //
 // ==================================================================================

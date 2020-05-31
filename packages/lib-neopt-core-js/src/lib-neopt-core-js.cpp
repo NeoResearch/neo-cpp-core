@@ -17,20 +17,8 @@
 // ---------------------------------------------------------------------------
 
 // ===================== Cryptography module =====================
-
-EMSCRIPTEN_KEEPALIVE
-extern "C" const char*
-Neo3_Cryptography_ECC_ECPoint_ToJsonStr(const char* cs_in)
-{
-   return Neo::Cryptography::ECC::ECPoint::ToJsonStr(std::string(cs_in)).c_str();
-}
-
-EMSCRIPTEN_KEEPALIVE
-extern "C" const char*
-Neo3_Cryptography_ECC_ECPoint_FromJsonStr(const char* cs_in)
-{
-   return Neo::Cryptography::ECC::ECPoint::FromJsonStr(std::string(cs_in)).c_str();
-}
+// -----
+// -----
 
 // ===================== SmartContract module =====================
 
@@ -46,23 +34,23 @@ Neo3_SmartContract_Contract_CreateSignatureRedeemScript(const char* cs_in)
 
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
-Neo3_SmartContract_Contract_Helper_ToScriptHash(const char* cs_in)
+Neo3_SmartContract_scHelper_ToScriptHash(const char* cs_in)
 {
-   return Neo::SmartContract::Contract::Helper::ToScriptHash(std::string(cs_in)).c_str();
+   return Neo::SmartContract::scHelper::NEO3API_ToScriptHash(std::string(cs_in)).c_str();
 }
 
 // ===================== Wallets module =====================
 
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
-Neo3_Wallets_Helper_ToAddress(const char* cs_in)
+Neo3_Wallets_wHelper_ToAddress(const char* cs_in)
 {
-   return Neo::Wallets::Helper::ToAddress(std::string(cs_in)).c_str();
+   return Neo::Wallets::wHelper::NEO3API_ToAddress(std::string(cs_in)).c_str();
 }
 
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
-Neo3_Wallets_Helper_ToScriptHash(const char* cs_in)
+Neo3_Wallets_wHelper_ToScriptHash(const char* cs_in)
 {
-   return Neo::Wallets::Helper::ToScriptHash(std::string(cs_in)).c_str();
+   return Neo::Wallets::wHelper::NEO3API_ToScriptHash(std::string(cs_in)).c_str();
 }
