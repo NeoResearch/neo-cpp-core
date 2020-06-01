@@ -44,7 +44,7 @@ class ScryptParameters
 //
 } // namespace NEP6
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //

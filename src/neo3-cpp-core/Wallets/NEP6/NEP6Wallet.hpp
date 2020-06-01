@@ -63,7 +63,7 @@ class NEP6Wallet : Wallet
 //
 } // namespace NEP6
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //

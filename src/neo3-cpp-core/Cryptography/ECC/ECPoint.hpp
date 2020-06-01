@@ -509,7 +509,7 @@ public:
          ECCurve::Secp256r1
       };
    }
-};
+}; // class ECPoint
 //
 } // namespace ECC
 //

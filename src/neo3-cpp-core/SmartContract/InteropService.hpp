@@ -70,5 +70,8 @@ Register(std::string method, bool(*handler)(ApplicationEngine&), long price, Tri
 }
 //
 } // public static partial class / namespace InteropService
+//
 } // namespace SmartContract
+//
 } // namespace Neo
+//

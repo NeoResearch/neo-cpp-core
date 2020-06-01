@@ -467,7 +467,7 @@ public:
 
 }; // class Wallet
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //

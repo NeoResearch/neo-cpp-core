@@ -56,7 +56,7 @@ protected:
 
 }; // class WalletAccount
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //

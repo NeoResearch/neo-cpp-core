@@ -12,7 +12,6 @@ public:
    static unique_ref::uref<ProtocolSettings> Default;
 };
 
-//
 unique_ref::uref<ProtocolSettings> ProtocolSettings::Default = unique_ref::uref<ProtocolSettings>{ ProtocolSettings{} };
 
 } // namespace Neo

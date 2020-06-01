@@ -47,7 +47,7 @@ public:
 public:
 }; // class KeyPair
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //

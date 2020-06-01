@@ -158,6 +158,9 @@ private:
    }
 */
 }; // class Crypto Crypto
+//
 }; // partial class InteropService   / class
+//
 } // namespace SmartContract
+//
 } // namespace Neo

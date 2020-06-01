@@ -47,7 +47,7 @@ class NEP6Contract : Contract
 //
 } // namespace NEP6
 //
-} // namespace Wallet
+} // namespace Wallets
 //
 } // namespace Neo
   //
