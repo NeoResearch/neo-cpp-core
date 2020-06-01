@@ -8,6 +8,9 @@ all:
 run:
 	./build/app_main
 
+test:
+	cd tests && make
+	
 vendor: vendor_js vendor_cpp  #get_bn-js already provided
 	@echo "Finished 'make vendor' successfully"
 
@@ -43,9 +46,6 @@ js_docker:
 
 run_js:
 	cd tests/node_tests && make run_js
-
-test:
-	cd tests && make
 
 clean: 
 	rm -f build/*

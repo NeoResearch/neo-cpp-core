@@ -135,7 +135,7 @@ public:
 public:
    // returns 'hexstring' and gets 'ECPoint'
    static std::string EXPORT_NEO3API_CreateSignatureRedeemScript(std::string jsonECPoint);
-}; // class contract
+}; // class Contract
 //
 } // namespace SmartContract
 //
