@@ -38,6 +38,9 @@ get_csbiginteger:
 js:
 	cd tests/node_tests && make js
 
+js_docker:
+	cd tests/node_tests && make js_docker
+
 run_js:
 	cd tests/node_tests && make run_js
 
