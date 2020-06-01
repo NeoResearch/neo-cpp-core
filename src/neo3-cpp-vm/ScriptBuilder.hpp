@@ -167,7 +167,7 @@ public:
       return buffer;
    }
    */
-};
+}; // class ScriptBuilder
 //
 } // namespace VM
 //

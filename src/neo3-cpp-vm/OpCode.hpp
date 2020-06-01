@@ -813,7 +813,7 @@ enum class OpCode : neopt::byte
    CONVERT = 0xDB
 
    //#endregion
-};
+}; // enum OpCode
 
 ostream&
 operator<<(ostream& os, const OpCode& op)
