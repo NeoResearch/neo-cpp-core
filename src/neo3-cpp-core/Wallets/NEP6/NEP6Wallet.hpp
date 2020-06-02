@@ -1,5 +1,7 @@
 #pragma once
 
+#define NEP6_WALLET
+
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 
 /*
@@ -15,8 +17,15 @@ using System.Threading.Tasks;
 using UserWallet = Neo.Wallets.SQLite.UserWallet;
 */
 
+#include "ScryptParameters.hpp"
+
 #include "../KeyPair.hpp"
+
 #include "NEP6Contract.hpp"
+
+#include "NEP6Account.hpp"
+
+#include "../Wallet.hpp"
 
 namespace Neo {
 //
@@ -26,17 +35,33 @@ namespace NEP6 {
 //
 class NEP6Wallet : public Wallet
 {
+
+private:
+   string password;
+
+private:
+   string name;
+
+   //private:
+   // Version version;
+
+private:
+   const Dictionary<UInt160, NEP6Account> accounts;
+
+private:
+   //const JObject& extra;
+
+public:
+   const ScryptParameters Scrypt;
+
+public:
+   string Name() override
+   {
+      return name;
+   }
+
+   //public override Version Version => version;
    /*
-        private string password;
-        private string name;
-        private Version version;
-        private readonly Dictionary<UInt160, NEP6Account> accounts;
-        private readonly JObject extra;
-
-        public readonly ScryptParameters Scrypt;
-        public override string Name => name;
-        public override Version Version => version;
-
         public NEP6Wallet(string path, string name = null) : base(path)
         {
             if (File.Exists(path))
@@ -114,15 +139,16 @@ public:
    {
       //KeyPair key = new KeyPair(privateKey);
       KeyPair key{ privateKey };
-      uptr<NEP6Contract> contract{
+      uptr<Contract> contract{
          new NEP6Contract{
-           Contract.CreateSignatureRedeemScript(key.PublicKey),
-           vector<ContractParameterType>{ ContractParameterType.Signature },
+           Contract::CreateSignatureRedeemScript(key.PublicKey),
+           vector<ContractParameterType>{ ContractParameterType::Signature },
            vector<string>{ "signature" },
            false }
       };
-      NEP6Account account = new NEP6Account(this, contract->ScriptHash(), key, password){
-         Contract = contract
+
+      uptr<WalletAccount> account{
+         new NEP6Account(*this, contract->ScriptHash(), key, password, contract.release())
       };
 
       //AddAccount(account, false);
@@ -160,12 +186,18 @@ public:
             AddAccount(account, true);
             return account;
         }
+*/
+public:
+   uptr<KeyPair> DecryptKey(string nep2key) const
+   {
+      return uptr<KeyPair>{
+         // TODO: verify if std::optional is broken
+         new KeyPair{
+           *GetPrivateKeyFromNEP2(nep2key, password, Scrypt.N, Scrypt.R, Scrypt.P) }
+      };
+   }
 
-        public KeyPair DecryptKey(string nep2key)
-        {
-            return new KeyPair(GetPrivateKeyFromNEP2(nep2key, password, Scrypt.N, Scrypt.R, Scrypt.P));
-        }
-
+   /*
         public override bool DeleteAccount(UInt160 scriptHash)
         {
             lock (accounts)

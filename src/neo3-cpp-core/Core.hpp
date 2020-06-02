@@ -19,11 +19,19 @@ using vbyte = neopt::vbyte;
 #include "SmartContract/Contract.hpp"
 #include "SmartContract/scHelper.hpp"
 
+#include "Wallets/NEP6/ScryptParameters.hpp"
+
+#include "Wallets/NEP6/NEP6Account.hpp"
+
+#include "Wallets/NEP6/NEP6Wallet.hpp"
+
 #include "Wallets/Wallet.hpp"
 
 #include "Wallets/wHelper.hpp"
 
-//#include "Wallets/NEP6/NEP6Wallet.hpp"
+
+
+
 
 //
 //

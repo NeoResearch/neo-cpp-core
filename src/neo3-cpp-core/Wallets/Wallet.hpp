@@ -61,8 +61,11 @@ public:
 public:
    virtual uptr<WalletAccount> CreateAccount(const vbyte& privateKey) = 0;
 
-   /*
-        public abstract string Name { get; }
+   
+        public:
+         virtual string Name() = 0;
+
+         /*
         public string Path { get; }
         public abstract Version Version { get; }
 
@@ -192,9 +195,13 @@ public:
             BigInteger amount = engine.ResultStack.Pop().GetBigInteger();
             return new BigDecimal(amount, decimals);
         }
-
-        public static byte[] GetPrivateKeyFromNEP2(string nep2, string passphrase, int N = 16384, int r = 8, int p = 8)
+*/
+        public:
+        
+         static std::optional<vbyte> GetPrivateKeyFromNEP2(string nep2, string passphrase, int N = 16384, int r = 8, int p = 8)
         {
+           std::cout << "GetPrivateKeyFromNEP2 NOT IMPLEMENTED!" << std::endl;
+           /*
             if (nep2 == null) throw new ArgumentNullException(nameof(nep2));
             if (passphrase == null) throw new ArgumentNullException(nameof(passphrase));
             byte[] data = nep2.Base58CheckDecode();
@@ -220,8 +227,10 @@ public:
             if (!Encoding.ASCII.GetBytes(address).Sha256().Sha256().AsSpan(0, 4).SequenceEqual(addresshash))
                 throw new FormatException();
             return prikey;
+            */
+           return vbyte{};
         }
-
+/*
         public static byte[] GetPrivateKeyFromWIF(string wif)
         {
             if (wif == null) throw new ArgumentNullException();

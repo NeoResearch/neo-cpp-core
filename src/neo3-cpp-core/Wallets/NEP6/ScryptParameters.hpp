@@ -1,6 +1,8 @@
-#pragma once 
+#pragma once
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
+
+#include <unique_ref/unique_ref.hpp>
 
 namespace Neo {
 //
@@ -10,20 +12,21 @@ namespace NEP6 {
 //
 class ScryptParameters
 {
-        public:
-         //static ScryptParameters Default { get; } = new ScryptParameters(16384, 8, 8);
+public:
+   static uref<ScryptParameters> Default;
 
-        public:
-         readonly int N, R, P;
+public:
+   const int N, R, P;
 
-        public:
-         ScryptParameters(int n, int r, int p)
-        {
-            this.N = n;
-            this.R = r;
-            this.P = p;
-        }
+public:
+   ScryptParameters(int n, int r, int p)
+     : N{ n }
+     , R{ r }
+     , P{ p }
+   {
+   }
 
+   /*
         public:
          static ScryptParameters FromJson(JObject json)
         {
@@ -39,8 +42,11 @@ class ScryptParameters
             json["p"] = P;
             return json;
         }
+        */
 
-} // class ScryptParameters
+}; // class ScryptParameters
+//
+uref<ScryptParameters> ScryptParameters::Default{ ScryptParameters{ 16384, 8, 8 } };
 //
 } // namespace NEP6
 //
@@ -48,4 +54,3 @@ class ScryptParameters
 //
 } // namespace Neo
   //
-

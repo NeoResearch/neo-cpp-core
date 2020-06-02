@@ -46,11 +46,17 @@ public:
       return this->pContract == nullptr;
    }
 
-   virtual KeyPair GetKey() = 0;
+   virtual uptr<KeyPair> GetKey() = 0;
 
 protected:
    WalletAccount(const UInt160& scriptHash)
      : ScriptHash{ scriptHash }
+   {
+   }
+
+   // REMEMBER: pointer pContract is UNIQUE
+   WalletAccount(const UInt160& scriptHash, Contract* pContract)
+     : ScriptHash{ scriptHash }, pContract { uptr<Contract>{pContract} }
    {
    }
 

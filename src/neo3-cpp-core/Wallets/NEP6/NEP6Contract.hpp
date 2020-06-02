@@ -4,6 +4,8 @@
 
 #include <neo3-cpp-core/SmartContract/Contract.hpp>
 
+using ContractParameterType = Neo::SmartContract::ContractParameterType;
+
 namespace Neo {
 //
 namespace Wallets {
@@ -20,11 +22,15 @@ public:
 
    NEP6Contract(vbyte Script, vector<ContractParameterType> ParameterList, vector<string> ParameterNames, bool Deployed)
      : Contract{
-        Contract::CreateSignatureRedeemScript(key.PublicKey),
-        vector<ContractParameterType>{ ContractParameterType.Signature }
+        Script,
+        ParameterList
      }
-     , ParameterNames{ vector<string>{ "signature" } }
-     , Deployed{ false }
+     , ParameterNames{ ParameterNames }
+     , Deployed{ Deployed }
+   {
+   }
+
+   virtual ~NEP6Contract()
    {
    }
 
@@ -56,7 +62,7 @@ public:
             return contract;
         }*/
 
-} // class NEP6Contract
+}; // class NEP6Contract
 //
 } // namespace NEP6
 //

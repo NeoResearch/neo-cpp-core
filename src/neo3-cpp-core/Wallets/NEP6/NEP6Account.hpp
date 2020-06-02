@@ -1,6 +1,12 @@
-#pragma once 
+#pragma once
+
+#ifdef NEP6_WALLET
+#error SHOULD INCLUDE NEP6Account before NEP6Wallet
+#endif
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
+
+#include "../WalletAccount.hpp"
 
 namespace Neo {
 //
@@ -8,42 +14,57 @@ namespace Wallets {
 //
 namespace NEP6 {
 //
-class NEP6Account : WalletAccount
+class NEP6Wallet; // Forward Declaration
+//
+class NEP6Account : public WalletAccount
 {
-        
-        private:
-         readonly NEP6Wallet wallet;
-        private:
-         string nep2key;
-        private:
-         string nep2KeyNew = null;
-        private:
-         KeyPair key;
-        public:
-        // JObject Extra;
+private:
+   const NEP6Wallet& wallet;
 
-        public:
-         bool Decrypted => nep2key == null || key != null;
-        public:
-         override bool HasKey => nep2key != null;
+private:
+   string nep2key{ "" };
 
-        public:
-         NEP6Account(NEP6Wallet wallet, UInt160 scriptHash, string nep2key = null)
-            : base(scriptHash)
-        {
-            this.wallet = wallet;
-            this.nep2key = nep2key;
-        }
+private:
+   string nep2KeyNew{ "" }; //null;
+private:
+   uptr<KeyPair> key;
 
+public:
+   // JObject Extra;
+
+public:
+   bool Decrypted()
+   {
+      //return nep2key == null || key != null;
+      return nep2key == "" || key != nullptr;
+   }
+
+public:
+   bool HasKey() override
+   {
+      return nep2key != "";
+   }
+
+public:
+   NEP6Account(const NEP6Wallet& wallet, UInt160 scriptHash, string nep2key = "", Contract* pContract = nullptr)
+     : WalletAccount(scriptHash, pContract)
+     , wallet{ wallet }
+     , nep2key{ nep2key }
+   {
+   }
+
+   virtual ~NEP6Account()
+   {
+   }
+
+public:
+   NEP6Account(const NEP6Wallet& wallet, const UInt160& scriptHash, KeyPair key, string password, Contract* pContract = nullptr);
+
+   // FORWARD
+
+   /*
         public:
-         NEP6Account(NEP6Wallet wallet, UInt160 scriptHash, KeyPair key, string password)
-            : this(wallet, scriptHash, key.Export(password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P))
-        {
-            this.key = key;
-        }
-       /*
-        public:
-         static NEP6Account FromJson(JObject json, NEP6Wallet wallet)
+         static NEP6Account FromJson(JObject json, const NEP6Wallet& wallet)
         {
             return new NEP6Account(wallet, json["address"].AsString().ToScriptHash(), json["key"]?.AsString())
             {
@@ -54,30 +75,18 @@ class NEP6Account : WalletAccount
                 Extra = json["extra"]
             };
         }
+        */
 
-         //override KeyPair GetKey()
-        public:
-         KeyPair GetKey()
-        {
-            if (nep2key == null) return null;
-            if (key == null)
-            {
-                key = wallet.DecryptKey(nep2key);
-            }
-            return key;
-        }
+   //override KeyPair GetKey()
+public:
+   uptr<KeyPair> GetKey() override;
+   // Forward declaration
 
-        public:
-         Neo::Wallets::KeyPair GetKey(string password)
-        {
-            if (nep2key == null) return null;
-            if (key == null)
-            {
-                key = new KeyPair(Wallet.GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P));
-            }
-            return key;
-        }
+public:
+   uptr<KeyPair> GetKey(string password);
+   // forward declaration
 
+   /*
         public:
          JObject ToJson()
         {
@@ -91,21 +100,10 @@ class NEP6Account : WalletAccount
             account["extra"] = Extra;
             return account;
         }
-
-        public:
-         bool VerifyPassword(string password)
-        {
-            try
-            {
-                Wallet.GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
+*/
+public:
+   bool VerifyPassword(string password);
+   /*
         /// <summary>
         /// Cache draft nep2key during wallet password changing process. Should not be called alone for a single account
         /// </summary>
@@ -136,7 +134,7 @@ class NEP6Account : WalletAccount
             return true;
         }
 
-        internal:
+        private:
          void ChangePasswordCommit()
         {
             if (nep2KeyNew != null)
@@ -145,14 +143,14 @@ class NEP6Account : WalletAccount
             }
         }
 
-        internal:
+        private:
          void ChangePasswordRoolback()
         {
             nep2KeyNew = null;
         }
         */
 
-} // class NEP6Account
+}; // class NEP6Account
 //
 } // namespace NEP6
 //
@@ -161,3 +159,64 @@ class NEP6Account : WalletAccount
 } // namespace Neo
   //
 
+// Forward declaration
+#include "NEP6Wallet.hpp"
+
+namespace Neo {
+//
+namespace Wallets {
+//
+namespace NEP6 {
+
+NEP6Account::NEP6Account(const NEP6Wallet& wallet, const UInt160& scriptHash, KeyPair key, string password, Contract* pContract)
+  : NEP6Account(wallet, scriptHash, key.Export(password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P), pContract)
+{
+   this->key = uptr<KeyPair>{ new KeyPair(key) };
+}
+
+uptr<KeyPair>
+NEP6Account::GetKey()
+{
+   if (nep2key == "null")
+      return nullptr;
+   if (key == nullptr) {
+      key = wallet.DecryptKey(nep2key);
+   }
+   return uptr<KeyPair>{ new KeyPair(*key) };
+}
+
+bool
+NEP6Account::VerifyPassword(string password)
+{
+   //try {
+   std::optional<vbyte> vout = Wallet::GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P);
+
+   if (vout)
+      return true;
+   //} catch (FormatException) {
+   else
+      return false;
+   //}
+}
+
+uptr<KeyPair>
+NEP6Account::GetKey(string password)
+{
+   if (nep2key == "")
+      return nullptr;
+   //
+   if (key == nullptr) {
+      // TODO: check return from 'GetPrivateKeyFromNEP2'
+      KeyPair* newKey = new KeyPair(*Wallet::GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P));
+      key = uptr<KeyPair>{ newKey };
+   }
+   //
+   return uptr<KeyPair>{ new KeyPair(*key) };
+}
+
+} // namespace NEP6
+//
+} // namespace Wallets
+//
+} // namespace Neo
+  //
