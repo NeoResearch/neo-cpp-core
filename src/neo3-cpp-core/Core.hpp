@@ -23,6 +23,8 @@ using vbyte = neopt::vbyte;
 
 #include "Wallets/wHelper.hpp"
 
+#include "Wallets/NEP6/NEP6Wallet.hpp"
+
 //
 //
 //

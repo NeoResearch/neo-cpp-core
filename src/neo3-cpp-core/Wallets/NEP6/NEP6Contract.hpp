@@ -1,6 +1,8 @@
-#pragma once 
+#pragma once
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
+
+#include <neo3-cpp-core/SmartContract/Contract.hpp>
 
 namespace Neo {
 //
@@ -8,14 +10,25 @@ namespace Wallets {
 //
 namespace NEP6 {
 //
-class NEP6Contract : Contract
+class NEP6Contract : public Contract
 {
-        public:
-        vector<string> ParameterNames;
-        public:
-         bool Deployed;
+public:
+   vector<string> ParameterNames;
 
-         /*
+public:
+   bool Deployed;
+
+   NEP6Contract(vbyte Script, vector<ContractParameterType> ParameterList, vector<string> ParameterNames, bool Deployed)
+     : Contract{
+        Contract::CreateSignatureRedeemScript(key.PublicKey),
+        vector<ContractParameterType>{ ContractParameterType.Signature }
+     }
+     , ParameterNames{ vector<string>{ "signature" } }
+     , Deployed{ false }
+   {
+   }
+
+   /*
         public static NEP6Contract FromJson(JObject json)
         {
             if (json == null) return null;
@@ -51,4 +64,3 @@ class NEP6Contract : Contract
 //
 } // namespace Neo
   //
-
