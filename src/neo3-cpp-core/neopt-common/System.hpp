@@ -1,6 +1,7 @@
 #pragma once
 
 #include <assert.h>
+#include <memory> // for unique_ptr
 //
 
 #include "system/BinaryWriter.hpp"
@@ -14,3 +15,6 @@
 
 using neopt::byte;
 using neopt::vbyte;
+
+template<class X>
+using uptr = std::unique_ptr<X>;

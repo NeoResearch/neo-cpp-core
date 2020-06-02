@@ -3,6 +3,8 @@
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 #include <neo3-cpp-core/ProtocolSettings.hpp>
 
+using UInt160 = neopt::UInt160;
+
 namespace Neo {
 //
 namespace Wallets {

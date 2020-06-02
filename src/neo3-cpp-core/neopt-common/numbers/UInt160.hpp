@@ -43,6 +43,10 @@ public:
    {
    }
 
+   virtual ~UInt160()
+   {
+   }
+
    /// <summary>
    /// Method CompareTo returns 1 if this UInt160 is bigger than other UInt160; -1 if it's smaller; 0 if it's equals
    /// Example: assume this is 01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4, this.CompareTo(02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) returns 1

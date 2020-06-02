@@ -14,6 +14,14 @@ using namespace Neo::VM;
 
 #include "ContractParameterType.hpp"
 
+#include <neo3-cpp-core/neopt-common/numbers/UInt160.hpp>
+
+#include <neo3-cpp-core/Wallets/wHelper.hpp>
+#include <neo3-cpp-core/SmartContract/scHelper.hpp>
+
+
+using UInt160 = neopt::UInt160;
+
 namespace Neo {
 //
 namespace SmartContract {
@@ -44,7 +52,7 @@ public:
    string Address()
    {
       if (_address == "") {
-         _address = ScriptHash.ToAddress();
+         _address = Neo::Wallets::wHelper::ToAddress(ScriptHash());
       }
       return _address;
    }
@@ -53,10 +61,10 @@ private:
    uptr<UInt160> _scriptHash;
 
 public:
-   virtual UInt160 ScriptHash()
+   virtual const UInt160& ScriptHash()
    {
       if (_scriptHash == nullptr) {
-         _scriptHash = uptr<UInt160>{ new UInt160{ Script.ToScriptHash() } };
+         _scriptHash = uptr<UInt160>{ new UInt160{ Neo::SmartContract::scHelper::ToScriptHash(Script) } };
       }
       return *_scriptHash;
    }
