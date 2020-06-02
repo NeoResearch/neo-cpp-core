@@ -143,8 +143,9 @@ public:
    virtual neopt::uptr<WalletAccount> CreateAccount(const vbyte& privateKey) override
    //WalletAccount CreateAccount(byte[] privateKey)
    {
+      std::cout << "Running CreateAccount with priv: " << privateKey.size() << std::endl;
       //KeyPair key = new KeyPair(privateKey);
-      KeyPair key{ privateKey };
+      KeyPair key (privateKey);
       neopt::uptr<Contract> contract{
          new NEP6Contract{
            Contract::CreateSignatureRedeemScript(key.PublicKey),
@@ -153,6 +154,7 @@ public:
            false }
       };
 
+    std::cout << "making account" << std::endl;
       neopt::uptr<WalletAccount> account{
          new NEP6Account(*this, contract->ScriptHash(), key, password, contract.release())
       };

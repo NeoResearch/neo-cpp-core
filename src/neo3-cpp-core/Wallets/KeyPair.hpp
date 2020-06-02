@@ -26,21 +26,37 @@ public:
 private:
    static ECPoint getECPoint(vbyte privateKey)
    {
+      std::cout << "WARNING: always using 32 byte private key" << std::endl;
+      vbyte pubKey(64, 0);
+      external_get_pubkey_from_privkey(privateKey.data(), privateKey.size(), false, pubKey.data(), pubKey.size());
+
+      vbyte vx(pubKey.begin(), pubKey.begin() + 32);
+      vbyte vy(pubKey.begin() + 33, pubKey.begin() + 64);
+
+      ECFieldElement X{ BigInteger{ vx }, *ECCurve::Secp256r1 };
+      ECFieldElement Y{ BigInteger{ vy }, *ECCurve::Secp256r1 };
+
+      ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
+
+      /*
+      std::cout << "getting EC Point: " << privateKey.size() << std::endl;
       //if (privateKey.Length != 32 && privateKey.Length != 96 && privateKey.Length != 104)
       //   throw new ArgumentException();
       //this.PrivateKey = privateKey[^32..];
 
-      //if (privateKey.size() == 32) {
-      //  return Cryptography::ECC::ECCurve.Secp256r1.G * privateKey;
-      //} else {
-
+      if (privateKey.size() == 32) {
+        return Cryptography::ECC::ECCurve::Secp256r1.G * privateKey;
+      } else {
       return Cryptography::ECC::ECPoint::FromBytes(privateKey, Cryptography::ECC::ECCurve::Secp256r1);
-      //}
+      }
+      */
+
+      return ecp;
    }
 
 public:
    KeyPair(vbyte privateKey)
-     : PublicKey(getECPoint(PrivateKey))
+     : PublicKey(getECPoint(privateKey))
    {
    }
 

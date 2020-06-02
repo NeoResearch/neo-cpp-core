@@ -136,6 +136,7 @@ public:
    //static byte[] CreateSignatureRedeemScript(ECPoint publicKey)
    static vbyte CreateSignatureRedeemScript(ECPoint& publicKey)
    {
+      std::cout << "Running 'CreateSignatureRedeemScript'" << std::endl;
       //using(ScriptBuilder sb = new ScriptBuilder())
       if (ScriptBuilder sb; true) {
          sb.EmitPush(publicKey.EncodePoint(true));

@@ -50,6 +50,7 @@ public:
 public:
    uptr<WalletAccount> CreateAccount()
    {
+      std::cout << "Running CreateAccount EMPTY" << std::endl;
       vbyte privateKey(32);
       //using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
       {

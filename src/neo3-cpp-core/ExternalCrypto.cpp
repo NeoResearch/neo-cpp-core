@@ -48,3 +48,19 @@ external_rand(int byte_count, neopt::byte* output, int sz_output)
    // TODO: verify 'sz_output' for 'safer' operation
    return val.size();
 }
+
+
+// call Crypto to generate ('compressed')
+extern "C" int
+external_get_pubkey_from_privkey(neopt::byte* input, int sz_input, bool compressed, neopt::byte* output, int sz_output)
+{
+      libcrypton::ICrypto& ic = const_cast<libcrypton::ICrypto&>(libcrypton::Crypto::Default());
+   //std::cout << "Running libcrypton" << std::endl;
+   //
+   neopt::vbyte vinput(input, input+sz_input);
+   neopt::vbyte val = ic.GetPublicKeyFromPrivateKey(vinput, compressed);
+   //
+   std::copy(val.begin(), val.end(), output);
+   // TODO: verify 'sz_output' for 'safer' operation
+   return val.size();
+}
