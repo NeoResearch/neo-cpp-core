@@ -1,4 +1,4 @@
-#include <lib-neopt-core-js/src/lib-neopt-core-js.cpp>
+#include <lib-neopt-core-js/src/lib-neopt-core-js.autogen.cpp>
 
 EMSCRIPTEN_KEEPALIVE
 extern "C" const char*
