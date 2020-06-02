@@ -8,11 +8,11 @@ echo ""
 (cd ../../src && grep -rh "EXPORT_NEO3API" . | grep "Neo::")
 
 echo ""
-BASEFILE=src/lib-neopt-core-js.base.cpp
-OUTFILE=src/lib-neopt-core-js.cpp
+BASEFILE=src/lib-neopt-core-js.cpp
+OUTFILE=src/lib-neopt-core-js.autogen.cpp
 #
-BASEFILE_JS=src/index.base.js
-OUTFILE_JS=src/index.js
+BASEFILE_JS=src/index.js
+OUTFILE_JS=src/index.autogen.js
 #
 echo "Adding these to '$OUTFILE' file"
 echo "// AUTOMATICALLY GENERATED FILE - DO NOT EDIT THIS" > $OUTFILE

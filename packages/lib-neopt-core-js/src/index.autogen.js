@@ -1,3 +1,4 @@
+// AUTOMATICALLY GENERATED FILE - DO NOT EDIT THIS
 //
 import ourtest from '../build/neopt_raw_lib.js';
 import ourtestWasm from '../build/neopt_raw_lib.wasm';
@@ -58,3 +59,19 @@ export const Neo3_Wallets_wHelper_ToScriptHash =
 // ------ finished
 
 // begin automatically imported modules
+
+// this method was automatically imported
+export const Neo3_Wallets_wHelper_ToAddress =
+   mymodule.cwrap('Neo3_Wallets_wHelper_ToAddress', 'string', ['string']);
+
+// this method was automatically imported
+export const Neo3_Wallets_wHelper_ToScriptHash =
+   mymodule.cwrap('Neo3_Wallets_wHelper_ToScriptHash', 'string', ['string']);
+
+// this method was automatically imported
+export const Neo3_SmartContract_Contract_CreateSignatureRedeemScript =
+   mymodule.cwrap('Neo3_SmartContract_Contract_CreateSignatureRedeemScript', 'string', ['string']);
+
+// this method was automatically imported
+export const Neo3_SmartContract_scHelper_ToScriptHash =
+   mymodule.cwrap('Neo3_SmartContract_scHelper_ToScriptHash', 'string', ['string']);

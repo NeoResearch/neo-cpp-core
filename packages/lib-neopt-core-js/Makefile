@@ -7,7 +7,7 @@ EXPORT_NAME='EXPORT_NAME="neopt_raw_lib"'
 PRE_NODE_LOAD=./packages/lib-neopt-core-js/prefix-node-require.tmp.js   # note this is temporary file
 LIB_JS_TO_BIND=./packages/lib-neopt-core-js/src/bindings-cpp-js/web-libcore_exports.js
 LIBS_JS_BUNDLE=./packages/lib-neopt-core-js/src/
-MAIN_CPP=./packages/lib-neopt-core-js/src/lib-neopt-core-js.cpp
+MAIN_CPP=./packages/lib-neopt-core-js/src/lib-neopt-core-js.autogen.cpp
 OUTPUT_FILE=./packages/lib-neopt-core-js/build/neopt_raw_lib.js
 
 # note that the following command with execute TWO FOLDERS BEFORE => -v $(pwd)/../../:/src

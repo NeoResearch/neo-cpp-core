@@ -1,3 +1,4 @@
+// AUTOMATICALLY GENERATED FILE - DO NOT EDIT THIS
 //
 // building lib-neopt-core in javascript (via emscripten)
 //
@@ -55,3 +56,31 @@ Neo3_Wallets_wHelper_ToScriptHash(const char* cs_in)
 */
 
 // begin automatically exported modules
+
+// this method was automatically exported
+EMSCRIPTEN_KEEPALIVE
+extern "C" const char*
+Neo3_Wallets_wHelper_ToAddress(const char* cs_in) {
+return Neo::Wallets::wHelper::EXPORT_NEO3API_ToAddress(std::string(cs_in)).c_str();
+}
+
+// this method was automatically exported
+EMSCRIPTEN_KEEPALIVE
+extern "C" const char*
+Neo3_Wallets_wHelper_ToScriptHash(const char* cs_in) {
+return Neo::Wallets::wHelper::EXPORT_NEO3API_ToScriptHash(std::string(cs_in)).c_str();
+}
+
+// this method was automatically exported
+EMSCRIPTEN_KEEPALIVE
+extern "C" const char*
+Neo3_SmartContract_Contract_CreateSignatureRedeemScript(const char* cs_in) {
+return Neo::SmartContract::Contract::EXPORT_NEO3API_CreateSignatureRedeemScript(std::string(cs_in)).c_str();
+}
+
+// this method was automatically exported
+EMSCRIPTEN_KEEPALIVE
+extern "C" const char*
+Neo3_SmartContract_scHelper_ToScriptHash(const char* cs_in) {
+return Neo::SmartContract::scHelper::EXPORT_NEO3API_ToScriptHash(std::string(cs_in)).c_str();
+}
