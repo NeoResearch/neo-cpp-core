@@ -5,6 +5,14 @@
 #include <neo3-cpp-core/SmartContract/scHelper.hpp>
 //#include "./wHelper.hpp"
 
+/*
+using Neo.Cryptography;
+using Neo.SmartContract;
+using System;
+using System.Text;
+using static Neo.Wallets.Helper;
+*/
+
 namespace Neo {
 //
 namespace Wallets {
@@ -55,6 +63,22 @@ private:
    }
 
 public:
+   /*
+        public KeyPair(byte[] privateKey)
+        {
+            if (privateKey.Length != 32 && privateKey.Length != 96 && privateKey.Length != 104)
+                throw new ArgumentException();
+            this.PrivateKey = privateKey[^32..];
+            if (privateKey.Length == 32)
+            {
+                this.PublicKey = Cryptography.ECC.ECCurve.Secp256r1.G * privateKey;
+            }
+            else
+            {
+                this.PublicKey = Cryptography.ECC.ECPoint.FromBytes(privateKey, Cryptography.ECC.ECCurve.Secp256r1);
+            }
+        }
+   */
    KeyPair(vbyte privateKey)
      : PublicKey(getECPoint(privateKey))
    {
@@ -71,37 +95,6 @@ public:
    }
 
    /*
-
-using Neo.Cryptography;
-using Neo.SmartContract;
-using System;
-using System.Text;
-using static Neo.Wallets.Helper;
-
-namespace Neo.Wallets
-{
-    public class KeyPair : IEquatable<KeyPair>
-    {
-        public readonly byte[] PrivateKey;
-        public readonly Cryptography.ECC.ECPoint PublicKey;
-
-        public UInt160 PublicKeyHash => PublicKey.EncodePoint(true).ToScriptHash();
-
-        public KeyPair(byte[] privateKey)
-        {
-            if (privateKey.Length != 32 && privateKey.Length != 96 && privateKey.Length != 104)
-                throw new ArgumentException();
-            this.PrivateKey = privateKey[^32..];
-            if (privateKey.Length == 32)
-            {
-                this.PublicKey = Cryptography.ECC.ECCurve.Secp256r1.G * privateKey;
-            }
-            else
-            {
-                this.PublicKey = Cryptography.ECC.ECPoint.FromBytes(privateKey, Cryptography.ECC.ECCurve.Secp256r1);
-            }
-        }
-
         public bool Equals(KeyPair other)
         {
             if (ReferenceEquals(this, other)) return true;
@@ -113,20 +106,22 @@ namespace Neo.Wallets
         {
             return Equals(obj as KeyPair);
         }
-
-        public string Export()
-        {
-            Span<byte> data = stackalloc byte[34];
-            data[0] = 0x80;
-            PrivateKey.CopyTo(data[1..]);
-            data[33] = 0x01;
-            string wif = Base58.Base58CheckEncode(data);
-            data.Clear();
-            return wif;
-        }
 */
 public:
-   string Export(string passphrase, int N = 16384, int r = 8, int p = 8)
+   string Export() const
+   {
+      vbyte data(34, 0);
+      data[0] = 0x80;
+      //PrivateKey.CopyTo(data[1..]);
+      std::copy(PrivateKey.begin(), PrivateKey.end(), data.begin() + 1);
+      data[33] = 0x01;
+      string wif = Neo::Cryptography::Base58::Base58CheckEncode(data);
+      //data.Clear();
+      return wif;
+   }
+
+public:
+   string Export(string passphrase, int N = 16384, int r = 8, int p = 8) const
    {
       std::cout << "EXPORT NOT IMPLEMENTED IN KeyPair" << std::endl;
       /*

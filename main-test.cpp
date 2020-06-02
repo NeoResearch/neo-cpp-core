@@ -64,6 +64,7 @@ main()
    ECPoint ecp{ X, Y, *ECCurve::Secp256r1 };
    std::cout << "point (JSON): " << ECPoint::_NEO3API_ToJsonStr(ecp) << std::endl;
 
+
    ECPoint G = ECCurve::Secp256r1->G; // allowed copy on 'ucref' type.. beware slicing!
    std::cout << "G:" << G.ToString() << std::endl;
 
@@ -93,11 +94,20 @@ main()
    std::cout << "Encode from Base58:" << std::endl;
    std::cout << Neo::Cryptography::Base58::Encode(script_hash.ToArray()) << std::endl;
 
+   std::cout << std::endl;
+   // testing WIF
+
+   //KeyPair kp()
+
    // testing  NEP6Wallet
 
    Neo::Wallets::NEP6::NEP6Wallet nep6;
    Neo::Wallets::Wallet& wnep6 = nep6;
    uptr<Neo::Wallets::WalletAccount> wacc = wnep6.CreateAccount();
+
+   //
+
+   
 
    std::cout
      << "Finished successfully" << std::endl;
