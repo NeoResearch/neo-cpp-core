@@ -140,12 +140,12 @@ public:
 */
 
 public:
-   virtual uptr<WalletAccount> CreateAccount(const vbyte& privateKey) override
+   virtual neopt::uptr<WalletAccount> CreateAccount(const vbyte& privateKey) override
    //WalletAccount CreateAccount(byte[] privateKey)
    {
       //KeyPair key = new KeyPair(privateKey);
       KeyPair key{ privateKey };
-      uptr<Contract> contract{
+      neopt::uptr<Contract> contract{
          new NEP6Contract{
            Contract::CreateSignatureRedeemScript(key.PublicKey),
            vector<ContractParameterType>{ ContractParameterType::Signature },
@@ -153,7 +153,7 @@ public:
            false }
       };
 
-      uptr<WalletAccount> account{
+      neopt::uptr<WalletAccount> account{
          new NEP6Account(*this, contract->ScriptHash(), key, password, contract.release())
       };
 
@@ -194,9 +194,9 @@ public:
         }
 */
 public:
-   uptr<KeyPair> DecryptKey(string nep2key) const
+   neopt::uptr<KeyPair> DecryptKey(string nep2key) const
    {
-      return uptr<KeyPair>{
+      return neopt::uptr<KeyPair>{
          // TODO: verify if std::optional is broken
          new KeyPair{
            *GetPrivateKeyFromNEP2(nep2key, password, Scrypt.N, Scrypt.R, Scrypt.P) }

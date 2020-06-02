@@ -19,9 +19,6 @@ namespace Wallets {
 //
 class WalletAccount
 {
-   template<class X>
-   using uptr = std::unique_ptr<X>;
-
 public:
 
    virtual ~WalletAccount()
@@ -33,7 +30,7 @@ public:
    bool IsDefault;
    bool Lock;
 
-   uptr<Contract> pContract;
+   neopt::uptr<Contract> pContract;
 
    std::string Address()
    {
@@ -47,7 +44,7 @@ public:
       return this->pContract == nullptr;
    }
 
-   virtual uptr<KeyPair> GetKey() = 0;
+   virtual neopt::uptr<KeyPair> GetKey() = 0;
 
 protected:
    WalletAccount(const UInt160& scriptHash)
@@ -57,7 +54,7 @@ protected:
 
    // REMEMBER: pointer pContract is UNIQUE
    WalletAccount(const UInt160& scriptHash, Contract* pContract)
-     : ScriptHash{ scriptHash }, pContract { uptr<Contract>{pContract} }
+     : ScriptHash{ scriptHash }, pContract { neopt::uptr<Contract>{pContract} }
    {
    }
 
