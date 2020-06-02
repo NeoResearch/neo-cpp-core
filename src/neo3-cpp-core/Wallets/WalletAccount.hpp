@@ -1,8 +1,6 @@
 #pragma once
 
 #include <memory>
-template<class X>
-using uptr = std::unique_ptr<X>;
 
 // using Neo.SmartContract;
 
@@ -21,6 +19,9 @@ namespace Wallets {
 //
 class WalletAccount
 {
+   template<class X>
+   using uptr = std::unique_ptr<X>;
+
 public:
 
    virtual ~WalletAccount()

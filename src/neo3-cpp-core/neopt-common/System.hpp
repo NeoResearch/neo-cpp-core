@@ -16,5 +16,5 @@
 using neopt::byte;
 using neopt::vbyte;
 
-template<class X>
-using uptr = std::unique_ptr<X>;
+//template<class X>
+//using uptr = std::unique_ptr<X>;

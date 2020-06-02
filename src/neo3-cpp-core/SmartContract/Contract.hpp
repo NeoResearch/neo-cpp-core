@@ -28,7 +28,8 @@ namespace SmartContract {
 //
 class Contract
 {
-
+   template<class X>
+   using uptr = std::unique_ptr<X>;
 public:
    vbyte Script;
 

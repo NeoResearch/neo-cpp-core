@@ -60,6 +60,12 @@ public:
       return name;
    }
 
+   NEP6Wallet() :
+      Scrypt{*ScryptParameters::Default}
+   {
+      // TODO: delete this constructor
+   }
+
    //public override Version Version => version;
    /*
         public NEP6Wallet(string path, string name = null) : base(path)

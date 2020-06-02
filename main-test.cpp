@@ -93,7 +93,11 @@ main()
    std::cout << "Encode from Base58:" << std::endl;
    std::cout << Neo::Cryptography::Base58::Encode(script_hash.ToArray()) << std::endl;
 
-   //
+   // testing  NEP6Wallet
+
+   Neo::Wallets::NEP6::NEP6Wallet nep6;
+   Neo::Wallets::Wallet& wnep6 = nep6;
+   uptr<Neo::Wallets::WalletAccount> wacc = wnep6.CreateAccount();
 
    std::cout
      << "Finished successfully" << std::endl;

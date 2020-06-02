@@ -13,11 +13,15 @@ namespace Neo {
 namespace Wallets {
 //
 namespace NEP6 {
+   //
+      template<class X>
+   using uptr = std::unique_ptr<X>;
 //
 class NEP6Wallet; // Forward Declaration
 //
 class NEP6Account : public WalletAccount
 {
+
 private:
    const NEP6Wallet& wallet;
 

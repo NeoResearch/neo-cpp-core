@@ -35,6 +35,9 @@ namespace Wallets {
 //
 class Wallet
 {
+   template<class X>
+   using uptr = std::unique_ptr<X>;
+
 public:
    Wallet()
    {
