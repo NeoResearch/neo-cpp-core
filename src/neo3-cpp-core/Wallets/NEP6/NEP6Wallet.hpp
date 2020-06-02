@@ -4,6 +4,8 @@
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 
+#include <neo3-cpp-core/neopt-common/json/JObject.hpp> // JObject
+
 /*
 using Neo.IO.Json;
 using Neo.SmartContract;
@@ -42,17 +44,17 @@ private:
 private:
    string name;
 
-   //private:
-   // Version version;
+private:
+   neopt::Version version;
 
 private:
-   const Dictionary<UInt160, NEP6Account> accounts;
+   const Dictionary<UInt160, NEP6Account*> accounts; // unique pointers
 
 private:
    //const JObject& extra;
 
 public:
-   const ScryptParameters Scrypt;
+   ScryptParameters Scrypt;
 
 public:
    string Name() override
@@ -60,11 +62,13 @@ public:
       return name;
    }
 
-   NEP6Wallet() :
-      Scrypt{*ScryptParameters::Default}
+/*
+   NEP6Wallet()
+     : Scrypt{ *ScryptParameters::Default }
    {
       // TODO: delete this constructor
    }
+   */
 
    //public override Version Version => version;
    /*
@@ -84,23 +88,40 @@ public:
                 this.extra = JObject.Null;
             }
         }
+   */
 
-        internal NEP6Wallet(JObject wallet) : base(null)
-        {
-            LoadFromJson(wallet, out Scrypt, out accounts, out extra);
-        }
+   NEP6Wallet(const neopt::JObject& wallet)
+   {
+      //LoadFromJson(wallet, out Scrypt, out accounts, out extra);
+      //auto [_Scrypt, _accounts, _extra] = LoadFromJson(wallet);
+      LoadFromJson(wallet);
+      //this->Scrypt = _Scrypt;
+   }
 
-        private void LoadFromJson(JObject wallet, out ScryptParameters scrypt, out Dictionary<UInt160, NEP6Account> accounts, out JObject extra)
-        {
-            this.version = Version.Parse(wallet["version"].AsString());
-            if (this.version.Major < 3) throw new FormatException();
+private:
+   //void LoadFromJson(JObject wallet, out ScryptParameters scrypt, out Dictionary<UInt160, NEP6Account> accounts, out JObject extra)
+   void LoadFromJson(const neopt::JObject& wallet)
+   {
+      this->version = neopt::Version::Parse(wallet["version"].AsString());
+      if (this->version.Major < 3) {
+         NEOPT_EXCEPTION("NEP6Wallet Format Exception");
+         //throw new FormatException();
+      }
 
-            this.name = wallet["name"]?.AsString();
-            scrypt = ScryptParameters.FromJson(wallet["scrypt"]);
-            accounts = ((JArray)wallet["accounts"]).Select(p => NEP6Account.FromJson(p, this)).ToDictionary(p => p.ScriptHash);
-            extra = wallet["extra"];
-        }
+      //this->name = wallet["name"]?.AsString();
+      this->name = wallet.HasKey("name")? wallet["name"].AsString() : "";
+      ScryptParameters scrypt { ScryptParameters::FromJson(wallet["scrypt"]) };
+      //accounts = ((neopt::JArray)wallet["accounts"]).Select(p = > NEP6Account.FromJson(p, this)).ToDictionary(p = > p.ScriptHash);
+      //accounts = ((neopt::JArray)wallet["accounts"]).Select(p = > NEP6Account.FromJson(p, this)).ToDictionary(p = > p.ScriptHash);
+      neopt::uptr<neopt::JObject> extra = wallet.upget("extra");
 
+      // return tuple...
+      //return std::make_tuple(scrypt, );
+      this->Scrypt = scrypt;
+      this->accounts = accounts;
+      this->extra = extra;
+   }
+   /*
         private void AddAccount(NEP6Account account, bool is_import)
         {
             lock (accounts)
@@ -145,7 +166,7 @@ public:
    {
       std::cout << "Running CreateAccount with priv: " << privateKey.size() << std::endl;
       //KeyPair key = new KeyPair(privateKey);
-      KeyPair key (privateKey);
+      KeyPair key(privateKey);
       neopt::uptr<Contract> contract{
          new NEP6Contract{
            Contract::CreateSignatureRedeemScript(key.PublicKey),
@@ -154,7 +175,7 @@ public:
            false }
       };
 
-    std::cout << "making account" << std::endl;
+      std::cout << "making account" << std::endl;
       neopt::uptr<WalletAccount> account{
          new NEP6Account(*this, contract->ScriptHash(), key, password, contract.release())
       };

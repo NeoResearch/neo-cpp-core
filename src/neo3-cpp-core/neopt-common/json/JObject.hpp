@@ -39,17 +39,67 @@ public:
       return *properties[name];
    }
 
+   const JObject& operator[](string name) const
+   {
+      return at(name);
+   }
+
+   const JObject& at(string name) const
+   {
+      const JObject* pobj = properties.at(name);
+      return *pobj;
+   }
+
+
+   // pointer get (like "optional")
+   JObject* pget(string name)
+   {
+      if (properties.count(name))
+         return properties.at(name);
+      else
+         return nullptr;
+   }
+
+   const bool HasKey(string name) const
+   {
+      return (properties.count(name));
+   }
+
+   // unique pointer get with clone
+   const uptr<JObject> upget(string name) const
+   {
+      if (properties.count(name))
+         return uptr<JObject>{ properties.at(name)->clone() };
+      else
+         return nullptr;
+   }
+
+   // pointer set (safe memory)
+   void pset(string name, uptr<JObject>&& obj)
+   {
+      // only OWNED memory (no cycles!!)
+
+      // free if exists
+      auto el = properties.find(name);
+      if (el != properties.end()) {
+         delete properties[name];
+         properties.erase(el);
+      }
+
+      properties[name] = obj.release();
+   }
+
    const map<string, JObject*> Properties()
    {
       return properties;
    }
 
-   virtual bool AsBoolean()
+   virtual bool AsBoolean() const
    {
       return true;
    }
 
-   virtual double AsNumber()
+   virtual double AsNumber() const
    {
       return NAN;
    }
@@ -136,6 +186,15 @@ public:
    {
       NEOPT_EXCEPTION("Not implemented: operator= JObject string")
       return *this;
+   }
+
+public:
+   virtual neopt::uptr<JObject> clone() const
+   {
+      JObject* other = new JObject();
+      // iterate over map, cloning every element
+      std::cout << "TODO: MUST ITERATE OVER MAP!!! " << std::endl;
+      return neopt::uptr<JObject>{ other };
    }
 };
 //

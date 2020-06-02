@@ -7,7 +7,6 @@
 #include <vector>
 
 // neopt core part
-#include "JObject.hpp"
 #include "../numbers/UIntBase.hpp"
 #include "../system/IComparable.h"
 #include "../system/IEquatable.h"
@@ -16,6 +15,7 @@
 #include "../system/StringReader.hpp"
 #include "../system/mhelper.h"
 #include "../system/shelper.h"
+#include "JObject.hpp"
 
 namespace neopt {
 
@@ -33,7 +33,16 @@ public:
    }
 
    JNumber(double d)
-     : _d(d)
+     : _d{ d }
+   {
+   }
+
+   JNumber(int d)
+     : _d{ (double) d }
+   {
+   }
+
+   virtual ~JNumber()
    {
    }
 };

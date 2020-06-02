@@ -10,6 +10,7 @@
 #include "system/IComparable.h"
 #include "system/IEquatable.h"
 #include "system/ISerializable.h"
+#include "system/Version.hpp"
 #include "system/shelper.h"
 #include "system/vhelper.hpp"
 
