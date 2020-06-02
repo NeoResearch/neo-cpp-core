@@ -12,55 +12,62 @@ using namespace Neo::VM;
 //
 #include <neo3-cpp-core/SmartContract/InteropService.Crypto.hpp>
 
+#include "ContractParameterType.hpp"
+
 namespace Neo {
 //
 namespace SmartContract {
 //
 class Contract
 {
-   /*
-public:
-   byte[] Script;
 
 public:
-   ContractParameterType[] ParameterList;
-
-private:
-   string _address;
+   vbyte Script;
 
 public:
-   string Address
+   vector<ContractParameterType> ParameterList;
+
+   Contract(vbyte Script, vector<ContractParameterType> ParameterList)
+     : Script{ Script }
+     , ParameterList{ ParameterList }
    {
-      get
-      {
-         if (_address == null) {
-            _address = ScriptHash.ToAddress();
-         }
-         return _address;
-      }
+   }
+
+   virtual ~Contract()
+   {
    }
 
 private:
-   UInt160 _scriptHash;
+   string _address{ "" };
 
 public:
-   virtual UInt160 ScriptHash
+   string Address()
    {
-      get
-      {
-         if (_scriptHash == null) {
-            _scriptHash = Script.ToScriptHash();
-         }
-         return _scriptHash;
+      if (_address == "") {
+         _address = ScriptHash.ToAddress();
       }
+      return _address;
+   }
+
+private:
+   uptr<UInt160> _scriptHash;
+
+public:
+   virtual UInt160 ScriptHash()
+   {
+      if (_scriptHash == nullptr) {
+         _scriptHash = uptr<UInt160>{ new UInt160{ Script.ToScriptHash() } };
+      }
+      return *_scriptHash;
    }
 
 public:
-   static Contract Create(ContractParameterType[] parameterList, byte[] redeemScript)
+   static uptr<Contract> Create(vector<ContractParameterType> parameterList, vbyte redeemScript)
    {
-      return new Contract{
-         Script = redeemScript,
-         ParameterList = parameterList
+      return uptr<Contract>{
+         new Contract{
+           redeemScript,
+           parameterList }
       };
    }
 
@@ -68,8 +75,9 @@ public:
    /// Construct special Contract with empty Script, will get the Script with scriptHash from blockchain when doing the Verify
    /// verification = snapshot.Contracts.TryGet(hashes[i])?.Script;
    /// </summary>
+   /*
 public:
-   static Contract Create(UInt160 scriptHash, params ContractParameterType[] parameterList)
+   static Contract Create(UInt160 scriptHash, vector<ContractParameterType> parameterList)
    {
       return new Contract{
          Script = Array.Empty<byte>(),
