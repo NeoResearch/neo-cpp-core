@@ -14,7 +14,7 @@
 //
 // these are the specs for lib-neopt-core
 //
-#include <lib-neopt-core/lib-neopt-core.h>
+/////#include <lib-neopt-core/lib-neopt-core.h>
 // ---------------------------------------------------------------------------
 
 // ===================== MANUAL exports =====================

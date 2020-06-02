@@ -47,5 +47,12 @@ js_docker:
 run_js:
 	cd tests/node_tests && make run_js
 
+jslib:
+	make vendor_js
+	# clean remote 'dist/'
+	rm -f ./packages/lib-neopt-core-js/dist/*
+	cd ./packages/lib-neopt-core-js/ && make compile
+	cd ./packages/lib-neopt-core-js/ && make test
+
 clean: 
 	rm -f build/*
