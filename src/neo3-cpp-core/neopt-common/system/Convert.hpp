@@ -15,7 +15,7 @@ class Convert
    static neopt::vbyte FromBase64String(std::string sinput)
    {
       std::string sout = ReneNyffenegger::base64_encode(sinput);
-      neopt::vbyte vout((unsigned char*)sout.c_str(), (unsigned char*)sout.c_str() + sout.length);
+      neopt::vbyte vout((unsigned char*)sout.c_str(), (unsigned char*)sout.c_str() + sout.length());
       return vout;
    }
 
