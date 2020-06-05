@@ -1,5 +1,6 @@
 // zlib license
 // joined .h and .cpp into .hpp from original from ReneNyffenegger
+// added namespace called 'ReneNyffenegger'
 //
 // https://github.com/ReneNyffenegger/cpp-base64/blob/master/base64.h
 // https://raw.githubusercontent.com/ReneNyffenegger/cpp-base64/master/base64.cpp
@@ -17,6 +18,9 @@
 #if __cplusplus >= 201703L
 #include <string_view>
 #endif  // __cplusplus >= 201703L
+
+namespace ReneNyffenegger
+{
 
 std::string base64_encode     (std::string const& s, bool url = false);
 std::string base64_encode_pem (std::string const& s);
@@ -37,6 +41,8 @@ std::string base64_encode_mime(std::string_view s);
 
 std::string base64_decode(std::string_view s, bool remove_linebreaks = false);
 #endif  // __cplusplus >= 201703L
+
+} //  namespace ReneNyffenegger
 
 #endif /* BASE64_H_C0CE2A47_D10E_42C9_A27C_C883944E704A */
 
@@ -75,6 +81,9 @@ std::string base64_decode(std::string_view s, bool remove_linebreaks = false);
 
 //#include "base64.h"
 //https://raw.githubusercontent.com/ReneNyffenegger/cpp-base64/master/base64.cpp
+
+namespace ReneNyffenegger
+{
 
  //
  // Depending on the url parameter in base64_chars, one of
@@ -295,5 +304,7 @@ std::string base64_encode_mime(std::string_view s) {
 std::string base64_decode(std::string_view s, bool remove_linebreaks) {
   return decode(s, remove_linebreaks);
 }
+
+} // namespace ReneNyffenegger
 
 #endif  // __cplusplus >= 201703L
