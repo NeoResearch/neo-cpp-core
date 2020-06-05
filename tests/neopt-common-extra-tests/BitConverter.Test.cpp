@@ -69,5 +69,5 @@ TEST_CASE("neopt extra tests - Test ToBase64String II")
 
    REQUIRE(convertedBase64 == "AgQGCAoMDhASFA==");
 
-   REQUIRE(byteArray == FromBase64String(convertedBase64));
+   REQUIRE(byteArray == neopt::Convert::FromBase64String(convertedBase64));
 }
