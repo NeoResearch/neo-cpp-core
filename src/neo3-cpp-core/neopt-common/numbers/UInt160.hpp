@@ -132,44 +132,48 @@ public:
            result = new UInt160(data.Reverse().ToArray());
            return true;
       }
+*/
+   /// <summary>
+   /// Operator > returns true if left UInt160 is bigger than right UInt160
+   /// Example: UInt160(01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) > UInt160 (02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) is true
+   /// </summary>
+public:
+   bool operator>(const UInt160& right) const
+   {
+      return this->CompareTo(right) > 0;
+   }
 
-      /// <summary>
-      /// Operator > returns true if left UInt160 is bigger than right UInt160
-      /// Example: UInt160(01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) > UInt160 (02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) is true
-      /// </summary>
-      public static bool operator >(UInt160 left, UInt160 right)
-      {
-           return left.CompareTo(right) > 0;
-      }
+   /// <summary>
+   /// Operator > returns true if left UInt160 is bigger or equals to right UInt160
+   /// Example: UInt160(01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) >= UInt160 (02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) is true
+   /// </summary>
+public:
+   bool operator>=(const UInt160& right) const
+   {
+      return this->CompareTo(right) >= 0;
+   }
 
-      /// <summary>
-      /// Operator > returns true if left UInt160 is bigger or equals to right UInt160
-      /// Example: UInt160(01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) >= UInt160 (02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) is true
-      /// </summary>
-      public static bool operator >=(UInt160 left, UInt160 right)
-      {
-           return left.CompareTo(right) >= 0;
-      }
+   /// <summary>
+   /// Operator > returns true if left UInt160 is less than right UInt160
+   /// Example: UInt160(02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) < UInt160 (01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) is true
+   /// </summary>
+public:
+   bool operator<(const UInt160& right) const
+   {
+      return this->CompareTo(right) < 0;
+   }
 
-      /// <summary>
-      /// Operator > returns true if left UInt160 is less than right UInt160
-      /// Example: UInt160(02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) < UInt160 (01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) is true
-      /// </summary>
-      public static bool operator <(UInt160 left, UInt160 right)
-      {
-           return left.CompareTo(right) < 0;
-      }
-
-      /// <summary>
-      /// Operator > returns true if left UInt160 is less or equals to right UInt160
-      /// Example: UInt160(02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) < UInt160 (01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) is true
-      /// </summary>
-      public static bool operator <=(UInt160 left, UInt160 right)
-      {
-           return left.CompareTo(right) <= 0;
-      }
-      */
+   /// <summary>
+   /// Operator > returns true if left UInt160 is less or equals to right UInt160
+   /// Example: UInt160(02ff00ff00ff00ff00ff00ff00ff00ff00ff00a3) < UInt160 (01ff00ff00ff00ff00ff00ff00ff00ff00ff00a4) is true
+   /// </summary>
+public:
+   bool operator<=(const UInt160& right) const
+   {
+      return this->CompareTo(right) <= 0;
+   }
 };
-}
+//
+} // namespace neopt
 
 #endif
