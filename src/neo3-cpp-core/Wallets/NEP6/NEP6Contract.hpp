@@ -34,19 +34,21 @@ public:
    {
    }
 
-   /*
-        public static NEP6Contract FromJson(JObject json)
-        {
-            if (json == null) return null;
-            return new NEP6Contract
-            {
-                Script = Convert.FromBase64String(json["script"].AsString()),
-                ParameterList = ((JArray)json["parameters"]).Select(p => p["type"].TryGetEnum<ContractParameterType>()).ToArray(),
-                ParameterNames = ((JArray)json["parameters"]).Select(p => p["name"].AsString()).ToArray(),
-                Deployed = json["deployed"].AsBoolean()
-            };
-        }
+public:
+   static neopt::uptr<NEP6Contract> FromJson(const nlohmann::json& json)
+   {
+      //if (json == null) return null;
+            auto ptr = new NEP6Contract
+            (
+                neopt::Convert::FromBase64String(json["script"].AsString()),
+                (JArray)json["parameters"]).Select(p => p["type"].TryGetEnum<ContractParameterType>()).ToArray(),
+                ((JArray)json["parameters"]).Select(p => p["name"].AsString()).ToArray(),
+                json["deployed"].get<bool>()
+            );
 
+            return neopt::uptr<NEP6Contract>(ptr);
+   }
+   /*
         public JObject ToJson()
         {
             JObject contract = new JObject();

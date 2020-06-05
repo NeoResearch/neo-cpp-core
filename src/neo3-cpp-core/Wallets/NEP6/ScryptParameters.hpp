@@ -46,16 +46,27 @@ public:
    }
 
 public:
-   static ScryptParameters FromJson(const neopt::JObject& json)
+   static ScryptParameters FromJson(const nlohmann::json& json)  //const neopt::JObject& json)
    {
       return ScryptParameters{
-         (int)json["n"].AsNumber(),
-         (int)json["r"].AsNumber(),
-         (int)json["p"].AsNumber()
+         json["n"].get<int>(), //.AsNumber(),
+         json["r"].get<int>(), //.AsNumber(),
+         json["p"].get<int>() //.AsNumber()
       };
    }
 
 public:
+
+   nlohmann::json ToJson()
+   {
+      nlohmann::json json;
+      json["n"] = N;
+      json["r"] = R; 
+      json["p"] = P;
+      return json;
+   }
+
+/*
    neopt::uptr<neopt::JObject> ToJson()
    {
       neopt::uptr<neopt::JObject> json{ new neopt::JObject() };
@@ -64,6 +75,7 @@ public:
       json->pset("p", neopt::uptr<neopt::JObject>{ new neopt::JNumber{ P } });
       return json;
    }
+*/
 
 }; // class ScryptParameters
 //

@@ -28,6 +28,7 @@ public:
    //private:
 public:
    map<string, JObject*> properties;
+   //nlohmann::json properties;
 
 public:
    virtual ~JObject()

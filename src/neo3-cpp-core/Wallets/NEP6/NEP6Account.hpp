@@ -13,9 +13,9 @@ namespace Neo {
 namespace Wallets {
 //
 namespace NEP6 {
-   //
-      template<class X>
-   using uptr = std::unique_ptr<X>;
+//
+template<class X>
+using uptr = std::unique_ptr<X>;
 //
 class NEP6Wallet; // Forward Declaration
 //
@@ -66,20 +66,8 @@ public:
 
    // FORWARD
 
-   /*
-        public:
-         static NEP6Account FromJson(JObject json, const NEP6Wallet& wallet)
-        {
-            return new NEP6Account(wallet, json["address"].AsString().ToScriptHash(), json["key"]?.AsString())
-            {
-                Label = json["label"]?.AsString(),
-                IsDefault = json["isDefault"].AsBoolean(),
-                Lock = json["lock"].AsBoolean(),
-                Contract = NEP6Contract.FromJson(json["contract"]),
-                Extra = json["extra"]
-            };
-        }
-        */
+public:
+   static uptr<NEP6Account> FromJson(const nlohmann::json& json, const NEP6Wallet& wallet);
 
    //override KeyPair GetKey()
 public:
@@ -216,6 +204,24 @@ NEP6Account::GetKey(string password)
    }
    //
    return uptr<KeyPair>{ new KeyPair(*key) };
+}
+
+neopt::uptr<NEP6Account>
+NEP6Account::FromJson(const nlohmann::json& json, const NEP6Wallet& wallet)
+{
+   NEP6Account* ptr =
+     new NEP6Account(
+       wallet,
+       wHelper::ToScriptHash(json["address"].get<std::string>()),
+       (json.contains("key") ? json["key"].get<std::string>() : ""));
+   ptr->Label = json.contains("label") ? json["label"].get<std::string>() : "";
+   ptr->IsDefault = json["isDefault"].get<bool>();
+   ptr->Lock = json["lock"].get<bool>();
+   ptr->pContract = NEP6Contract::FromJson(json["contract"]);
+   ptr->Extra = json["extra"];
+   return neopt::uptr<NEP6Account>{
+      ptr
+   };
 }
 
 } // namespace NEP6

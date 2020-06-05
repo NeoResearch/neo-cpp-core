@@ -88,6 +88,7 @@
         "bit": "cpp",
         "hash_map": "cpp",
         "hash_set": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "valarray": "cpp"
     }
 }

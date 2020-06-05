@@ -49,12 +49,13 @@ private:
 
 private:
    const Dictionary<UInt160, NEP6Account*> accounts; // unique pointers
-
+  
 private:
-   const neopt::uptr<neopt::JObject> extra;
+   //const neopt::uptr<neopt::JObject> extra;
+   const nlohmann::json extra;
 
 public:
-   ScryptParameters Scrypt;
+   const ScryptParameters Scrypt;
 
 public:
    string Name() override
@@ -100,30 +101,47 @@ public:
 
 private:
    //void LoadFromJson(JObject wallet, out ScryptParameters scrypt, out Dictionary<UInt160, NEP6Account> accounts, out JObject extra)
-   void LoadFromJson(const neopt::JObject& wallet)
+   void LoadFromJson(const nlohmann::json& wallet)
    {
-      this->version = neopt::Version::Parse(wallet["version"].AsString());
+      this->version = neopt::Version::Parse(wallet["version"].get<std::string>()); //.dump()); //AsString());
       if (this->version.Major < 3) {
          NEOPT_EXCEPTION("NEP6Wallet Format Exception");
          //throw new FormatException();
       }
 
       //this->name = wallet["name"]?.AsString();
-      this->name = wallet.HasKey("name")? wallet["name"].AsString() : "";
+      this->name = wallet.contains("name")? wallet["name"].get<std::string>() : "";  //.AsString() : "";
       ScryptParameters scrypt { ScryptParameters::FromJson(wallet["scrypt"]) };
-      neopt::uptr<neopt::JObject> accounts{ new neopt::JArray{} };
+      //neopt::uptr<neopt::JObject> accounts{ new neopt::JArray{} };
       
       //= ((neopt::JArray)wallet["accounts"]).Select(
       //   p => NEP6Account.FromJson(p, this)
       //   ).ToDictionary(p = > p.ScriptHash);
       //accounts = ((neopt::JArray)wallet["accounts"]).Select(p = > NEP6Account.FromJson(p, this)).ToDictionary(p = > p.ScriptHash);
-      neopt::uptr<neopt::JObject> extra = wallet.upget("extra");
 
+      Dictionary<UInt160, NEP6Account*>& _accounts = const_cast<Dictionary<UInt160, NEP6Account*>&>(this->accounts);
+      //for(auto& [p, value] : wallet["accounts"].items())
+      for(auto& p : wallet["accounts"])
+      {
+         neopt::uptr<NEP6Account> acc = NEP6Account::FromJson(p, *this);
+         NEP6Account* pacc = acc.release();
+         _accounts[acc->ScriptHash] = pacc;
+      }
+
+      
+
+      ScryptParameters& _Scrypt = const_cast<ScryptParameters&>(this->Scrypt);
+      
       // return tuple...
       //return std::make_tuple(scrypt, );
-      this->Scrypt = scrypt;
-      this->accounts = std::move(accounts);
-      this->extra = extra;
+      _Scrypt = scrypt;
+
+      nlohmann::json extra = wallet["extra"];
+
+      nlohmann::json& _extra = const_cast<nlohmann::json&>(this->extra);
+      
+      //this->accounts = std::move(accounts);
+      _extra = extra;
    }
    /*
         private void AddAccount(NEP6Account account, bool is_import)
