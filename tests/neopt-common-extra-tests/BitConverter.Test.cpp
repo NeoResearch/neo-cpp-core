@@ -64,10 +64,15 @@ q6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj\
 
 TEST_CASE("neopt extra tests - Test ToBase64String II")
 {
+
+   REQUIRE(neopt::Convert::ToBase64String(neopt::Encoding::ASCII::GetBytes("helloworld")) == "aGVsbG93b3JsZA==");
+   REQUIRE(neopt::Convert::FromBase64String("aGVsbG93b3JsZA==") == neopt::Encoding::ASCII::GetBytes("helloworld"));
+   
+
    vbyte byteArray  = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
    string convertedBase64 = neopt::Convert::ToBase64String(byteArray);
 
    REQUIRE(convertedBase64 == "AgQGCAoMDhASFA==");
 
-   //REQUIRE(byteArray == neopt::Convert::FromBase64String(convertedBase64));
+   REQUIRE(byteArray == neopt::Convert::FromBase64String(convertedBase64));
 }
