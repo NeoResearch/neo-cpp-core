@@ -34,7 +34,7 @@ private:
    uptr<KeyPair> key;
 
 public:
-   // JObject Extra;
+   nlohmann::json Extra;
 
 public:
    bool Decrypted()
