@@ -56,7 +56,8 @@ external_get_pubkey_from_privkey(neopt::byte* input, int sz_input, bool compress
    libcrypton::ICrypto& ic = const_cast<libcrypton::ICrypto&>(libcrypton::Crypto::Default());
    //std::cout << "Running libcrypton" << std::endl;
    //
-   libcrypton::SecureBytes vinput(input, input + sz_input);
+   neopt::vbyte vvinput(input, input + sz_input);
+   libcrypton::SecureBytes vinput(std::move(vvinput));
    neopt::vbyte val = ic.GetPublicKeyFromPrivateKey(vinput, compressed);
    //
    std::copy(val.data(), val.data() + val.size(), output);

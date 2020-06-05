@@ -38,14 +38,16 @@ public:
    static neopt::uptr<NEP6Contract> FromJson(const nlohmann::json& json)
    {
       //if (json == null) return null;
+      NEP6Contract* ptr = nullptr;
+      /*
             auto ptr = new NEP6Contract
             (
-                neopt::Convert::FromBase64String(json["script"].AsString()),
+                neopt::Convert::FromBase64String(json["script"].get<std::string>()),
                 (JArray)json["parameters"]).Select(p => p["type"].TryGetEnum<ContractParameterType>()).ToArray(),
                 ((JArray)json["parameters"]).Select(p => p["name"].AsString()).ToArray(),
                 json["deployed"].get<bool>()
             );
-
+      */
             return neopt::uptr<NEP6Contract>(ptr);
    }
    /*
