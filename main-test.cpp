@@ -101,7 +101,9 @@ main()
 
    // testing  NEP6Wallet
 
-   Neo::Wallets::NEP6::NEP6Wallet nep6;
+   nlohmann::json json_wallet;
+
+   Neo::Wallets::NEP6::NEP6Wallet nep6(json_wallet);
    Neo::Wallets::Wallet& wnep6 = nep6;
    uptr<Neo::Wallets::WalletAccount> wacc = wnep6.CreateAccount();
 

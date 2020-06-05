@@ -91,7 +91,7 @@ public:
         }
    */
 
-   NEP6Wallet(const neopt::JObject& wallet)
+   NEP6Wallet(const nlohmann::json& wallet)
    {
       //LoadFromJson(wallet, out Scrypt, out accounts, out extra);
       //auto [_Scrypt, _accounts, _extra] = LoadFromJson(wallet);
