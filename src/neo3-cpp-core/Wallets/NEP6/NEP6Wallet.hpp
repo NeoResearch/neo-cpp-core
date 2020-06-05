@@ -4,7 +4,7 @@
 
 #include <neo3-cpp-core/Cryptography/Cryptography.hpp>
 
-#include <neo3-cpp-core/neopt-common/json/JObject.hpp> // JObject
+#include <neo3-cpp-core/IO/Json/JObject.hpp> // JObject
 
 /*
 using Neo.IO.Json;
@@ -51,7 +51,7 @@ private:
    const Dictionary<UInt160, NEP6Account*> accounts; // unique pointers
 
 private:
-   //const JObject& extra;
+   const neopt::uptr<neopt::JObject> extra;
 
 public:
    ScryptParameters Scrypt;
@@ -111,14 +111,18 @@ private:
       //this->name = wallet["name"]?.AsString();
       this->name = wallet.HasKey("name")? wallet["name"].AsString() : "";
       ScryptParameters scrypt { ScryptParameters::FromJson(wallet["scrypt"]) };
-      //accounts = ((neopt::JArray)wallet["accounts"]).Select(p = > NEP6Account.FromJson(p, this)).ToDictionary(p = > p.ScriptHash);
+      neopt::uptr<neopt::JObject> accounts{ new neopt::JArray{} };
+      
+      //= ((neopt::JArray)wallet["accounts"]).Select(
+      //   p => NEP6Account.FromJson(p, this)
+      //   ).ToDictionary(p = > p.ScriptHash);
       //accounts = ((neopt::JArray)wallet["accounts"]).Select(p = > NEP6Account.FromJson(p, this)).ToDictionary(p = > p.ScriptHash);
       neopt::uptr<neopt::JObject> extra = wallet.upget("extra");
 
       // return tuple...
       //return std::make_tuple(scrypt, );
       this->Scrypt = scrypt;
-      this->accounts = accounts;
+      this->accounts = std::move(accounts);
       this->extra = extra;
    }
    /*

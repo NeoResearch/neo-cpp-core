@@ -43,24 +43,23 @@ external_rand(int byte_count, neopt::byte* output, int sz_output)
    //
    if (byte_count >= 1024 * 10) // 10 KiB maximum (preserve entropy)
       return 0;
-   neopt::vbyte val = ic.RandBytes(byte_count);
-   std::copy(val.begin(), val.end(), output);
+   libcrypton::SecureBytes val = ic.RandBytes(byte_count);
+   std::copy(val.data(), val.data() + val.size(), output);
    // TODO: verify 'sz_output' for 'safer' operation
    return val.size();
 }
-
 
 // call Crypto to generate ('compressed')
 extern "C" int
 external_get_pubkey_from_privkey(neopt::byte* input, int sz_input, bool compressed, neopt::byte* output, int sz_output)
 {
-      libcrypton::ICrypto& ic = const_cast<libcrypton::ICrypto&>(libcrypton::Crypto::Default());
+   libcrypton::ICrypto& ic = const_cast<libcrypton::ICrypto&>(libcrypton::Crypto::Default());
    //std::cout << "Running libcrypton" << std::endl;
    //
-   neopt::vbyte vinput(input, input+sz_input);
+   libcrypton::SecureBytes vinput(input, input + sz_input);
    neopt::vbyte val = ic.GetPublicKeyFromPrivateKey(vinput, compressed);
    //
-   std::copy(val.begin(), val.end(), output);
+   std::copy(val.data(), val.data() + val.size(), output);
    // TODO: verify 'sz_output' for 'safer' operation
    return val.size();
 }

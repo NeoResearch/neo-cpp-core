@@ -4,7 +4,7 @@
 
 #include <unique_ref/unique_ref.hpp>
 
-#include <neo3-cpp-core/neopt-common/json/JObject.hpp>
+#include <neo3-cpp-core/IO/Json/JObject.hpp>
 
 namespace Neo {
 //

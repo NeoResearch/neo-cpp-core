@@ -7,28 +7,43 @@
 #include <vector>
 
 // neopt core part
-#include "../numbers/UIntBase.hpp"
-#include "../system/IComparable.h"
-#include "../system/IEquatable.h"
-#include "../system/ISerializable.h"
-#include "../system/ITextReader.h"
-#include "../system/StringReader.hpp"
-#include "../system/mhelper.h"
-#include "../system/shelper.h"
+#include <neo3-cpp-core/neopt-common/numbers/UIntBase.hpp>
+#include <neo3-cpp-core/neopt-common/system/IComparable.h>
+#include <neo3-cpp-core/neopt-common/system/IEquatable.h>
+#include <neo3-cpp-core/neopt-common/system/ISerializable.h>
+#include <neo3-cpp-core/neopt-common/system/ITextReader.h>
+#include <neo3-cpp-core/neopt-common/system/StringReader.hpp>
+#include <neo3-cpp-core/neopt-common/system/mhelper.h>
+#include <neo3-cpp-core/neopt-common/system/shelper.h>
+
+#include <nlohmann/json.hpp>
+
 #include "JArray.hpp"
+using JArray = neopt::JArray;
 #include "JBoolean.hpp"
+using JBoolean = neopt::JBoolean;
 #include "JNumber.hpp"
+using JNumber = neopt::JNumber;
 #include "JObject.hpp"
+using JObject = neopt::JObject;
 #include "JString.hpp"
+using JString = neopt::JString;
 
 // JSON Helper Class
 
-namespace neopt {
+namespace Neo {
+//
+namespace IO {
+//
+namespace Json {
+//
+template<class X>
+using uptr = std::unique_ptr<X>;
 
 class jhelper
 {
 public:
-   static uptr<JObject> Parse(ITextReader& reader, int max_nest = 100)
+   static uptr<JObject> Parse(neopt::ITextReader& reader, int max_nest = 100)
    {
       if (max_nest < 0)
          NEOPT_EXCEPTION("JObject Parse (max_nest < 0) FormatException");
@@ -75,12 +90,12 @@ public:
 
    static uptr<JObject> Parse(string value, int max_nest = 100)
    {
-      StringReader reader(value);
+      neopt::StringReader reader(value);
       return Parse(reader, max_nest);
    }
 
 private:
-   static uptr<JObject> ParseNull(ITextReader& reader)
+   static uptr<JObject> ParseNull(neopt::ITextReader& reader)
    {
       char firstChar = (char)reader.Read();
       if (firstChar == 'n') {
@@ -96,7 +111,7 @@ private:
    }
 
 private: // TODO test
-   static void SkipSpace(ITextReader& reader)
+   static void SkipSpace(neopt::ITextReader& reader)
    {
       while (reader.Peek() == ' ' || reader.Peek() == '\t' || reader.Peek() == '\r' || reader.Peek() == '\n') {
          reader.Read();
@@ -104,7 +119,7 @@ private: // TODO test
    }
 
 public:
-   static uptr<JString> ParseString(ITextReader& reader, int max_nest = 100)
+   static uptr<JString> ParseString(neopt::ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       char* buffer = new char[4];
@@ -128,7 +143,7 @@ public:
                case 'u': {
                   reader.Read(buffer, 0, 4); // read four chars to buffer
                   string sbuffer(buffer);
-                  c = (char)shelper::ParseHexToShort(sbuffer); // TODO: test endianess (big or little?)
+                  c = (char)neopt::shelper::ParseHexToShort(sbuffer); // TODO: test endianess (big or little?)
                   //c = (char)short.Parse(new string(buffer), NumberStyles.HexNumber); // TODO: verify if that's the same
                   break;
                }
@@ -151,11 +166,11 @@ public:
 
    static uptr<JString> ParseString(string value, int max_nest = 100)
    {
-      StringReader reader(value);
+      neopt::StringReader reader(value);
       return ParseString(reader, max_nest);
    }
 
-   static uptr<JNumber> ParseNumber(ITextReader& reader, int max_nest = 100)
+   static uptr<JNumber> ParseNumber(neopt::ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       //StringBuilder sb = new StringBuilder();
@@ -171,16 +186,16 @@ public:
       }
       std::string sf = sb.str();
       //return new JNumber(double.Parse(sf));
-      return uptr<JNumber>{ new JNumber(shelper::ParseDouble(sf)) };
+      return uptr<JNumber>{ new JNumber(neopt::shelper::ParseDouble(sf)) };
    }
 
    static uptr<JNumber> ParseNumber(string value, int max_nest = 100)
    {
-      StringReader reader(value);
+      neopt::StringReader reader(value);
       return ParseNumber(reader, max_nest);
    }
 
-   static uptr<JBoolean> ParseBoolean(ITextReader& reader, int max_nest = 100)
+   static uptr<JBoolean> ParseBoolean(neopt::ITextReader& reader, int max_nest = 100)
    {
       SkipSpace(reader);
       char firstChar = (char)reader.Read();
@@ -207,11 +222,11 @@ public:
 
    static uptr<JBoolean> ParseBoolean(string value, int max_nest = 100)
    {
-      StringReader reader(value);
+      neopt::StringReader reader(value);
       return ParseBoolean(reader, max_nest);
    }
 
-   static uptr<JArray> ParseArray(ITextReader& reader, int max_nest = 100)
+   static uptr<JArray> ParseArray(neopt::ITextReader& reader, int max_nest = 100)
    {
       if (max_nest < 0)
          NEOPT_EXCEPTION("JArray FormatException");
@@ -234,10 +249,15 @@ public:
 
    static uptr<JArray> ParseArray(string value, int max_nest = 100)
    {
-      StringReader reader(value);
+      neopt::StringReader reader(value);
       return ParseArray(reader, max_nest);
    }
 };
-}
+//
+} // namespace Json
+//
+} // namespace IO
+//
+} // namespace Neo
 
 #endif

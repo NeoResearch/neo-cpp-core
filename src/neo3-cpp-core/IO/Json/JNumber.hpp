@@ -7,14 +7,14 @@
 #include <vector>
 
 // neopt core part
-#include "../numbers/UIntBase.hpp"
-#include "../system/IComparable.h"
-#include "../system/IEquatable.h"
-#include "../system/ISerializable.h"
-#include "../system/ITextReader.h"
-#include "../system/StringReader.hpp"
-#include "../system/mhelper.h"
-#include "../system/shelper.h"
+#include <neo3-cpp-core/neopt-common/numbers/UIntBase.hpp>
+#include <neo3-cpp-core/neopt-common/system/IComparable.h>
+#include <neo3-cpp-core/neopt-common/system/IEquatable.h>
+#include <neo3-cpp-core/neopt-common/system/ISerializable.h>
+#include <neo3-cpp-core/neopt-common/system/ITextReader.h>
+#include <neo3-cpp-core/neopt-common/system/StringReader.hpp>
+#include <neo3-cpp-core/neopt-common/system/mhelper.h>
+#include <neo3-cpp-core/neopt-common/system/shelper.h>
 #include "JObject.hpp"
 
 namespace neopt {

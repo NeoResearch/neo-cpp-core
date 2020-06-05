@@ -6,7 +6,7 @@
 
 #include <neo3-cpp-core/neopt-common/System.hpp>
 // JSON lib for external APIs
-#include <neo3-cpp-core/neopt-common/json/jhelper.hpp>
+#include <neo3-cpp-core/IO/Json/jhelper.hpp>
 //using Neo.IO;
 //using System;
 //using System.IO;
@@ -498,7 +498,7 @@ public:
    // special method that encodes this from a json str (for external APIs)
    static ECPoint _NEO3API_FromJsonStr(std::string json)
    {
-      neopt::uptr<neopt::JObject> jobj_p = neopt::jhelper::Parse(json);
+      neopt::uptr<neopt::JObject> jobj_p = Neo::IO::Json::jhelper::Parse(json);
       auto& jobj = *jobj_p;
       std::string x = jobj["X"]; // "little-endian" hexstring
       std::string y = jobj["Y"]; // "little-endian" hexstring
