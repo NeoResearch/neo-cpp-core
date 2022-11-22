@@ -12,7 +12,7 @@
     "file-loader": "^1.1.11",
     "http-server": "^0.12.3",
     "webpack": "^4.8.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "crypto-js": "",
